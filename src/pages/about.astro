@@ -1,8 +1,33 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
-<Layout title="About | Team G Laundry Venturez">
-	<h1>About</h1>
-	<p>Tell your team's story here.</p>
+<Layout
+	title="About | Team G Laundry Venturez"
+	description="Learn about Team G Laundry Venturez."
+>
+	<h1>About Team G Laundry Venturez</h1>
+	<p>
+		We are a small team that believes laundry day should be the easy part of your week. We wash,
+		dry and fold with care, and we offer pickup and delivery so your clothes come back fresh
+		without taking up your time.
+	</p>
+	<p><a href={`${base}/`}>&larr; Back to the homepage</a></p>
 </Layout>
+
+<style>
+	h1 {
+		font-size: clamp(1.8rem, 5vw, 2.6rem);
+		line-height: 1.15;
+		margin: 0 0 1rem;
+	}
+	p {
+		max-width: 65ch;
+		margin: 0 0 1.25rem;
+	}
+	a {
+		color: var(--accent);
+	}
+</style>
