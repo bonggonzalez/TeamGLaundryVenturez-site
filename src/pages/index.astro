@@ -1,74 +1,377 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const features = [
+const steps = ['Soak', 'Wash', 'Rinse', 'Spin'];
+
+const services = [
 	{ title: 'Wash & Fold', text: 'Drop off your laundry and pick it up clean and neatly folded.' },
 	{ title: 'Pickup & Delivery', text: 'Convenient scheduling so laundry day never gets in the way.' },
 	{ title: 'Fast Turnaround', text: 'Quick, reliable service you can count on every week.' },
 ];
 ---
 
-<Layout title="Team G Laundry Venturez">
-	<section class="hero">
-		<h1>Fresh laundry, without the hassle.</h1>
-		<p>Welcome to Team G Laundry Venturez. This is a starter page we can build on.</p>
+<Layout
+	title="Team G Laundry Venturez"
+	description="Wash and fold, pickup and delivery, and fast turnaround from Team G Laundry Venturez."
+>
+	<section class="cycle" aria-labelledby="hero-title">
+		<div class="stage">
+			<div class="copy">
+				<h1 id="hero-title">Fresh laundry, without the hassle.</h1>
+				<p class="lede">
+					Welcome to Team G Laundry Venturez. Scroll to run a cycle.
+				</p>
+				<p class="status" aria-hidden="true">
+					<span class="status-label">Now</span>
+					<span class="steps">
+						{steps.map((s) => <span class="step">{s}</span>)}
+					</span>
+				</p>
+			</div>
+
+			<div class="machine" aria-hidden="true">
+				<div class="drum">
+					<div class="load">
+						<svg class="g shirt" viewBox="0 0 100 100"><path d="M30 12 10 28l10 14 8-6v52h44V36l8 6 10-14-20-16q-20 14-40 0Z"></path></svg>
+						<svg class="g sock" viewBox="0 0 100 100"><path d="M38 8h26v42q0 12 16 20 12 8 6 20-6 8-26 2L40 76q-8-6-8-20Z"></path></svg>
+						<svg class="g towel" viewBox="0 0 100 100"><rect x="18" y="14" width="64" height="72" rx="6"></rect><path class="stripe" d="M18 34h64M18 66h64"></path></svg>
+						<svg class="g tee" viewBox="0 0 100 100"><path d="M30 12 10 28l10 14 8-6v52h44V36l8 6 10-14-20-16q-20 14-40 0Z"></path></svg>
+					</div>
+					<div class="water">
+						<svg class="wave" viewBox="0 0 200 20" preserveAspectRatio="none"><path d="M0 10Q25 0 50 10T100 10T150 10T200 10V20H0Z"></path></svg>
+						<div class="body"></div>
+					</div>
+					<div class="shine"></div>
+				</div>
+				<div class="door"></div>
+			</div>
+		</div>
 	</section>
 
-	<section class="grid" aria-label="Highlights">
-		{
-			features.map((f) => (
-				<article class="card">
-					<h2>{f.title}</h2>
-					<p>{f.text}</p>
-				</article>
-			))
-		}
+	<section class="services" aria-labelledby="services-title">
+		<h2 id="services-title">What we do</h2>
+		<ul>
+			{
+				services.map((s) => (
+					<li>
+						<h3>{s.title}</h3>
+						<p>{s.text}</p>
+					</li>
+				))
+			}
+		</ul>
 	</section>
 </Layout>
 
+<style is:global>
+	@font-face {
+		font-family: 'Bricolage Grotesque';
+		font-style: normal;
+		font-weight: 400 800;
+		font-display: swap;
+		src: url('/fonts/bricolage-grotesque-latin.woff2') format('woff2');
+		unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122;
+	}
+	body {
+		overflow-x: clip;
+	}
+</style>
+
 <style>
-	.hero {
-		max-width: 44rem;
-		margin-bottom: 2.5rem;
+	/* ---------- Static baseline (also the no-support / reduced-motion view) ---------- */
+	.cycle {
+		--ink: #0a1a2c;
+		--ink-2: #12304d;
+		--water: #2f93f5;
+		--foam: #eaf6ff;
+		--coral: #ff6b57;
+		--sun: #ffc83d;
+		--mint: #4fd1a5;
+		--size: min(84vw, 46svh);
+
+		width: 100vw;
+		margin: -2rem calc(50% - 50vw) 0;
+		background: radial-gradient(120% 90% at 75% 40%, var(--ink-2), var(--ink) 70%);
+		color: var(--foam);
+	}
+	.stage {
+		display: grid;
+		grid-template-rows: auto 1fr;
+		justify-items: center;
+		align-items: center;
+		gap: 1.5rem;
+		min-height: 100svh;
+		max-width: 80rem;
+		margin-inline: auto;
+		padding: 2rem 1rem 2.5rem;
+	}
+	.copy {
+		width: 100%;
+		max-width: 38rem;
 	}
 	h1 {
-		font-size: clamp(1.9rem, 5vw, 3rem);
-		line-height: 1.15;
+		font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+		font-weight: 800;
+		font-size: clamp(2.3rem, 7.5vw, 4.75rem);
+		line-height: 1.02;
+		letter-spacing: -0.03em;
+		text-wrap: balance;
 		margin: 0 0 1rem;
 	}
-	.hero p {
+	.lede {
 		font-size: 1.1rem;
-		color: var(--muted);
-		margin: 0;
+		margin: 0 0 1.5rem;
+		color: #b9d4ec;
+		max-width: 34ch;
 	}
-	.grid {
+	.status {
+		display: flex;
+		align-items: baseline;
+		gap: 0.75rem;
+		margin: 0;
+		font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+	}
+	.status-label {
+		font-size: 0.95rem;
+		color: #9fc2e0;
+	}
+	.steps {
 		display: grid;
-		gap: 1rem;
-		grid-template-columns: 1fr;
+		font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+		font-weight: 700;
+		color: var(--sun);
 	}
-	@media (min-width: 640px) {
-		.grid {
-			grid-template-columns: repeat(2, 1fr);
-		}
+	/* baseline: show the steps as a plain line */
+	.steps {
+		display: flex;
+		gap: 0.6em;
+		flex-wrap: wrap;
 	}
-	@media (min-width: 1024px) {
-		.grid {
-			grid-template-columns: repeat(3, 1fr);
-			gap: 1.5rem;
-		}
+	.step:not(:last-child)::after {
+		content: '/';
+		margin-left: 0.6em;
+		color: #6f93b3;
 	}
-	.card {
-		background: var(--card);
-		border: 1px solid var(--border);
-		border-radius: 0.75rem;
-		padding: 1.25rem;
+
+	.machine {
+		position: relative;
+		width: var(--size);
+		aspect-ratio: 1;
+		perspective: 1400px;
 	}
-	.card h2 {
-		margin: 0 0 0.5rem;
-		font-size: 1.2rem;
+	.drum {
+		position: absolute;
+		inset: 7%;
+		border-radius: 50%;
+		overflow: hidden;
+		background: radial-gradient(circle at 50% 40%, #0d2740, #06121f 80%);
+		box-shadow:
+			0 0 0 0.9rem #1a2b3e,
+			0 0 0 1rem #3a556f,
+			0 1.5rem 3rem rgba(0, 0, 0, 0.45);
 	}
-	.card p {
+	.load {
+		position: absolute;
+		inset: 0;
+		will-change: rotate;
+	}
+	.g {
+		position: absolute;
+		width: 34%;
+		height: 34%;
+	}
+	.g path,
+	.g rect {
+		stroke: rgba(0, 0, 0, 0.18);
+		stroke-width: 1.5;
+		stroke-linejoin: round;
+	}
+	.shirt { top: 12%; left: 14%; rotate: -20deg; fill: var(--coral); }
+	.sock { top: 18%; right: 14%; rotate: 25deg; fill: var(--mint); }
+	.towel { bottom: 14%; left: 22%; rotate: 8deg; fill: var(--foam); }
+	.towel .stripe { stroke: var(--water); stroke-width: 5; fill: none; }
+	.tee { bottom: 16%; right: 16%; rotate: -55deg; fill: var(--sun); }
+
+	.water {
+		position: absolute;
+		inset: 0;
+		translate: 0 52%;
+		will-change: translate;
+	}
+	.wave {
+		display: block;
+		width: 200%;
+		height: 8%;
+		fill: rgba(47, 147, 245, 0.62);
+		margin-bottom: -1px;
+	}
+	.water .body {
+		height: 120%;
+		background: linear-gradient(rgba(47, 147, 245, 0.62), rgba(20, 90, 190, 0.78));
+	}
+	.shine {
+		position: absolute;
+		inset: 0;
+		border-radius: 50%;
+		background:
+			radial-gradient(ellipse 30% 14% at 30% 18%, rgba(255, 255, 255, 0.35), transparent 70%),
+			radial-gradient(circle at 50% 50%, transparent 62%, rgba(0, 0, 0, 0.35));
+		pointer-events: none;
+	}
+	.door {
+		display: none;
+	}
+
+	/* ---------- Services (themed, below the stage) ---------- */
+	.services {
+		padding-block: 3.5rem 1rem;
+	}
+	.services h2 {
+		font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+		font-size: clamp(1.6rem, 4vw, 2.4rem);
+		letter-spacing: -0.02em;
+		margin: 0 0 1.5rem;
+	}
+	.services ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.services li {
+		display: grid;
+		gap: 0.25rem 2rem;
+		padding-block: 1.25rem;
+		border-top: 1px solid var(--border);
+	}
+	.services li:last-child {
+		border-bottom: 1px solid var(--border);
+	}
+	.services h3 {
+		font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+		font-size: 1.4rem;
+		margin: 0;
+	}
+	.services p {
 		margin: 0;
 		color: var(--muted);
+		max-width: 60ch;
+	}
+	@media (min-width: 768px) {
+		.services li {
+			grid-template-columns: 16rem 1fr;
+			align-items: baseline;
+		}
+	}
+
+	/* ---------- Wide layouts ---------- */
+	@media (min-width: 900px) {
+		.cycle {
+			--size: min(46vw, 80svh);
+		}
+		.stage {
+			grid-template-columns: 1fr auto;
+			grid-template-rows: none;
+			gap: 3rem;
+			padding: 2rem 3rem;
+		}
+		.copy {
+			justify-self: start;
+		}
+	}
+
+	/* ---------- Authored moment: one scroll-driven wash cycle ---------- */
+	@media (prefers-reduced-motion: no-preference) {
+		@keyframes wave-drift {
+			to { translate: -50% 0; }
+		}
+		.wave {
+			animation: wave-drift 7s linear infinite;
+		}
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		@supports (animation-timeline: view()) {
+			.cycle {
+				height: 340vh;
+				view-timeline: --cycle block;
+			}
+			.stage {
+				position: sticky;
+				top: 0;
+				height: 100svh;
+				min-height: 0;
+			}
+
+			@keyframes tumble {
+				from { rotate: 0deg; }
+				to { rotate: 1260deg; }
+			}
+			@keyframes fill {
+				0% { translate: 0 108%; }
+				30% { translate: 0 30%; }
+				62% { translate: 0 30%; }
+				82% { translate: 0 80%; }
+				100% { translate: 0 108%; }
+			}
+			@keyframes swing {
+				from { transform: rotateY(0deg); }
+				to { transform: rotateY(-112deg); }
+			}
+			@keyframes step-first {
+				0%, 78% { opacity: 1; translate: 0 0; }
+				100% { opacity: 0; translate: 0 -40%; }
+			}
+			@keyframes step-mid {
+				0% { opacity: 0; translate: 0 40%; }
+				22%, 78% { opacity: 1; translate: 0 0; }
+				100% { opacity: 0; translate: 0 -40%; }
+			}
+			@keyframes step-last {
+				0% { opacity: 0; translate: 0 40%; }
+				22%, 100% { opacity: 1; translate: 0 0; }
+			}
+
+			.load {
+				animation: tumble linear both;
+				animation-timeline: --cycle;
+				animation-range: cover 24% cover 76%;
+			}
+			.water {
+				animation: fill linear both;
+				animation-timeline: --cycle;
+				animation-range: cover 24% cover 76%;
+			}
+
+			.door {
+				display: block;
+				position: absolute;
+				inset: 4%;
+				border-radius: 50%;
+				transform-origin: 0 50%;
+				background: radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.22), rgba(150, 200, 255, 0.07) 55%, rgba(150, 200, 255, 0.14));
+				box-shadow: inset 0 0 0 0.6rem rgba(180, 210, 240, 0.35), 0 1rem 2.5rem rgba(0, 0, 0, 0.35);
+				backdrop-filter: blur(1px);
+				animation: swing cubic-bezier(0.16, 1, 0.3, 1) both;
+				animation-timeline: --cycle;
+				animation-range: cover 67% cover 76%;
+			}
+
+			.steps {
+				display: grid;
+			}
+			.step {
+				grid-area: 1 / 1;
+				animation-timeline: --cycle;
+				animation-timing-function: linear;
+				animation-fill-mode: both;
+			}
+			.step::after {
+				content: none !important;
+			}
+			.step:nth-child(1) { animation-name: step-first; animation-range: cover 24% cover 37%; }
+			.step:nth-child(2) { animation-name: step-mid; animation-range: cover 37% cover 50%; }
+			.step:nth-child(3) { animation-name: step-mid; animation-range: cover 50% cover 63%; }
+			.step:nth-child(4) { animation-name: step-last; animation-range: cover 63% cover 76%; }
+		}
 	}
 </style>
