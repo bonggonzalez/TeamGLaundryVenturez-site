@@ -5,18 +5,23 @@ const links = [
 	{ href: '/about', label: 'About' },
 	{ href: '/contact', label: 'Contact' },
 ];
-const path = Astro.url.pathname;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const norm = (p: string) => p.replace(/\/$/, '') || '/';
+const current = norm(Astro.url.pathname);
 ---
 
 <header class="site-header">
 	<div class="container bar">
-		<a class="brand" href="/">Team G Laundry Venturez</a>
+		<a class="brand" href={`${base}/`}>Team G Laundry Venturez</a>
 		<nav aria-label="Main">
 			<ul>
 				{
 					links.map((l) => (
 						<li>
-							<a href={l.href} aria-current={path === l.href ? 'page' : undefined}>
+							<a
+								href={`${base}${l.href}`}
+								aria-current={current === norm(`${base}${l.href}`) ? 'page' : undefined}
+							>
 								{l.label}
 							</a>
 						</li>
