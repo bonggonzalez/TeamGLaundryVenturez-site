@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const features = [
+	{ title: 'Wash & Fold', text: 'Drop off your laundry and pick it up clean and neatly folded.' },
+	{ title: 'Pickup & Delivery', text: 'Convenient scheduling so laundry day never gets in the way.' },
+	{ title: 'Fast Turnaround', text: 'Quick, reliable service you can count on every week.' },
+];
+---
+
+<Layout title="Team G Laundry Venturez">
+	<section class="hero">
+		<h1>Fresh laundry, without the hassle.</h1>
+		<p>Welcome to Team G Laundry Venturez. This is a starter page we can build on.</p>
+	</section>
+
+	<section class="grid" aria-label="Highlights">
+		{
+			features.map((f) => (
+				<article class="card">
+					<h2>{f.title}</h2>
+					<p>{f.text}</p>
+				</article>
+			))
+		}
+	</section>
+</Layout>
+
+<style>
+	.hero {
+		max-width: 44rem;
+		margin-bottom: 2.5rem;
+	}
+	h1 {
+		font-size: clamp(1.9rem, 5vw, 3rem);
+		line-height: 1.15;
+		margin: 0 0 1rem;
+	}
+	.hero p {
+		font-size: 1.1rem;
+		color: var(--muted);
+		margin: 0;
+	}
+	.grid {
+		display: grid;
+		gap: 1rem;
+		grid-template-columns: 1fr;
+	}
+	@media (min-width: 640px) {
+		.grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	@media (min-width: 1024px) {
+		.grid {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 1.5rem;
+		}
+	}
+	.card {
+		background: var(--card);
+		border: 1px solid var(--border);
+		border-radius: 0.75rem;
+		padding: 1.25rem;
+	}
+	.card h2 {
+		margin: 0 0 0.5rem;
+		font-size: 1.2rem;
+	}
+	.card p {
+		margin: 0;
+		color: var(--muted);
+	}
+</style>
