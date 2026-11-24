@@ -12,7 +12,7 @@ const current = norm(Astro.url.pathname);
 
 <header class="site-header">
 	<div class="container bar">
-		<a class="brand" href={`${base}/`}>Team G Laundry Venturez</a>
+		<a class="brand" href={`${base}/`}>Team G <span>Laundry Venturez</span></a>
 		<nav aria-label="Main">
 			<ul>
 				{
@@ -29,27 +29,37 @@ const current = norm(Astro.url.pathname);
 				}
 			</ul>
 		</nav>
+		<a class="cta" href={`${base}/contact`}>Request a consultation</a>
 	</div>
 </header>
 
 <style>
 	.site-header {
+		background: #fff;
 		border-bottom: 1px solid var(--border);
-		background: var(--bg);
 	}
 	.bar {
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		justify-content: space-between;
 		gap: 0.5rem 1.5rem;
-		padding-block: 1rem;
+		padding-block: 0.75rem;
 	}
 	.brand {
-		font-weight: 700;
-		font-size: 1.15rem;
+		font-family: var(--display);
+		font-weight: 800;
+		font-size: 1.25rem;
+		letter-spacing: -0.02em;
 		color: var(--text);
 		text-decoration: none;
+		margin-right: auto;
+	}
+	.brand span {
+		font-weight: 500;
+	}
+	nav {
+		order: 3;
+		width: 100%;
 	}
 	ul {
 		display: flex;
@@ -62,12 +72,49 @@ const current = norm(Astro.url.pathname);
 	nav a {
 		color: var(--muted);
 		text-decoration: none;
-		padding-block: 0.25rem;
+		font-weight: 500;
+		display: inline-block;
+		padding-block: 0.6rem 0.4rem;
 		border-bottom: 2px solid transparent;
 	}
 	nav a:hover,
 	nav a[aria-current='page'] {
 		color: var(--text);
 		border-bottom-color: var(--accent);
+	}
+	.cta {
+		background: var(--accent);
+		color: #fff;
+		font-weight: 600;
+		font-size: 0.95rem;
+		text-decoration: none;
+		padding: 0.6rem 1.1rem;
+		border-radius: 0.5rem;
+		transition: background 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+	.cta:hover {
+		background: var(--accent-strong);
+	}
+	@media (min-width: 820px) {
+		.site-header {
+			position: sticky;
+			top: 0;
+			z-index: 10;
+			background: rgba(255, 255, 255, 0.92);
+			backdrop-filter: blur(8px);
+		}
+		nav {
+			order: 0;
+			width: auto;
+		}
+		.brand {
+			margin-right: 0;
+		}
+		.bar {
+			gap: 0.5rem 2.5rem;
+		}
+		.cta {
+			margin-left: auto;
+		}
 	}
 </style>

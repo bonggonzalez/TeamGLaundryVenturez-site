@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-24T15:30:00Z",
+  "title": "Design System: Team G Laundry Venturez",
+  "extensions": {
+    "colorMeta": {
+      "cobalt": { "role": "primary", "displayName": "Signal Cobalt", "canonical": "#1d4ed8", "tonalRamp": ["#0a1a4d", "#102a80", "#1740b3", "#1d4ed8", "#4a73e6", "#7b97ee", "#b4c5f6", "#e3e9fc"] },
+      "cobalt-deep": { "role": "primary", "displayName": "Deep Cobalt", "canonical": "#1740b3", "tonalRamp": ["#08153d", "#0e2370", "#1740b3", "#2557d6", "#5578e0", "#8aa2ea", "#bccaf3", "#e6ebfb"] },
+      "ink": { "role": "neutral", "displayName": "Showroom Ink", "canonical": "#0b1220", "tonalRamp": ["#0b1220", "#1b2638", "#2f3b50", "#46556a", "#6b7a8f", "#98a5b5", "#c6cfda", "#eef1f5"] },
+      "slate-muted": { "role": "neutral", "displayName": "Cool Slate", "canonical": "#46556a", "tonalRamp": ["#10161f", "#222c3a", "#344152", "#46556a", "#66758a", "#8f9bac", "#bcc5d1", "#e9edf2"] },
+      "paper": { "role": "neutral", "displayName": "Clean White", "canonical": "#ffffff", "tonalRamp": ["#d9dee5", "#e3e7ec", "#eaeef2", "#f0f3f6", "#f5f7f9", "#f9fafb", "#fcfdfd", "#ffffff"] },
+      "mist-blue": { "role": "neutral", "displayName": "Mist Blue", "canonical": "#e8f3ff", "tonalRamp": ["#5b7fa6", "#7f9fc2", "#a0bcd9", "#bfd3e8", "#d3e3f3", "#e0ecf8", "#e8f3ff", "#f4f9ff"] },
+      "hairline": { "role": "neutral", "displayName": "Hairline Blue-Gray", "canonical": "#d3dfec", "tonalRamp": ["#6f84a0", "#8a9db5", "#a3b4c8", "#b9c8d9", "#c8d5e4", "#d3dfec", "#e2eaf3", "#f0f4f9"] },
+      "scrollbar-thumb": { "role": "neutral", "displayName": "Scroll Thumb", "canonical": "#9db4d3", "tonalRamp": ["#3e5879", "#546f93", "#6b86ab", "#839bbd", "#9db4d3", "#b6c8df", "#d0dbea", "#e8eef6"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero H1 only; Bricolage Grotesque 800, tight tracking." },
+      "headline": { "displayName": "Headline", "purpose": "Section H2s across claim, scope, audiences and closing band." },
+      "title": { "displayName": "Title", "purpose": "Scope and audience item H3s." },
+      "body": { "displayName": "Body", "purpose": "Default Hanken Grotesk copy; secondary paragraphs in Cool Slate." },
+      "label": { "displayName": "Label", "purpose": "Buttons, links and nav in Hanken Grotesk 600." }
+    },
+    "shadows": [
+      { "name": "button-lift", "value": "0 6px 18px rgba(29, 78, 216, 0.28)", "purpose": "Primary cobalt button at rest." },
+      { "name": "button-lift-on-cobalt", "value": "0 8px 22px rgba(4, 12, 40, 0.3)", "purpose": "White inverted button on the closing band." },
+      { "name": "header-glass", "value": "background: rgba(255,255,255,0.92); backdrop-filter: blur(8px)", "purpose": "Sticky header translucency." }
+    ],
+    "motion": [
+      { "name": "ease-out-expo", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Button hover color and 2px lift (0.25s), header CTA (0.2s)." },
+      { "name": "drum-spin", "value": "14s linear infinite; 22s reverse on second drum", "purpose": "Ambient drum rotation, only under prefers-reduced-motion: no-preference." },
+      { "name": "smooth-scroll", "value": "scroll-behavior: smooth (auto when reduced motion)", "purpose": "In-page anchor to the scope section." }
+    ],
+    "breakpoints": [
+      { "name": "nav", "value": "820px" },
+      { "name": "md", "value": "768px" },
+      { "name": "aud", "value": "860px" },
+      { "name": "hero", "value": "960px" },
+      { "name": "scope", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main consultation action on light grounds.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Request a consultation</a>",
+      "css": ".ds-btn { display: inline-block; background: #1d4ed8; color: #fff; font-family: 'Hanken Grotesk', system-ui, sans-serif; font-weight: 600; font-size: 1.1rem; text-decoration: none; padding: 1rem 1.75rem; border-radius: 0.6rem; box-shadow: 0 6px 18px rgba(29,78,216,0.28); transition: background 0.25s cubic-bezier(0.16,1,0.3,1), transform 0.25s cubic-bezier(0.16,1,0.3,1); } .ds-btn:hover { background: #1740b3; transform: translateY(-2px); } .ds-btn:focus-visible { outline: 3px solid #1d4ed8; outline-offset: 3px; border-radius: 4px; }"
+    },
+    {
+      "name": "Inverted Button",
+      "kind": "button",
+      "refersTo": "button-on-cobalt",
+      "description": "White action on the cobalt closing band.",
+      "html": "<div class=\"ds-on-band\"><a class=\"ds-btn-inv\" href=\"#\">Request a consultation</a></div>",
+      "css": ".ds-on-band { background: #1d4ed8; padding: 1.5rem; } .ds-btn-inv { display: inline-block; background: #fff; color: #1740b3; font-family: 'Hanken Grotesk', system-ui, sans-serif; font-weight: 600; font-size: 1.1rem; text-decoration: none; padding: 1rem 1.75rem; border-radius: 0.6rem; box-shadow: 0 8px 22px rgba(4,12,40,0.3); transition: background 0.25s cubic-bezier(0.16,1,0.3,1), transform 0.25s cubic-bezier(0.16,1,0.3,1); } .ds-btn-inv:hover { background: #e8f3ff; transform: translateY(-2px); } .ds-btn-inv:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }"
+    },
+    {
+      "name": "Text Link",
+      "kind": "custom",
+      "refersTo": "button-primary",
+      "description": "Secondary action beside the primary button.",
+      "html": "<a class=\"ds-link\" href=\"#\">See what we build</a>",
+      "css": ".ds-link { color: #0b1220; font-family: 'Hanken Grotesk', system-ui, sans-serif; font-weight: 600; text-decoration: underline; text-decoration-color: #1d4ed8; text-decoration-thickness: 2px; text-underline-offset: 0.35em; } .ds-link:hover { color: #1740b3; } .ds-link:focus-visible { outline: 3px solid #1d4ed8; outline-offset: 3px; border-radius: 4px; }"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "button-header",
+      "description": "Sticky translucent bar with brand, links and compact action.",
+      "html": "<header class=\"ds-header\"><a class=\"ds-brand\" href=\"#\">Team G <span>Laundry Venturez</span></a><nav><a class=\"ds-nav-a\" aria-current=\"page\" href=\"#\">Home</a><a class=\"ds-nav-a\" href=\"#\">Services</a><a class=\"ds-nav-a\" href=\"#\">About</a><a class=\"ds-nav-a\" href=\"#\">Contact</a></nav><a class=\"ds-cta\" href=\"#\">Request a consultation</a></header>",
+      "css": ".ds-header { display: flex; align-items: center; gap: 2rem; padding: 0.75rem 1.25rem; background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid #d3dfec; font-family: 'Hanken Grotesk', system-ui, sans-serif; } .ds-brand { font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em; color: #0b1220; text-decoration: none; } .ds-brand span { font-weight: 500; } .ds-header nav { display: flex; gap: 1.25rem; } .ds-nav-a { color: #46556a; text-decoration: none; font-weight: 500; padding-block: 0.25rem; border-bottom: 2px solid transparent; } .ds-nav-a:hover, .ds-nav-a[aria-current='page'] { color: #0b1220; border-bottom-color: #1d4ed8; } .ds-cta { margin-left: auto; background: #1d4ed8; color: #fff; font-weight: 600; font-size: 0.95rem; text-decoration: none; padding: 0.6rem 1.1rem; border-radius: 0.5rem; transition: background 0.2s cubic-bezier(0.16,1,0.3,1); } .ds-cta:hover { background: #1740b3; }"
+    },
+    {
+      "name": "Province Pill",
+      "kind": "chip",
+      "refersTo": "chip-province",
+      "description": "Static outlined label for covered provinces.",
+      "html": "<ul class=\"ds-pills\"><li>Cavite</li><li>Laguna</li><li>Batangas</li></ul>",
+      "css": ".ds-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; list-style: none; margin: 0; padding: 0; } .ds-pills li { font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 700; font-size: 1.1rem; color: #0b1220; padding: 0.5rem 1rem; border: 1.5px solid #0b1220; border-radius: 999px; }"
+    },
+    {
+      "name": "Ruled Scope Row",
+      "kind": "custom",
+      "refersTo": "title",
+      "description": "Hairline-separated title and description row; replaces cards.",
+      "html": "<ol class=\"ds-rows\"><li><h3>Design</h3><p>A laundry layout planned around your space, your volume and your customers.</p></li><li><h3>Installation</h3><p>Samsung professional equipment installed and commissioned by the people who sell it.</p></li></ol>",
+      "css": ".ds-rows { list-style: none; margin: 0; padding: 0; font-family: 'Hanken Grotesk', system-ui, sans-serif; } .ds-rows li { display: grid; grid-template-columns: 12rem 1fr; gap: 0.25rem 2rem; align-items: baseline; padding-block: 1.4rem; border-top: 1px solid #d3dfec; } .ds-rows li:last-child { border-bottom: 1px solid #d3dfec; } .ds-rows h3 { margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 1.4rem; font-weight: 700; letter-spacing: -0.03em; color: #0b1220; } .ds-rows p { margin: 0; color: #46556a; line-height: 1.6; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Showroom Spec Sheet",
+    "overview": "This is the category standard played straight: a clean commercial-equipment page where large near-black type and a single washer/dryer illustration carry the message, and everything else stays out of the way. The page reads like a manufacturer's professional-laundry page rather than a consumer wash-and-fold flyer or a dark tech catalog. It is built for owners and operators making a capital-equipment decision, so it is calm, legible and confident, not playful.\n\nSurfaces are white that drifts into a pale blue field (hero gradient, audience band). Text is near-black ink with a cool slate for secondary copy. One cobalt blue does all the work of action: buttons, links' underline accents, focus rings, the scroll-selected text and the closing band. Structure comes from hairline rules and generous section padding, not from boxes or cards.\n\nThe hero is the one place with an image-like object: an authored SVG pair of commercial machines with stainless drums that turn slowly. It is explicitly an illustration (captioned as such) until real photography arrives.",
+    "keyCharacteristics": [
+      "Light, product-led, huge tight-tracked display type in near-black.",
+      "White into pale blue; cobalt reserved for action and the closing band.",
+      "Hairline rules and open columns instead of cards.",
+      "One authored illustration; slow, reduced-motion-safe drum rotation is the only ambient motion.",
+      "Flat surfaces; the only shadows sit under primary buttons."
+    ],
+    "rules": [
+      { "name": "The One Cobalt Rule", "body": "Cobalt means \"act here\" or \"this is the closing ask.\" It is never used as decoration, as a heading color, or as a second background tint beyond the closing band.", "section": "colors" },
+      { "name": "The Cool Neutrals Rule", "body": "Every gray is blue-tinted. No warm or pure-neutral grays enter the palette.", "section": "colors" },
+      { "name": "The Heavy-Tight Rule", "body": "Display and headline text is always weight 800 with negative tracking and `text-wrap: balance`; titles drop to 700. Body never uses the display face except for pills and the brand name.", "section": "typography" },
+      { "name": "The Open Column Rule", "body": "Group content with rules and whitespace, not containers. Lists are separated by hairlines; there are no cards.", "section": "layout" },
+      { "name": "The Flat-By-Default Rule", "body": "Nothing else carries a shadow. Large buttons lift 2px on hover; panels, rows and pills stay flat.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use Signal Cobalt (`#1d4ed8`) only for actions, focus and the closing band.",
+      "Do set headlines in Bricolage Grotesque 800 with negative tracking and balanced wrapping.",
+      "Do separate content with 1px Hairline Blue-Gray rules and generous vertical padding.",
+      "Do keep surfaces flat; reserve shadows for large primary buttons.",
+      "Do gate ambient motion behind `prefers-reduced-motion: no-preference`.",
+      "Do label illustrations as illustrations until real photography is supplied."
+    ],
+    "donts": [
+      "Don't return to the dark-blue consumer wash-cycle look or a wash-and-fold tone; the audience is equipment buyers.",
+      "Don't introduce a second accent hue or warm grays.",
+      "Don't wrap list content in cards or boxed panels.",
+      "Don't invent prices, models, clients, photos or credentials in copy or imagery."
+    ]
+  }
+}

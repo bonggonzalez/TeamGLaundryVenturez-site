@@ -4,18 +4,29 @@ const year = new Date().getFullYear();
 
 <footer class="site-footer">
 	<div class="container">
-		<p>&copy; {year} Team G Laundry Venturez. All rights reserved.</p>
+		<p class="name">Team G Laundry Venturez</p>
+		<p>Exclusive Samsung laundry equipment distributor in Calabarzon, Philippines.</p>
+		<p class="copy">&copy; {year} Team G Laundry Venturez. All rights reserved.</p>
 	</div>
 </footer>
 
 <style>
 	.site-footer {
 		border-top: 1px solid var(--border);
-		padding-block: 1.5rem;
+		padding-block: 2rem;
 		color: var(--muted);
-		font-size: 0.9rem;
+		font-size: 0.95rem;
 	}
 	p {
-		margin: 0;
+		margin: 0 0 0.25rem;
+	}
+	.name {
+		font-family: var(--display);
+		font-weight: 700;
+		color: var(--text);
+	}
+	.copy {
+		margin-top: 0.75rem;
+		font-size: 0.85rem;
 	}
 </style>

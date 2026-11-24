@@ -1,6 +1,8 @@
 name: CI
 
-# Build check only. The site itself is deployed by Cloudflare.
+# Build check only. The site itself is deployed by Cloudflare, which publishes
+# production only from main. Protect main (require PR + approval + this check)
+# so nothing reaches production without owner approval.
 on:
   push:
     branches: [main]
@@ -11,6 +13,7 @@ permissions:
 
 jobs:
   build:
+    name: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout your repository using git
