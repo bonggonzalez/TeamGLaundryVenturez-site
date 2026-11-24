@@ -3,6 +3,5 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://bonggonzalez.github.io',
-	base: '/TeamGLaundryVenturez-site',
+	site: 'https://teamgventurez.com',
 });
