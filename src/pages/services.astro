@@ -60,7 +60,7 @@ const services = [
 	</figure>
 
 	<section class="band" aria-labelledby="what">
-		<h2 id="what">Everything your laundry needs.</h2>
+		<h2 id="what">How we can help your laundry</h2>
 		<ul class="rows">
 			{
 				services.map((s) => (
@@ -74,6 +74,16 @@ const services = [
 				))
 			}
 		</ul>
+	</section>
+
+	<section class="band" aria-labelledby="inst">
+		<h2 id="inst">What our basic installation covers</h2>
+		<ul class="rows plain">
+			<li><h3>Included</h3><div><p>Water supply and drainage connections. Electrical connections for the washer and dryer. Gas dryer connection and leak testing. Dryer exhaust and ducting. Testing, commissioning and basic training and handover.</p></div></li>
+			<li><h3>Not included</h3><div><p>Civil works and structural changes. Major electrical upgrades. Building permits and government fees. The LPG tank, supply and regulator. Materials not listed in your quotation. Extra work found during installation is quoted separately and needs your approval first.</p></div></li>
+			<li><h3>Optional utility additions</h3><div><p>Basic electrical, plumbing and ducting work needed to commission the equipment, from about ₱200,000. This is an estimate only and is confirmed after our site visit.</p></div></li>
+		</ul>
+		<p class="est">Prices, scope and timelines are estimates only. TeamG Venturez may change them without prior notice, and your signed scope of work confirms the final figures.</p>
 	</section>
 
 	<Fragment slot="after">
@@ -91,5 +101,10 @@ const services = [
 		aspect-ratio: 21 / 9;
 		object-fit: cover;
 		object-position: 70% 50%;
+	}
+	.est {
+		margin-top: 1.5rem;
+		color: var(--muted);
+		font-size: 0.95rem;
 	}
 </style>

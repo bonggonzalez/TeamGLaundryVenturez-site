@@ -42,6 +42,8 @@ const machines = [
 			['Dimensions (W x H x D)', '762 x 1,083 x 826 mm'],
 			['Weight', '121 kg'],
 			['Power consumption', '800 W'],
+			['Power supply', '230 V / 60 Hz'],
+			['Spin speed', '800 to 1,200 RPM'],
 			['Inverter', 'Inverter (DD Motor)'],
 			['Wi-Fi', 'Embedded'],
 			['Mobile app and software', 'Open API for integration'],
@@ -51,8 +53,8 @@ const machines = [
 	},
 	{
 		img: dryer,
-		alt: 'Black Samsung 14 kg professional dryer, front and angled views',
-		title: '14 kg professional dryer',
+		alt: 'Black Samsung 14 kg professional gas dryer, front and angled views',
+		title: '14 kg professional gas dryer',
 		model: 'DV14FG94GCGVST',
 		highlights: ['Super Speed: 14 kg capacity, dries in 45 min', 'Flexible installation: reversible door to suit your space', 'User friendly: easy-to-use controller'],
 		spec: [
@@ -66,6 +68,8 @@ const machines = [
 			['Dimensions (W x H x D)', '762 x 1,083 x 813 mm'],
 			['Weight', '74 kg'],
 			['Power consumption', '350 W'],
+			['Power supply', '230 V / 60 Hz'],
+			['Heating', 'LPG, 22,000 BTU'],
 			['Inverter', 'Inverter (DD Motor)'],
 			['Wi-Fi', 'Embedded'],
 			['Mobile app and software', 'Open API for integration'],
@@ -78,11 +82,11 @@ const machines = [
 
 <Layout
 	title="Samsung Professional Washers and Dryers | TeamG Venturez"
-	description="Samsung professional washers and dryers, available through us as the exclusive distributor in Calabarzon."
+	description="Samsung professional washers and gas dryers, available through us as an authorized dealer in Calabarzon."
 >
 	<header class="page-head">
 		<Image class="brandmark" src={samsung} alt="Samsung Professional Laundry" height={80} />
-		<h1>Samsung professional laundry equipment from the exclusive distributor in Calabarzon.</h1>
+		<h1>Samsung professional laundry equipment from an authorized dealer in Calabarzon.</h1>
 		<p>
 			When you buy from us, the same team installs and services your machines.
 		</p>
@@ -111,9 +115,20 @@ const machines = [
 			}
 		</div>
 		<p class="note">
-			*Based on Samsung internal testing using a Normal cycle. Individual results may vary with actual load contents. Payment systems and coin exchangers are sold separately. Product images are for illustration; specifications may change without notice. Speak to us for current models, pricing and availability.
+			*Based on Samsung internal testing using a Normal cycle. Individual results may vary with actual load contents. Payment systems and coin exchangers are sold separately. Product images are for illustration. Specifications, prices and availability are estimates only and may be changed by TeamG Venturez without prior notice. Message us to confirm the current models and pricing.
 		</p>
 		<a class="btn" href={contact}>Ask about models and availability</a>
+	</section>
+
+	<section class="band" aria-labelledby="lpg">
+		<h2 id="lpg">Our dryer runs on LPG, and we plan the setup with you.</h2>
+		<p>
+			The 14 kg professional dryer is a gas dryer that uses LPG. Our basic installation prepares the gas line,
+			the dryer exhaust and ducting, the water supply, drainage and electrical connections, with leak testing
+			and commissioning. You arrange the LPG tank, supply and regulator with an LPG provider. We confirm every
+			requirement for your space during the free site visit.
+		</p>
+		<a class="btn" href={`${base}/services`}>See what installation covers</a>
 	</section>
 
 	<section class="band" aria-labelledby="feat">

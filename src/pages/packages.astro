@@ -2,85 +2,97 @@
 import Layout from '../layouts/Layout.astro';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const contact = `${base}/contact`;
-const paths = [
-	{
-		key: 'start',
-		name: 'Start-Up',
-		promise: 'From idea to opening day, with one team to call.',
-		best: 'Best if you have a space in mind but no laundry yet.',
-		items: [
-			'Layout design planned around your space and volume',
-			'Construction coordinated with your equipment plan',
-			'Samsung professional equipment, installed by us',
-			'Point-of-sale setup and business and marketing guidance',
-		],
-		cta: 'Plan my start-up',
-	},
-	{
-		key: 'upgrade',
-		name: 'Upgrade',
-		promise: 'More capacity and dependable service for the laundry you already run.',
-		best: 'Best if you already run a laundry and want to grow or replace machines.',
-		items: [
-			'Replace or add Samsung professional equipment',
-			'Layout review for the machines you are adding',
-			'Installation and ongoing maintenance by our team',
-			'Point-of-sale setup and business consultation',
-		],
-		cta: 'Plan my upgrade',
-	},
-	{
-		key: 'hotel',
-		name: 'Hospitality',
-		promise: 'Your own laundry inside your hotel, BnB or inn.',
-		best: 'Best if you own or manage a hotel, BnB or inn.',
-		items: [
-			'Laundry layout planned for your property',
-			'Construction coordinated with your equipment plan',
-			'Samsung equipment installed and maintained by our team',
-			'Business consultation for running laundry in-house',
-		],
-		cta: 'Plan my in-house laundry',
-	},
+const perSet = 240000;
+const peso = (n: number) => `₱${n.toLocaleString('en-PH')}`;
+const sizes = [
+	{ sets: 2, wall: '1.52 m', wash: 40, dry: 32, kg: 448 },
+	{ sets: 3, wall: '2.29 m', wash: 60, dry: 48, kg: 672 },
+	{ sets: 4, wall: '3.05 m', wash: 80, dry: 64, kg: 896 },
+	{ sets: 5, wall: '3.81 m', wash: 100, dry: 80, kg: 1120 },
 ];
+const hospitality = {
+	name: 'Hotels, BnBs and inns',
+	promise: 'Your own laundry inside your hotel, BnB or inn.',
+	best: 'Best if you own or manage a hotel, BnB or inn.',
+	items: [
+		'Laundry layout planned for your property',
+		'Construction coordinated with your equipment plan',
+		'Samsung equipment installed and maintained by our team',
+		'Business consultation for running laundry in-house',
+	],
+};
 ---
 
 <Layout
-	title="Packages | TeamG Venturez"
-	description="Three ways to work with us: Start-Up, Upgrade and Hospitality. Samsung laundry equipment plus design, construction, installation and maintenance."
+	title="Laundry Packages in Calabarzon | TeamG Venturez"
+	description="Samsung laundry packages from 2 to 5 washer and dryer sets, starting at ₱240,000 per set. Estimates only; basic installation included. Free site visit in Calabarzon."
 >
 	<header class="page-head">
-		<h1>Three ways to work with us.</h1>
+		<h1>Choose a package that fits your space.</h1>
 		<p>
-			Every laundry starts from a different place. Pick the path closest to yours, and we will agree
-			on the scope and price together once we hear your plan.
+			Start small with 2 sets and expand later as your business grows. Every package includes basic installation,
+			and your site visit and layout assessment are free, with no obligation.
 		</p>
 	</header>
 
-	<section class="band" aria-labelledby="paths">
-		<h2 id="paths" class="sr">Choose your path</h2>
-		<div class="paths">
+	<section class="band" aria-labelledby="sets">
+		<h2 id="sets">Equipment packages, starting at {peso(perSet)} per set</h2>
+		<div class="paths sizes">
 			{
-				paths.map((p) => (
+				sizes.map((p) => (
 					<article>
-						<h3>{p.name}</h3>
-						<p class="promise">{p.promise}</p>
-						<p class="best">{p.best}</p>
+						<h3>{p.sets} sets</h3>
+						<p class="promise">Starting at {peso(p.sets * perSet)}</p>
+						<p class="best">One set is one 18 kg washer and one 14 kg gas dryer.</p>
 						<ul>
-							{p.items.map((i) => <li>{i}</li>)}
+							<li>Minimum wall width: {p.wall}</li>
+							<li>Up to {p.wash} wash loads a day</li>
+							<li>Up to {p.dry} dry loads a day</li>
+							<li>Up to {p.kg} kg dry capacity a day</li>
+							<li>Basic installation included</li>
 						</ul>
-						<a class="btn" href={`${contact}?for=${p.key}`}>{p.cta}</a>
+						<a class="btn" href={`${contact}?for=start`}>Ask about {p.sets} sets</a>
 					</article>
 				))
 			}
 		</div>
-		<p class="note">Not an exact fit? We will adjust any path to your plan.</p>
+		<p class="note">
+			Basic utility additions are optional, from about ₱200,000. They cover the basic electrical, plumbing and
+			ducting work needed to commission the equipment, and exclude civil works, permits and main-line upgrades.
+			Capacity figures are theoretical maximums based on a 12-hour operating day. Actual output depends on loading time,
+			your site and how you run your laundry.
+		</p>
+		<p class="note">
+			Prices, capacity figures and timelines are estimates only. TeamG Venturez may change them without prior notice.
+			Your written quotation confirms the final figures after the site visit.
+		</p>
+	</section>
+
+	<section class="band" aria-labelledby="hosp">
+		<h2 id="hosp">For hotels, BnBs and inns</h2>
+		<div class="paths">
+			<article>
+				<h3>{hospitality.name}</h3>
+				<p class="promise">{hospitality.promise}</p>
+				<p class="best">{hospitality.best}</p>
+				<ul>
+					{hospitality.items.map((i) => <li>{i}</li>)}
+				</ul>
+				<a class="btn" href={`${contact}?for=hotel`}>Plan my in-house laundry</a>
+			</article>
+		</div>
+	</section>
+
+	<section class="band" aria-labelledby="upg">
+		<h2 id="upg">Already running a laundry?</h2>
+		<p>We can add machines, review your layout and take care of installation and ongoing maintenance for the laundry you already run.</p>
+		<a class="btn" href={`${contact}?for=upgrade`}>Plan my upgrade</a>
 	</section>
 
 	<Fragment slot="after">
 		<section class="closing" aria-labelledby="pk-close">
 			<div class="container">
-				<h2 id="pk-close">Not sure which path fits? Tell us your plan.</h2>
+				<h2 id="pk-close">Not sure which package fits? Tell us your plan.</h2>
 				<a class="btn" href={contact}>Get a quote</a>
 			</div>
 		</section>
@@ -104,6 +116,15 @@ const paths = [
 		.paths {
 			grid-template-columns: repeat(3, 1fr);
 			gap: 3rem;
+		}
+		.paths.sizes {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	@media (min-width: 1200px) {
+		.paths.sizes {
+			grid-template-columns: repeat(4, 1fr);
+			gap: 2rem;
 		}
 	}
 	article {

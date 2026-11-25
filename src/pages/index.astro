@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import stackRow from '../assets/images/stack-row.jpg';
 import samsung from '../assets/images/samsung-logo.png';
+import { site } from '../config/site';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const contact = `${base}/contact`;
 const provinces = ['Cavite', 'Laguna', 'Batangas', 'Rizal', 'Quezon'];
@@ -22,14 +23,14 @@ const audiences = [
 ---
 <Layout
 	title="Samsung Laundry Equipment in Calabarzon | TeamG Venturez"
-	description="Exclusive Samsung laundry equipment distributor in Calabarzon. Start or upgrade your laundry shop with one team for design, build, installation and service."
+	description="Authorized Samsung laundry equipment dealer in Calabarzon. Start or upgrade your laundry shop with one team for design, build, installation and service."
 >
 	<section class="hero" aria-labelledby="hero-title">
 		<div class="container hero-grid">
 			<div class="hero-copy">
-				<h1 id="hero-title">Exclusive Samsung laundry equipment distributor in Calabarzon.</h1>
+				<h1 id="hero-title">Authorized Samsung laundry equipment dealer in Calabarzon.</h1>
 				<p class="lede">
-					One team you can call for your layout, build, machines and service, from your first plan to your opening day.
+					One team you can call for your layout, build, machines and service, from your first plan to your opening day. Your site visit and layout assessment are free, with no obligation.
 				</p>
 				<div class="actions">
 					<a class="btn" href={contact}>Get a quote</a>
@@ -55,7 +56,7 @@ const audiences = [
 			<div>
 				<Image class="sam" src={samsung} alt="Samsung Professional Laundry" height={80} />
 				<p>
-					As the exclusive distributor here, we sell you the machines, install them and keep them running, so you always have one team to call.
+					As an authorized Samsung dealer, we sell you the machines, install them and keep them running, so you always have one team to call.
 				</p>
 				<ul class="provinces" aria-label="Provinces covered">
 					{provinces.map((p) => <li>{p}</li>)}
@@ -83,6 +84,26 @@ const audiences = [
 		</div>
 	</section>
 
+	<section class="audiences" aria-labelledby="why-title">
+		<div class="container">
+			<h2 id="why-title">Why Samsung Professional Laundry</h2>
+			<ul class="aud-list">
+				<li>
+					<h3>Built for daily loads</h3>
+					<p>Main parts are tested to 30,000 cycles.</p>
+				</li>
+				<li>
+					<h3>Made to last</h3>
+					<p>An inverter direct-drive motor and a stainless steel drum.</p>
+				</li>
+				<li>
+					<h3>Supported by us</h3>
+					<p>We handle your site visit, layout, installation, training and after-sales service.</p>
+				</li>
+			</ul>
+		</div>
+	</section>
+
 	<section class="audiences" aria-labelledby="aud-title">
 		<div class="container">
 			<h2 id="aud-title">Which of these describes you?</h2>
@@ -104,6 +125,7 @@ const audiences = [
 		<div class="container close-inner">
 			<h2 id="close-title">Let’s plan your laundry together. We supply the machines and stay with you after they are installed.</h2>
 			<a class="btn on-dark" href={contact}>Get a quote</a>
+			<p class="visit">Visit our showroom: {site.addressDisplay}.</p>
 		</div>
 	</section>
 </Layout>
@@ -376,6 +398,10 @@ const audiences = [
 		}
 	}
 	/* Close */
+	.visit {
+		margin: 0;
+		opacity: 0.9;
+	}
 	.close {
 		background: var(--accent);
 		color: #fff;

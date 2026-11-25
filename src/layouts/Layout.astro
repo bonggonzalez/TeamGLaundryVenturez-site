@@ -10,7 +10,7 @@ interface Props {
 	image?: string;
 }
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const { title = 'TeamG Venturez', description = 'TeamG Venturez', image = '/og.jpg' } = Astro.props;
+const { title = 'TeamG Venturez', description = 'TeamG Venturez is an authorized Samsung Professional Laundry dealer in Calabarzon, with a showroom in Alfonso, Cavite.', image = '/og.jpg' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const ogImage = new URL(`${base}${image}`, site.url).href;
 // Only well-formed IDs are injected into inline scripts.
@@ -25,7 +25,15 @@ const orgSchema = {
 	email: site.email,
 	telephone: site.phoneIntl,
 	description:
-		'Exclusive Samsung laundry equipment distributor in Calabarzon. Design, construction, installation, maintenance and point-of-sale for laundry businesses.',
+		'Authorized Samsung Professional Laundry dealer in Calabarzon. Design, construction, installation, maintenance and point-of-sale for laundry businesses.',
+	address: {
+		'@type': 'PostalAddress',
+		streetAddress: site.address.street,
+		addressLocality: site.address.locality,
+		addressRegion: site.address.region,
+		postalCode: site.address.postalCode,
+		addressCountry: site.address.country,
+	},
 	areaServed: site.provinces.map((p) => ({ '@type': 'AdministrativeArea', name: `${p}, Philippines` })),
 	...(site.facebook ? { sameAs: [site.facebook] } : {}),
 };

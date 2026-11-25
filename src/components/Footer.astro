@@ -4,6 +4,7 @@ import logo from '../assets/images/teamg-venturez-logo.png';
 import samsung from '../assets/images/samsung-logo.png';
 import { navLinks, serviceLinks } from './nav-links';
 import ContactIcons from './ContactIcons.astro';
+import { site } from '../config/site';
 const year = new Date().getFullYear();
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
@@ -13,7 +14,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 		<div>
 			<div class="lockup"><Image class="flogo" src={logo} alt="TeamG Venturez" height={72} /><Image class="fsam" src={samsung} alt="Samsung Professional Laundry" height={72} /></div>
 			<p>
-				Exclusive Samsung laundry equipment distributor in Calabarzon, Philippines. We design,
+				Authorized Samsung Professional Laundry dealer in Calabarzon, Philippines. We design,
 				build, equip and maintain commercial laundry operations.
 			</p>
 		</div>
@@ -32,11 +33,20 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 		<div>
 			<h2>Contact</h2>
 			<ContactIcons size="sm" />
+			<p>Visit our showroom: {site.addressDisplay}.</p>
 			<p>Serving Cavite, Laguna, Batangas, Rizal and Quezon.</p>
 			<p><a href={`${base}/contact`}>Get a quote</a></p>
 		</div>
 	</div>
 	<div class="container">
+		<p class="legal">
+			TeamG Venturez is an independent company and an authorized dealer of Samsung Professional Laundry equipment.
+			We are a separate company from Samsung Electronics Co., Ltd. and its Philippine distributor. Agreements are
+			between you and TeamG Venturez. Samsung and Samsung Professional Laundry are trademarks of Samsung Electronics Co., Ltd.
+		</p>
+		<p class="legal">
+			Prices, capacity figures and timelines on this site are estimates only. TeamG Venturez may change them without prior notice.
+		</p>
 		<p class="copy">&copy; {year} TeamG Venturez. All rights reserved.</p>
 	</div>
 </footer>
@@ -91,6 +101,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 		height: 2.25rem;
 		width: auto;
 		mix-blend-mode: multiply;
+	}
+	.legal {
+		margin: 0 0 0.75rem;
+		font-size: 0.8rem;
+		line-height: 1.5;
+		opacity: 0.75;
+		max-width: 60rem;
 	}
 	.copy {
 		margin-top: 2rem;
