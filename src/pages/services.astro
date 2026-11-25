@@ -1,7 +1,5 @@
 ---
-import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
-import laundromat from '../assets/images/laundromat.jpg';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const contact = `${base}/contact`;
 const services = [
@@ -48,16 +46,6 @@ const services = [
 			We handle your planning, construction, Samsung equipment, point-of-sale and ongoing support, so you have one team to turn to.
 		</p>
 	</header>
-
-	<figure class="photo wide">
-		<Image
-			src={laundromat}
-			alt="Samsung professional washers and dryers stacked in a laundry shop"
-			widths={[640, 960, 1280]}
-			sizes="(min-width: 76rem) 70rem, 92vw"
-		/>
-		<figcaption>Image shown for illustration.</figcaption>
-	</figure>
 
 	<section class="band" aria-labelledby="what">
 		<h2 id="what">How we can help your laundry</h2>
