@@ -1,0 +1,255 @@
+---
+// Swipeable banner strip. Touch scrolling and snapping are native (CSS scroll-snap);
+// the script only wires the arrow buttons and dots. No autoplay.
+import { Image } from 'astro:assets';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const images = import.meta.glob<{ default: ImageMetadata }>('../assets/banners/*.webp', { eager: true });
+const img = (name: string) => {
+	const hit = Object.entries(images).find(([p]) => p.endsWith(`/${name}.webp`));
+	if (!hit) throw new Error(`Banner image missing: ${name}`);
+	return hit[1].default;
+};
+
+// The text in each banner is part of the image, so `text` repeats it for screen readers and search engines.
+const slides = [
+	{ file: '06-your-next-business', href: `${base}/packages`, text: 'Your next business starts here. Commercial-grade Samsung equipment, a 2-year warranty with free preventive maintenance, and one team to call for design, installation and service.' },
+	{ file: '10-five-sets-installation', href: `${base}/packages`, text: 'Get 5 sets with basic installation included, from ₱1,200,000. Estimate only. Includes a 2-year warranty with free maintenance, operations and technical training, and a free site visit and layout plan.' },
+	{ file: '02-meet-the-equipment', href: `${base}/products`, text: 'Meet the equipment: an 18 kg commercial washer and a 14 kg LPG gas dryer, one complete system. See them running at our showroom in Alfonso, Cavite.' },
+	{ file: '03-how-it-works', href: `${base}/contact?for=start`, text: 'From inquiry to installation in four steps: send an inquiry, talk to TeamG Venturez, free site visit and layout, then installation and opening.' },
+	{ file: '05-what-matters-most', href: `${base}/contact?for=start`, text: 'Starting a laundry business? Durability, efficiency and support after the sale. We cover all three. Message us for a free site visit in Calabarzon.' },
+	{ file: '07-day-in-your-laundry', href: `${base}/services`, text: 'A day in your laundry business, from opening up to closing out. Backed by a 2-year warranty and free preventive maintenance.' },
+	{ file: '09-big-enough-to-trust', href: `${base}/about`, text: 'Big enough to trust globally, local enough to know your business. We serve Cavite, Laguna, Batangas, Rizal and Quezon, with a local showroom and support that goes through us.' },
+	{ file: '08-thinking-about-it', href: `${base}/contact`, text: "Thinking about it? We're ready when you are. Reliable equipment, local support and one team to call." },
+];
+---
+
+<section class="banners" aria-roledescription="carousel" aria-label="Featured offers">
+	<div class="container">
+		<div class="frame">
+			<ul class="track" tabindex="0" aria-label="Featured offers. Swipe or use the arrow keys to see more.">
+				{
+					slides.map((s, i) => (
+						<li class="slide" aria-roledescription="slide" aria-label={`${i + 1} of ${slides.length}`}>
+							<a class="cta" href={s.href}>
+								<Image
+									src={img(s.file)}
+									alt=""
+									widths={[640, 960, 1280, 1600]}
+									sizes="(min-width: 1100px) 1000px, 86vw"
+									loading={i === 0 ? 'eager' : 'lazy'}
+									fetchpriority={i === 0 ? 'high' : 'auto'}
+									decoding={i === 0 ? 'sync' : 'async'}
+								/>
+								<span class="sr">{s.text}</span>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+			<button class="nav prev" type="button" aria-label="Previous banner" disabled>
+				<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7" /></svg>
+			</button>
+			<button class="nav next" type="button" aria-label="Next banner">
+				<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7" /></svg>
+			</button>
+		</div>
+		<div class="dots">
+			{slides.map((_, i) => <button type="button" class="dot" aria-label={`Go to banner ${i + 1}`} aria-current={i === 0 ? 'true' : undefined}></button>)}
+		</div>
+	</div>
+</section>
+
+<style>
+	.banners {
+		padding-block: clamp(1.25rem, 3vw, 2.5rem) 0;
+	}
+	.frame {
+		position: relative;
+	}
+	.track {
+		display: flex;
+		gap: 0.75rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scroll-behavior: smooth;
+		overscroll-behavior-x: contain;
+		scrollbar-width: none;
+	}
+	.track::-webkit-scrollbar {
+		display: none;
+	}
+	.track:focus-visible {
+		outline: 3px solid var(--accent);
+		outline-offset: 3px;
+	}
+	.slide {
+		flex: 0 0 88%;
+		scroll-snap-align: center;
+		min-width: 0;
+	}
+	@media (min-width: 900px) {
+		.slide {
+			flex-basis: 100%;
+		}
+		.track {
+			gap: 1rem;
+		}
+	}
+	.slide a {
+		display: block;
+		border-radius: 0.9rem;
+		overflow: hidden;
+		border: 1px solid var(--border);
+		line-height: 0;
+	}
+	.slide a:focus-visible {
+		outline: 3px solid var(--accent);
+		outline-offset: 2px;
+	}
+	.slide :global(img) {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 2400 / 1256;
+	}
+	.sr {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+	.nav {
+		display: none;
+		position: absolute;
+		top: 50%;
+		translate: 0 -50%;
+		width: 2.9rem;
+		height: 2.9rem;
+		border-radius: 50%;
+		border: 1px solid var(--border);
+		background: rgba(255, 255, 255, 0.94);
+		color: var(--text);
+		box-shadow: 0 6px 18px rgba(4, 16, 31, 0.18);
+		cursor: pointer;
+		place-items: center;
+	}
+	.nav svg {
+		width: 1.4rem;
+		height: 1.4rem;
+	}
+	.nav:hover:not(:disabled) {
+		background: #fff;
+		color: var(--accent);
+	}
+	.nav:focus-visible {
+		outline: 3px solid var(--accent);
+		outline-offset: 2px;
+	}
+	.nav:disabled {
+		opacity: 0;
+		pointer-events: none;
+	}
+	.prev {
+		left: 0.75rem;
+	}
+	.next {
+		right: 0.75rem;
+	}
+	@media (hover: hover) and (min-width: 700px) {
+		.nav {
+			display: grid;
+		}
+	}
+	.dots {
+		display: flex;
+		justify-content: center;
+		gap: 0.15rem;
+		margin-top: 0.4rem;
+	}
+	.dot {
+		width: 1.6rem;
+		height: 1.6rem;
+		border: 0;
+		background: transparent;
+		cursor: pointer;
+		position: relative;
+		padding: 0;
+	}
+	.dot::after {
+		content: '';
+		position: absolute;
+		inset: 50% auto auto 50%;
+		width: 0.55rem;
+		height: 0.55rem;
+		translate: -50% -50%;
+		border-radius: 50%;
+		background: var(--border);
+		transition: background 0.2s ease, scale 0.2s ease;
+	}
+	.dot[aria-current='true']::after {
+		background: var(--accent);
+		scale: 1.3;
+	}
+	.dot:focus-visible {
+		outline: 3px solid var(--accent);
+		outline-offset: 1px;
+		border-radius: 50%;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.track {
+			scroll-behavior: auto;
+		}
+		.dot::after {
+			transition: none;
+		}
+	}
+</style>
+
+<script>
+	document.querySelectorAll<HTMLElement>('.banners').forEach((root) => {
+		const track = root.querySelector<HTMLElement>('.track')!;
+		const slides = [...track.querySelectorAll<HTMLElement>('.slide')];
+		const dots = [...root.querySelectorAll<HTMLButtonElement>('.dot')];
+		const prev = root.querySelector<HTMLButtonElement>('.prev')!;
+		const next = root.querySelector<HTMLButtonElement>('.next')!;
+		let current = 0;
+
+		const goTo = (i: number) => {
+			i = Math.max(0, Math.min(slides.length - 1, i));
+			current = i;
+			const s = slides[i];
+			track.scrollTo({ left: s.offsetLeft - (track.clientWidth - s.clientWidth) / 2, behavior: 'smooth' });
+		};
+		const update = () => {
+			const mid = track.scrollLeft + track.clientWidth / 2;
+			let best = 0;
+			let bestDist = Infinity;
+			slides.forEach((s, i) => {
+				const d = Math.abs(s.offsetLeft + s.clientWidth / 2 - mid);
+				if (d < bestDist) {
+					bestDist = d;
+					best = i;
+				}
+			});
+			current = best;
+			dots.forEach((d, i) => (i === best ? d.setAttribute('aria-current', 'true') : d.removeAttribute('aria-current')));
+			prev.disabled = track.scrollLeft <= 2;
+			next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+		};
+		prev.addEventListener('click', () => goTo(current - 1));
+		next.addEventListener('click', () => goTo(current + 1));
+		dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+		let raf = 0;
+		track.addEventListener('scroll', () => {
+			cancelAnimationFrame(raf);
+			raf = requestAnimationFrame(update);
+		}, { passive: true });
+		window.addEventListener('resize', update);
+		update();
+	});
+</script>

@@ -5,6 +5,7 @@ import stackRow from '../assets/images/stack-row.jpg';
 import samsung from '../assets/images/samsung-logo.png';
 import { site } from '../config/site';
 import MapLink from '../components/MapLink.astro';
+import BannerCarousel from '../components/BannerCarousel.astro';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const contact = `${base}/contact`;
 const provinces = ['Cavite', 'Laguna', 'Batangas', 'Rizal', 'Quezon'];
@@ -51,6 +52,8 @@ const audiences = [
 			</figure>
 		</div>
 	</section>
+
+	<BannerCarousel />
 
 	<section class="claim" aria-labelledby="claim-title">
 		<div class="container claim-grid">
