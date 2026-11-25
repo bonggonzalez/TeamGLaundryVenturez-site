@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import logo from '../assets/images/teamg-venturez-logo.png';
 import samsung from '../assets/images/samsung-logo.png';
 import { navLinks as links } from './nav-links';
+import TGMark from './TGMark.astro';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const norm = (p: string) => p.replace(/\/$/, '') || '/';
 const current = norm(Astro.url.pathname);
@@ -11,9 +12,12 @@ const current = norm(Astro.url.pathname);
 <header class="site-header">
 	<div class="container bar">
 		<a class="brand" href={`${base}/`} aria-label="TeamG Venturez with Samsung Professional Laundry, home">
-			<Image src={logo} alt="TeamG Venturez" height={72} loading="eager" />
-			<span class="x" aria-hidden="true"></span>
-			<Image class="sam" src={samsung} alt="Samsung Professional Laundry" height={72} loading="eager" />
+			<span class="short" aria-hidden="true"><TGMark class="tg" /><span class="word">TeamG</span></span>
+			<span class="full">
+				<Image src={logo} alt="TeamG Venturez" height={72} loading="eager" />
+				<span class="x" aria-hidden="true"></span>
+				<Image class="sam" src={samsung} alt="Samsung Professional Laundry" height={72} loading="eager" />
+			</span>
 		</a>
 		<nav aria-label="Main">
 			<ul>
@@ -53,6 +57,37 @@ const current = norm(Astro.url.pathname);
 		gap: 0.75rem;
 		margin-right: auto;
 		line-height: 0;
+		text-decoration: none;
+	}
+	.brand .full {
+		display: none;
+		align-items: center;
+		gap: 0.75rem;
+	}
+	.brand .short {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		line-height: 1;
+		color: var(--navy);
+	}
+	.brand .short :global(.tg) {
+		height: 1.6rem;
+		width: auto;
+	}
+	.brand .word {
+		font-family: var(--display);
+		font-weight: 800;
+		font-size: 1.35rem;
+		letter-spacing: -0.03em;
+	}
+	@media (min-width: 560px) {
+		.brand .short {
+			display: none;
+		}
+		.brand .full {
+			display: flex;
+		}
 	}
 	.brand .x {
 		width: 1px;

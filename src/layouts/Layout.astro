@@ -21,7 +21,7 @@ const orgSchema = {
 	'@type': 'Organization',
 	name: site.name,
 	url: site.url,
-	logo: new URL(`${base}/og.jpg`, site.url).href,
+	logo: new URL(`${base}/icon-512.png`, site.url).href,
 	email: site.email,
 	telephone: site.phoneIntl,
 	description:
@@ -46,7 +46,8 @@ const orgSchema = {
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content={description} />
 		<link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
-		<link rel="icon" href={`${base}/favicon.ico`} />
+		<link rel="icon" href={`${base}/favicon.ico`} sizes="48x48 32x32 16x16" />
+		<link rel="apple-touch-icon" href={`${base}/apple-touch-icon.png`} />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<link rel="canonical" href={canonical} />
@@ -60,6 +61,7 @@ const orgSchema = {
 		<meta property="og:image" content={ogImage} />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="TeamG Venturez, authorized Samsung laundry equipment dealer in Calabarzon" />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
@@ -131,6 +133,7 @@ const orgSchema = {
 		--border: #d3dfec;
 		--accent: #1d4ed8;
 		--accent-strong: #1740b3;
+		--navy: #04101f; /* brand navy from the TG mark; used for dark bands */
 		--tint: #e8f3ff;
 		--display: 'Bricolage Grotesque', system-ui, sans-serif;
 	}
@@ -328,7 +331,9 @@ const orgSchema = {
 		transform: translateY(-2px);
 	}
 	.closing {
-		background: var(--accent);
+		position: relative;
+		overflow: hidden;
+		background: var(--navy) url('/tg-ghost.svg') no-repeat right -4rem center / auto 150%;
 		color: #fff;
 		padding-block: clamp(3rem, 8vw, 5.5rem);
 		margin-top: clamp(2.5rem, 6vw, 4.5rem);
