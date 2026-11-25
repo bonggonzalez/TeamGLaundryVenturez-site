@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const contact = `${base}/contact`;
+const audiences = [
+	{ title: 'Starting a laundry business', text: 'Equipment sized for a new shop, paired with the layout, build and systems around it.' },
+	{ title: 'Upgrading your laundry', text: 'Replace or expand your current machines with Samsung professional equipment.' },
+	{ title: 'Hotels and motels', text: 'Equipment for an in-house laundry operation inside your property.' },
+];
+---
+
+<Layout
+	title="Products | Team G Laundry Venturez"
+	description="Samsung professional laundry equipment, distributed exclusively in Calabarzon by Team G Laundry Venturez."
+>
+	<header class="page-head">
+		<p class="eyebrow">Products</p>
+		<h1>Samsung laundry equipment, exclusively in Calabarzon.</h1>
+		<p>
+			Team G is the exclusive Samsung laundry equipment distributor for Calabarzon. You buy from
+			the distributor, and the same team installs and services what it sells.
+		</p>
+	</header>
+
+	<section class="band" aria-labelledby="who">
+		<h2 id="who">Equipment for where you are starting from</h2>
+		<div class="cards">
+			{
+				audiences.map((a) => (
+					<article class="card">
+						<h3>{a.title}</h3>
+						<p>{a.text}</p>
+					</article>
+				))
+			}
+		</div>
+	</section>
+
+	<section class="band" aria-labelledby="choose">
+		<h2 id="choose">Not sure which machines fit?</h2>
+		<p>
+			Tell us your space, your expected volume and your type of operation, and we will recommend
+			the right equipment as part of your plan.
+		</p>
+		<a class="btn" href={contact}>Request a consultation</a>
+	</section>
+</Layout>

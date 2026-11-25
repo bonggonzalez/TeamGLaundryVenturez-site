@@ -1,8 +1,39 @@
 ---
 import Layout from '../layouts/Layout.astro';
+// TODO(owner): phone, text, email, hours and the inquiry-form destination are
+// not confirmed yet (see PRODUCT.md "Open decisions"). Add them to the
+// "Direct channels" and "Inquiry" sections once supplied; do not invent them.
+const provinces = ['Cavite', 'Laguna', 'Batangas', 'Rizal', 'Quezon'];
 ---
 
-<Layout title="Contact | Team G Laundry Venturez">
-	<h1>Contact</h1>
-	<p>Add contact details here.</p>
+<Layout
+	title="Contact | Team G Laundry Venturez"
+	description="Contact Team G Laundry Venturez to start or upgrade a laundry operation in Calabarzon."
+>
+	<header class="page-head">
+		<p class="eyebrow">Contact</p>
+		<h1>Talk to Team G about your laundry operation.</h1>
+		<p>
+			Whether you are starting out, upgrading, or setting up laundry in your hotel or motel, we
+			will help you plan the next step.
+		</p>
+	</header>
+
+	<section class="band" aria-labelledby="channels">
+		<h2 id="channels">Direct channels</h2>
+		<p>You can reach us by phone, text or email. Our contact details are coming soon.</p>
+	</section>
+
+	<section class="band" aria-labelledby="inquiry">
+		<h2 id="inquiry">Request a consultation</h2>
+		<p>
+			An online inquiry form is coming soon. Tell us your target location, your type of
+			operation and your space size when you get in touch.
+		</p>
+	</section>
+
+	<section class="band" aria-labelledby="area">
+		<h2 id="area">Service area</h2>
+		<p>Calabarzon: {provinces.join(', ')}.</p>
+	</section>
 </Layout>

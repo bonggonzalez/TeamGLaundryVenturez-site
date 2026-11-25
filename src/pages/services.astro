@@ -1,8 +1,70 @@
 ---
 import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const contact = `${base}/contact`;
+const services = [
+	{
+		title: 'Design',
+		text: 'A laundry layout planned around your space, your volume and your customers, before anything is built.',
+		cta: 'Ask about design',
+	},
+	{
+		title: 'Construction',
+		text: 'The build-out of your premises, handled alongside the equipment plan so the two fit together.',
+		cta: 'Ask about construction',
+	},
+	{
+		title: 'Equipment installation',
+		text: 'Samsung professional laundry equipment installed and commissioned by the people who distribute it.',
+		cta: 'Ask about installation',
+	},
+	{
+		title: 'Maintenance',
+		text: 'Ongoing service so your operation keeps earning long after opening day.',
+		cta: 'Ask about maintenance',
+	},
+	{
+		title: 'Point-of-sale systems',
+		text: 'Point-of-sale set up for the way your laundry takes payment and tracks business.',
+		cta: 'Ask about point of sale',
+	},
+	{
+		title: 'Business and marketing consultation',
+		text: 'Practical guidance on running and promoting your laundry business, from plan to growth.',
+		cta: 'Ask about consultation',
+	},
+];
 ---
 
-<Layout title="Services | Team G Laundry Venturez">
-	<h1>Services</h1>
-	<p>Tell customers what you offer here.</p>
+<Layout
+	title="Services | Team G Laundry Venturez"
+	description="Design, construction, equipment installation, maintenance, point-of-sale systems and business consultation for commercial laundry operations in Calabarzon."
+>
+	<header class="page-head">
+		<p class="eyebrow">Services</p>
+		<h1>From the first plan to the first service call.</h1>
+		<p>
+			One partner for the whole laundry operation: planning, build-out, Samsung equipment,
+			systems and ongoing support.
+		</p>
+	</header>
+
+	{
+		services.map((s, i) => (
+			<section class="band" aria-labelledby={`svc-${i}`}>
+				<h2 id={`svc-${i}`}>{s.title}</h2>
+				<p>{s.text}</p>
+				<a class="btn" href={contact}>{s.cta}</a>
+			</section>
+		))
+	}
+
+	<section class="band" aria-labelledby="svc-start">
+		<h2 id="svc-start">Start your laundry operation</h2>
+		<p>
+			Tell us whether you are starting out, upgrading, or setting up laundry in your hotel or
+			motel, and we will take it from there.
+		</p>
+		<a class="btn" href={contact}>Request a consultation</a>
+	</section>
 </Layout>

@@ -1,11 +1,37 @@
 ---
+import { navLinks, serviceLinks } from './nav-links';
 const year = new Date().getFullYear();
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <footer class="site-footer">
+	<div class="container grid">
+		<div>
+			<p class="name">Team G Laundry Venturez</p>
+			<p>
+				Exclusive Samsung laundry equipment distributor in Calabarzon, Philippines. We design,
+				build, equip and maintain commercial laundry operations.
+			</p>
+		</div>
+		<nav aria-label="Quick links">
+			<h2>Quick links</h2>
+			<ul>
+				{navLinks.map((l) => <li><a href={`${base}${l.href}`}>{l.label}</a></li>)}
+			</ul>
+		</nav>
+		<div>
+			<h2>What we do</h2>
+			<ul>
+				{serviceLinks.map((s) => <li><a href={`${base}/services`}>{s}</a></li>)}
+			</ul>
+		</div>
+		<div>
+			<h2>Contact</h2>
+			<p>Service area: Cavite, Laguna, Batangas, Rizal and Quezon.</p>
+			<p><a href={`${base}/contact`}>Request a consultation</a></p>
+		</div>
+	</div>
 	<div class="container">
-		<p class="name">Team G Laundry Venturez</p>
-		<p>Exclusive Samsung laundry equipment distributor in Calabarzon, Philippines.</p>
 		<p class="copy">&copy; {year} Team G Laundry Venturez. All rights reserved.</p>
 	</div>
 </footer>
@@ -13,12 +39,37 @@ const year = new Date().getFullYear();
 <style>
 	.site-footer {
 		border-top: 1px solid var(--border);
-		padding-block: 2rem;
+		padding-block: 2.5rem 2rem;
 		color: var(--muted);
 		font-size: 0.95rem;
 	}
+	.grid {
+		display: grid;
+		gap: 2rem;
+		grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+	}
+	h2 {
+		font-family: var(--display);
+		font-size: 1rem;
+		color: var(--text);
+		margin: 0 0 0.6rem;
+	}
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	li {
+		margin-bottom: 0.3rem;
+	}
+	a {
+		color: var(--muted);
+	}
+	a:hover {
+		color: var(--accent);
+	}
 	p {
-		margin: 0 0 0.25rem;
+		margin: 0 0 0.5rem;
 	}
 	.name {
 		font-family: var(--display);
@@ -26,7 +77,7 @@ const year = new Date().getFullYear();
 		color: var(--text);
 	}
 	.copy {
-		margin-top: 0.75rem;
+		margin-top: 2rem;
 		font-size: 0.85rem;
 	}
 </style>

@@ -1,33 +1,57 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const contact = `${base}/contact`;
+const provinces = ['Cavite', 'Laguna', 'Batangas', 'Rizal', 'Quezon'];
+const audiences = [
+	{ title: 'Aspiring laundry entrepreneurs', text: 'People who want to start a laundry business and need equipment plus a plan.' },
+	{ title: 'Existing laundry operators', text: 'Owners who already run a laundry business and want to upgrade equipment or operations.' },
+	{ title: 'Hospitality operators', text: 'Hotels, motels and similar businesses that want laundry inside their own property.' },
+];
 ---
 
 <Layout
 	title="About | Team G Laundry Venturez"
-	description="Learn about Team G Laundry Venturez."
+	description="Team G Laundry Venturez is the exclusive Samsung laundry equipment distributor in Calabarzon and an end-to-end partner for commercial laundry operations."
 >
-	<h1>About Team G Laundry Venturez</h1>
-	<p>
-		We are a small team that believes laundry day should be the easy part of your week. We wash,
-		dry and fold with care, and we offer pickup and delivery so your clothes come back fresh
-		without taking up your time.
-	</p>
-	<p><a href={`${base}/`}>&larr; Back to the homepage</a></p>
-</Layout>
+	<header class="page-head">
+		<p class="eyebrow">About</p>
+		<h1>About Team G Laundry Venturez</h1>
+		<p>
+			We help clients build a complete laundry operation, not just buy machines.
+		</p>
+	</header>
 
-<style>
-	h1 {
-		font-size: clamp(1.8rem, 5vw, 2.6rem);
-		line-height: 1.15;
-		margin: 0 0 1rem;
-	}
-	p {
-		max-width: 65ch;
-		margin: 0 0 1.25rem;
-	}
-	a {
-		color: var(--accent);
-	}
-</style>
+	<section class="band" aria-labelledby="who">
+		<h2 id="who">Who we are</h2>
+		<p>
+			Team G Laundry Venturez is the exclusive Samsung laundry equipment distributor in
+			Calabarzon, Philippines. No other distributor holds this territory.
+		</p>
+		<p>
+			We act as an end-to-end partner: design, construction, equipment installation and ongoing
+			maintenance, plus point-of-sale systems and business and marketing consultation.
+		</p>
+		<a class="btn" href={contact}>Request a consultation</a>
+	</section>
+
+	<section class="band" aria-labelledby="clients">
+		<h2 id="clients">Who we work with</h2>
+		<div class="cards">
+			{
+				audiences.map((a) => (
+					<article class="card">
+						<h3>{a.title}</h3>
+						<p>{a.text}</p>
+					</article>
+				))
+			}
+		</div>
+	</section>
+
+	<section class="band" aria-labelledby="area">
+		<h2 id="area">Where we operate</h2>
+		<p>We serve Calabarzon: {provinces.join(', ')}.</p>
+		<p><a href={`${base}/services`}>See our services</a> or <a href={`${base}/products`}>our products</a>.</p>
+	</section>
+</Layout>
