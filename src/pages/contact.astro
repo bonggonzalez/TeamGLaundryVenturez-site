@@ -27,13 +27,13 @@ const interests = [
 ---
 
 <Layout
-	title="Contact | TeamG Venturez"
-	description="Talk to TeamG Venturez about starting or upgrading a laundry operation in Calabarzon. Request a consultation by form, phone, text or email."
+	title="Get a Quote | TeamG Venturez"
+	description="Talk to TeamG Venturez about starting or upgrading a laundry operation in Calabarzon. Get a quote by form, phone, text or email."
 >
 	<header class="page-head">
 		<h1>Let's plan your laundry.</h1>
 		<p>
-			Starting, upgrading or adding laundry to your property? Tell us your plan. We will help with the next step.
+			Starting, upgrading or adding laundry to your property? Tell us your plan and we will help with the next step.
 		</p>
 	</header>
 
@@ -58,7 +58,7 @@ const interests = [
 	<section class="band" aria-labelledby="inquiry">
 		<div class="form-wrap">
 			<div class="form-intro">
-				<h2 id="inquiry">Request a consultation</h2>
+				<h2 id="inquiry">Get a quote</h2>
 				<p>
 					Share a few details. We will follow up to discuss your plan and the equipment that fits.
 				</p>
@@ -98,9 +98,10 @@ const interests = [
 					</select>
 				</label>
 				<label>Your space or plan
-					<textarea name="message" rows="4" placeholder="For example: floor area in square metres, number of machines, target opening date"></textarea>
+					<textarea name="message" rows="4" placeholder="For example: floor area in square meters, number of machines, target opening date"></textarea>
 				</label>
 				<button class="btn" type="submit">Send my request</button>
+				<p class="privacy">We use your details only to reply to your request, in line with the Data Privacy Act of 2012.</p>
 				<p id="form-status" role="status" aria-live="polite"></p>
 			</form>
 		</div>
@@ -195,6 +196,11 @@ const interests = [
 	input[aria-invalid='true'] {
 		border-color: #b3261e;
 	}
+	.privacy {
+		font-size: 0.85rem;
+		color: var(--muted);
+		margin: 0.75rem 0 0;
+	}
 	#form-status {
 		margin: 0;
 		min-height: 1.5em;
@@ -239,7 +245,7 @@ const interests = [
 				'',
 				f.message.value,
 			];
-			const href = `mailto:${email}?subject=${encodeURIComponent('Consultation request')}&body=${encodeURIComponent(lines.join('\n'))}`;
+			const href = `mailto:${email}?subject=${encodeURIComponent('Quote request')}&body=${encodeURIComponent(lines.join('\n'))}`;
 			status.textContent = `Opening your email app. You can also email ${email} or call or text ${phone}.`;
 			location.href = href;
 			return;
@@ -253,7 +259,7 @@ const interests = [
 			});
 			if (!res.ok) throw new Error('bad status');
 			form.reset();
-			status.textContent = 'Thank you. We have your request and will be in touch.';
+			status.textContent = 'Salamat po! We have your request and will be in touch.';
 		} catch {
 			status.textContent = 'Your request did not send. Please try again, or contact us directly.';
 		}

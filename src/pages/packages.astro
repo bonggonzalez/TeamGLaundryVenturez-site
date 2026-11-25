@@ -6,7 +6,8 @@ const paths = [
 	{
 		key: 'start',
 		name: 'Start-Up',
-		promise: 'From idea to opening day, with one partner.',
+		promise: 'From idea to opening day, with one team to call.',
+		best: 'Best if you have a space in mind but no laundry yet.',
 		items: [
 			'Layout design planned around your space and volume',
 			'Construction coordinated with your equipment plan',
@@ -18,7 +19,8 @@ const paths = [
 	{
 		key: 'upgrade',
 		name: 'Upgrade',
-		promise: 'Better machines and tighter systems for the laundry you already run.',
+		promise: 'More capacity and fewer breakdowns for the laundry you already run.',
+		best: 'Best if you already run a laundry and want to grow or replace machines.',
 		items: [
 			'Replace or add Samsung professional equipment',
 			'Layout review for the machines you are adding',
@@ -31,6 +33,7 @@ const paths = [
 		key: 'hotel',
 		name: 'Hospitality',
 		promise: 'Your own laundry operation inside your hotel or motel.',
+		best: 'Best if you own or manage a hotel or motel.',
 		items: [
 			'Laundry layout planned for your property',
 			'Construction coordinated with your equipment plan',
@@ -50,7 +53,7 @@ const paths = [
 		<h1>Three ways to work with TeamG.</h1>
 		<p>
 			Every laundry starts from a different place. Choose the path closest to yours. We set scope
-			and pricing together after a consultation.
+			and pricing together once we hear your plan.
 		</p>
 	</header>
 
@@ -62,6 +65,7 @@ const paths = [
 					<article>
 						<h3>{p.name}</h3>
 						<p class="promise">{p.promise}</p>
+						<p class="best">{p.best}</p>
 						<ul>
 							{p.items.map((i) => <li>{i}</li>)}
 						</ul>
@@ -71,7 +75,7 @@ const paths = [
 			}
 		</div>
 		<p class="note">
-			Scope and pricing are set after a consultation. Tell us your plan and we will shape the
+			Scope and pricing are set once we hear your plan. Tell us your plan and we will shape the
 			engagement around it.
 		</p>
 	</section>
@@ -80,7 +84,7 @@ const paths = [
 		<section class="closing" aria-labelledby="pk-close">
 			<div class="container">
 				<h2 id="pk-close">Not sure which path fits? Tell us your plan.</h2>
-				<a class="btn" href={contact}>Request a consultation</a>
+				<a class="btn" href={contact}>Get a quote</a>
 			</div>
 		</section>
 	</Fragment>
@@ -121,6 +125,11 @@ const paths = [
 	}
 	.promise {
 		color: var(--muted);
+		margin: 0 0 0.5rem;
+	}
+	.best {
+		font-size: 0.9rem;
+		font-weight: 600;
 		margin: 0 0 1.25rem;
 	}
 	@media (min-width: 900px) {

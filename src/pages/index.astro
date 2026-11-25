@@ -15,24 +15,24 @@ const scope = [
 	{ title: 'Business and marketing consultation', text: 'Practical guidance on running and promoting your business.' },
 ];
 const audiences = [
-	{ key: 'start', title: 'Starting a laundry business', text: 'Go from idea to opening with one partner for the plan, the build and the machines.' },
+	{ key: 'start', title: 'Starting a laundry business', text: 'Turn your idea into a laundry negosyo with one partner for the plan, the build and the machines.' },
 	{ key: 'upgrade', title: 'Upgrading your laundry', text: 'Replace or add equipment, and tighten the systems around it.' },
-	{ key: 'hotel', title: 'Hotel or motel laundry', text: 'Run laundry inside your own property, on your own terms.' },
+	{ key: 'hotel', title: 'Hotel or motel laundry', text: 'Run your own laundry inside your hotel or motel.' },
 ];
 ---
 <Layout
-	title="TeamG Venturez | Exclusive Samsung laundry equipment distributor in Calabarzon"
-	description="TeamG Venturez is the exclusive Samsung laundry equipment distributor in Calabarzon. We design, build, install and maintain laundry operations."
+	title="Samsung Laundry Equipment in Calabarzon | TeamG Venturez"
+	description="Exclusive Samsung laundry equipment distributor in Calabarzon. Start or upgrade your laundry shop with one team for design, build, installation and service."
 >
 	<section class="hero" aria-labelledby="hero-title">
 		<div class="container hero-grid">
 			<div class="hero-copy">
 				<h1 id="hero-title">Exclusive Samsung laundry equipment distributor in Calabarzon.</h1>
 				<p class="lede">
-					One partner to design, build, equip and maintain your laundry. From first layout to first payment.
+					One team to call for your layout, build, machines and service. From first plan to first payment.
 				</p>
 				<div class="actions">
-					<a class="btn" href={contact}>Request a consultation</a>
+					<a class="btn" href={contact}>Get a quote</a>
 					<a class="link" href="#scope">See our services</a>
 				</div>
 			</div>
@@ -85,7 +85,7 @@ const audiences = [
 
 	<section class="audiences" aria-labelledby="aud-title">
 		<div class="container">
-			<h2 id="aud-title">Pick your path.</h2>
+			<h2 id="aud-title">Which sounds like you?</h2>
 			<ul class="aud-list">
 				{
 					audiences.map((a) => (
@@ -103,7 +103,7 @@ const audiences = [
 	<section class="close" aria-labelledby="close-title">
 		<div class="container close-inner">
 			<h2 id="close-title">Plan your laundry with the team that supplies the machines.</h2>
-			<a class="btn on-dark" href={contact}>Request a consultation</a>
+			<a class="btn on-dark" href={contact}>Get a quote</a>
 		</div>
 	</section>
 </Layout>

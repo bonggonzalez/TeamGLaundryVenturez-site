@@ -10,7 +10,7 @@ const contact = `${base}/contact`;
 const why = [
 	{ title: 'Built for daily loads', text: 'Commercial laundries run machines all day. This equipment is made for that workload.' },
 	{ title: 'Tested to 30,000 cycles', text: 'Main parts are tested for 30,000 cycles. An inverter direct-drive motor drives the drum.' },
-	{ title: 'Plan your loads', text: 'An 18 kg washer runs a 36 minute cycle. A 14 kg dryer runs 45 minutes. You can work out your daily capacity.' },
+	{ title: 'Know your daily capacity', text: 'An 18 kg washer runs a 36 minute cycle and a 14 kg dryer runs 45 minutes. That lets you estimate how many loads your shop can handle in a day.' },
 ];
 const features = [
 	{ title: 'Powerful, effective cleaning', text: 'Bubble Wash turns detergent into rich bubbles that soak quickly into fabric. A strong water shot rinses away stubborn stains and detergent residue.' },
@@ -18,8 +18,11 @@ const features = [
 	{ title: 'Interior drum light', text: 'A built-in light lets customers see every item inside the drum, so nothing gets left behind and unloading is quick.' },
 	{ title: 'Safe, efficient, durable', text: 'The inverter direct-drive motor attaches straight to the drum, with no belt to wear out. VRT+ vibration control detects and reduces vibration at any spin speed or load size*.' },
 	{ title: 'Keeps the washer clean', text: 'A detergent-free cleaning cycle soaks, pulses and spins to cut dirt and odor-causing bacteria. A water jet clears the door frame, and the machine tells you when it is due.' },
-	{ title: 'Payment ready', text: 'Works with coin, card and Samsung Pay systems. Payment systems and coin exchangers are sold separately.' },
-	{ title: 'Do business anywhere', text: 'Install as stacked pairs or side by side to fit your floor plan and make the most of every square meter.' },
+	{ title: 'Dryer drum that lasts', text: 'The dryer drum is stainless steel and heat-resistant. Unlike coated or plastic drums, it will not chip, scratch, rust or discolor over time.' },
+	{ title: 'Dryer alerts that prevent breakdowns', text: 'A lint filter alert reminds you to clear the filter. A vent sensor watches the air duct and tells you when it needs cleaning, so the dryer keeps performing.' },
+	{ title: 'Payment ready', text: 'Works with coin, card, RFID, QR code and credit card payment systems, set up for how your laundry runs. Payment systems and coin exchangers are sold separately.' },
+	{ title: 'Connects to your other systems', text: 'You can add a third-party auto-dosing detergent system. If you already use management software, Samsung provides product protocol information to help connect it.' },
+	{ title: 'Fit more in less space', text: 'Install side by side, or stack a matching dryer on top of the washer to free up floor space, even in narrow rooms. Stacking needs Samsung’s top installation kit (SKK-BC) and display kit (SKK-CC1).' },
 ];
 const machines = [
 	{
@@ -41,8 +44,8 @@ const machines = [
 			['Power consumption', '800 W'],
 			['Inverter', 'Inverter (DD Motor)'],
 			['Wi-Fi', 'Embedded'],
-			['Mobile application', 'API is opened'],
-			['Maintenance test', '30,000 cycles tested'],
+			['Mobile app and software', 'Open API for integration'],
+			['Durability test', '30,000 cycles (main parts)'],
 			['Installation dimensions', 'Depth with door open: 1,480 mm. Allow 150 mm clearance from the rear wall.'],
 		],
 	},
@@ -65,8 +68,8 @@ const machines = [
 			['Power consumption', '350 W'],
 			['Inverter', 'Inverter (DD Motor)'],
 			['Wi-Fi', 'Embedded'],
-			['Mobile application', 'API is opened'],
-			['Maintenance test', '30,000 cycles tested'],
+			['Mobile app and software', 'Open API for integration'],
+			['Durability test', '30,000 cycles (main parts)'],
 			['Installation dimensions', 'Depth with door open: 1,467 mm. Allow 150 mm clearance from the rear wall.'],
 		],
 	},
@@ -74,7 +77,7 @@ const machines = [
 ---
 
 <Layout
-	title="Products | TeamG Venturez"
+	title="Samsung Professional Washers and Dryers | TeamG Venturez"
 	description="Samsung professional washers and dryers, distributed exclusively in Calabarzon by TeamG Venturez."
 >
 	<header class="page-head">
@@ -108,14 +111,14 @@ const machines = [
 			}
 		</div>
 		<p class="note">
-			*Based on Samsung internal testing. Payment systems and coin exchangers are sold separately. Product images are for illustration; specifications may change without notice. Speak to us for current models, pricing and availability.
+			*Based on Samsung internal testing using a Normal cycle. Individual results may vary with actual load contents. Payment systems and coin exchangers are sold separately. Product images are for illustration; specifications may change without notice. Speak to us for current models, pricing and availability.
 		</p>
 		<a class="btn" href={contact}>Ask about models and availability</a>
 	</section>
 
 	<section class="band" aria-labelledby="feat">
 		<Image class="brandmark" src={samsung} alt="Samsung" height={80} />
-		<h2 id="feat">Samsung business washing machine: features that work for a laundry business.</h2>
+		<h2 id="feat">Features that help a laundry business run smoothly.</h2>
 		<ul class="rows">
 			{
 				features.map((f) => (
@@ -146,7 +149,7 @@ const machines = [
 		<div>
 			<h2 id="fit">Stack them. Save floor space.</h2>
 			<p>
-				Washers and dryers can be installed side by side or stacked. Stacking gives you more capacity in the same floor area. That matters in a rented shop or a hotel. We plan layout, machine count and utilities with you before installation.
+				Washers and dryers can be installed side by side or stacked. Stacking gives you more capacity in the same floor area. That matters in a rented shop or a hotel. Stacking requires Samsung’s top installation kit (SKK-BC) and display kit (SKK-CC1); we confirm them in your plan and quote. We plan layout, machine count and utilities with you before installation.
 			</p>
 			<a class="btn" href={contact}>Plan your layout with us</a>
 		</div>
@@ -165,7 +168,7 @@ const machines = [
 		<section class="closing" aria-labelledby="prod-close">
 			<div class="container">
 				<h2 id="prod-close">Not sure which machines fit your space and volume?</h2>
-				<a class="btn" href={contact}>Request a consultation</a>
+				<a class="btn" href={contact}>Get a quote</a>
 			</div>
 		</section>
 	</Fragment>
