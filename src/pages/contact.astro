@@ -1,4 +1,5 @@
 ---
+import MapLink from '../components/MapLink.astro';
 import Layout from '../layouts/Layout.astro';
 import ContactIcons from '../components/ContactIcons.astro';
 import { site } from '../config/site';
@@ -43,6 +44,7 @@ const interests = [
 		<h2 id="channels">Reach us directly</h2>
 		<ContactIcons size="lg" class="channels" />
 		<p class="area">Visit our showroom at {site.addressDisplay}. We serve {provinces.join(', ')}.</p>
+		<p class="map"><MapLink /></p>
 	</section>
 
 	<section class="band" aria-labelledby="inquiry">
@@ -110,6 +112,9 @@ const interests = [
 	}
 	.area {
 		margin: 1.25rem 0 0;
+	}
+	.map {
+		margin: 0.5rem 0 0;
 	}
 	.form-wrap {
 		display: grid;

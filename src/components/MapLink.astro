@@ -1,0 +1,60 @@
+---
+// "Get directions" link to the showroom on Google Maps. Opens in a new tab.
+import { site } from '../config/site';
+
+interface Props {
+	onDark?: boolean;
+}
+const { onDark = false } = Astro.props;
+---
+
+<a class:list={['maplink', { 'on-dark': onDark }]} href={site.mapUrl} target="_blank" rel="noopener" data-track="map">
+	<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z" />
+		<circle cx="12" cy="10" r="3" />
+	</svg>
+	<span>Get directions on Google Maps<span class="sr"> (opens in a new tab)</span></span>
+</a>
+
+<style>
+	.maplink {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		color: var(--accent);
+		font-weight: 600;
+		text-decoration: none;
+		border-bottom: 1px solid transparent;
+	}
+	.maplink:hover {
+		color: var(--accent-strong);
+		border-bottom-color: currentColor;
+	}
+	.maplink:focus-visible {
+		outline: 3px solid var(--accent);
+		outline-offset: 3px;
+		border-radius: 2px;
+	}
+	.maplink.on-dark {
+		color: #fff;
+	}
+	.maplink.on-dark:hover {
+		color: #fff;
+	}
+	.maplink.on-dark:focus-visible {
+		outline-color: #fff;
+	}
+	svg {
+		width: 1.15em;
+		height: 1.15em;
+		flex: none;
+	}
+	.sr {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+</style>

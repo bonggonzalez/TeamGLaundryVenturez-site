@@ -1,4 +1,5 @@
 ---
+import MapLink from '../components/MapLink.astro';
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import { site } from '../config/site';
@@ -63,6 +64,7 @@ const audiences = [
 		<h2 id="area">Where we operate</h2>
 		<p>We serve Calabarzon: Cavite, Laguna, Batangas, Rizal and Quezon.</p>
 		<p>Visit our showroom at {site.addressDisplay}.</p>
+		<p><MapLink /></p>
 		<p><a href={`${base}/services`}>See our services</a> or <a href={`${base}/products`}>our products</a>.</p>
 	</section>
 </Layout>

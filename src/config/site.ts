@@ -19,6 +19,8 @@ export const site = {
 		country: 'PH',
 	},
 	addressDisplay: '333 Luksuhin Ibaba, Alfonso, Cavite 4123',
+	// Pinned Google Maps place for the showroom (TeamG Venturez).
+	mapUrl: 'https://maps.app.goo.gl/8XcBeHynokMFoshX7',
 	provinces: ['Cavite', 'Laguna', 'Batangas', 'Rizal', 'Quezon'],
 	formEndpoint: clean(env.PUBLIC_FORM_ENDPOINT),
 	gaId: clean(env.PUBLIC_GA_ID) || 'G-RRLK12LMQ0', // Google Analytics 4 measurement ID (public); override via env

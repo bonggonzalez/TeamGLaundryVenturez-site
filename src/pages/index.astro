@@ -4,6 +4,7 @@ import { Image } from 'astro:assets';
 import stackRow from '../assets/images/stack-row.jpg';
 import samsung from '../assets/images/samsung-logo.png';
 import { site } from '../config/site';
+import MapLink from '../components/MapLink.astro';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const contact = `${base}/contact`;
 const provinces = ['Cavite', 'Laguna', 'Batangas', 'Rizal', 'Quezon'];
@@ -129,6 +130,7 @@ const audiences = [
 <li>
 <h3>Visit us in Alfonso, Cavite</h3>
 <p>{site.addressDisplay}. See the Samsung machines in person and talk to us about your plan.</p>
+					<p class="map"><MapLink /></p>
 <a href={`${contact}?for=showroom`}>Request a showroom demo<span aria-hidden="true"> &rarr;</span></a>
 </li>
 <li>
@@ -145,6 +147,7 @@ const audiences = [
 			<h2 id="close-title">Let’s plan your laundry together. We supply the machines and stay with you after they are installed.</h2>
 			<a class="btn on-dark" href={contact}>Get a quote</a>
 			<p class="visit">Visit our showroom: {site.addressDisplay}.</p>
+			<p class="visit"><MapLink onDark /></p>
 		</div>
 	</section>
 </Layout>
