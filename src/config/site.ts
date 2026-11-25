@@ -21,7 +21,7 @@ export const site = {
 	addressDisplay: '333 Luksuhin Ibaba, Alfonso, Cavite 4123',
 	provinces: ['Cavite', 'Laguna', 'Batangas', 'Rizal', 'Quezon'],
 	formEndpoint: clean(env.PUBLIC_FORM_ENDPOINT),
-	gaId: clean(env.PUBLIC_GA_ID),
+	gaId: clean(env.PUBLIC_GA_ID) || 'G-RRLK12LMQ0', // Google Analytics 4 measurement ID (public); override via env
 	metaPixelId: clean(env.PUBLIC_META_PIXEL_ID),
 	viber: clean(env.PUBLIC_VIBER_NUMBER) || '+639173098138', // defaults to the main number; override via env
 	whatsapp: clean(env.PUBLIC_WHATSAPP_NUMBER) || '+639173098138', // defaults to the main number; override via env
