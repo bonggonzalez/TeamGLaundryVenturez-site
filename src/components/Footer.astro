@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import logo from '../assets/images/teamg-venturez-logo.png';
+import samsung from '../assets/images/samsung-logo.png';
 import { navLinks, serviceLinks } from './nav-links';
 const year = new Date().getFullYear();
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -9,7 +10,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <footer class="site-footer">
 	<div class="container grid">
 		<div>
-			<Image class="flogo" src={logo} alt="TeamG Venturez" height={72} />
+			<div class="lockup"><Image class="flogo" src={logo} alt="TeamG Venturez" height={72} /><Image class="fsam" src={samsung} alt="Samsung" height={60} /></div>
 			<p>
 				Exclusive Samsung laundry equipment distributor in Calabarzon, Philippines. We design,
 				build, equip and maintain commercial laundry operations.
@@ -75,10 +76,20 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 	p {
 		margin: 0 0 0.5rem;
 	}
+	.lockup {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		margin-bottom: 0.9rem;
+	}
+	.site-footer :global(.fsam) {
+		height: 0.8rem;
+		width: auto;
+		mix-blend-mode: multiply;
+	}
 	.site-footer :global(.flogo) {
 		height: 2.25rem;
 		width: auto;
-		margin-bottom: 0.9rem;
 		mix-blend-mode: multiply;
 	}
 	.copy {

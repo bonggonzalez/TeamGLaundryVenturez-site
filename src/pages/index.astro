@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import stackRow from '../assets/images/stack-row.jpg';
+import samsung from '../assets/images/samsung-logo.png';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const contact = `${base}/contact`;
 const provinces = ['Cavite', 'Laguna', 'Batangas', 'Rizal', 'Quezon'];
@@ -52,6 +53,7 @@ const audiences = [
 		<div class="container claim-grid">
 			<h2 id="claim-title">Buy Samsung laundry equipment in Calabarzon straight from TeamG.</h2>
 			<div>
+				<Image class="sam" src={samsung} alt="Samsung" height={80} />
 				<p>
 					We are the exclusive distributor here. You buy from us. We install it. We keep it running. One team, one point of contact.
 				</p>
@@ -388,5 +390,12 @@ const audiences = [
 		line-height: 1.04;
 		font-weight: 800;
 		max-width: 50rem;
+	}
+	.claim :global(.sam) {
+		display: block;
+		height: 1.15rem;
+		width: auto;
+		margin-bottom: 1.25rem;
+		mix-blend-mode: multiply;
 	}
 </style>

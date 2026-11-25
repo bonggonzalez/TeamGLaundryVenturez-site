@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import logo from '../assets/images/teamg-venturez-logo.png';
+import samsung from '../assets/images/samsung-logo.png';
 import { navLinks as links } from './nav-links';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const norm = (p: string) => p.replace(/\/$/, '') || '/';
@@ -9,8 +10,10 @@ const current = norm(Astro.url.pathname);
 
 <header class="site-header">
 	<div class="container bar">
-		<a class="brand" href={`${base}/`} aria-label="TeamG Venturez, home">
+		<a class="brand" href={`${base}/`} aria-label="TeamG Venturez with Samsung, home">
 			<Image src={logo} alt="TeamG Venturez" height={72} loading="eager" />
+			<span class="x" aria-hidden="true"></span>
+			<Image class="sam" src={samsung} alt="Samsung" height={60} loading="eager" />
 		</a>
 		<nav aria-label="Main">
 			<ul>
@@ -45,9 +48,20 @@ const current = norm(Astro.url.pathname);
 		padding-block: 0.75rem;
 	}
 	.brand {
-		display: block;
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
 		margin-right: auto;
 		line-height: 0;
+	}
+	.brand .x {
+		width: 1px;
+		height: 1.5rem;
+		background: var(--border);
+	}
+	.brand :global(img.sam) {
+		height: 0.85rem;
+		opacity: 0.9;
 	}
 	.brand :global(img) {
 		height: 2.1rem;
@@ -109,6 +123,13 @@ const current = norm(Astro.url.pathname);
 		}
 		.brand :global(img) {
 			height: 2.5rem;
+		}
+		.brand :global(img.sam) {
+			height: 1rem;
+		}
+		.brand .x {
+			height: 1.75rem;
+			margin-inline: 0.25rem;
 		}
 		.bar {
 			gap: 0.5rem 2.75rem;

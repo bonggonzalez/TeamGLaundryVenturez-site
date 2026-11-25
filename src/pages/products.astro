@@ -4,6 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import washer from '../assets/images/washer.jpg';
 import dryer from '../assets/images/dryer.jpg';
 import stackRow from '../assets/images/stack-row.jpg';
+import samsung from '../assets/images/samsung-logo.png';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const contact = `${base}/contact`;
 const why = [
@@ -11,22 +12,38 @@ const why = [
 	{ title: 'Tested to 30,000 cycles', text: 'Main parts are tested for 30,000 cycles. An inverter direct-drive motor drives the drum.' },
 	{ title: 'Plan your loads', text: 'An 18 kg washer runs a 36 minute cycle. A 14 kg dryer runs 45 minutes. You can work out your daily capacity.' },
 ];
+const features = [
+	{ title: 'Powerful, effective cleaning', text: 'Bubble Wash turns detergent into rich bubbles that soak quickly into fabric. A strong water shot rinses away stubborn stains and detergent residue.' },
+	{ title: 'Save time, wash more', text: 'The 18 kg drum fits big items like a king-size comforter in a single load and washes it in 36 minutes*, so large volumes move quickly.' },
+	{ title: 'Interior drum light', text: 'A built-in light lets customers see every item inside the drum, so nothing gets left behind and unloading is quick.' },
+	{ title: 'Safe, efficient, durable', text: 'The inverter direct-drive motor attaches straight to the drum, with no belt to wear out. VRT+ vibration control detects and reduces vibration at any spin speed or load size*.' },
+	{ title: 'Keeps the washer clean', text: 'A detergent-free cleaning cycle soaks, pulses and spins to cut dirt and odor-causing bacteria. A water jet clears the door frame, and the machine tells you when it is due.' },
+	{ title: 'Payment ready', text: 'Works with coin, card and Samsung Pay systems. Payment systems and coin exchangers are sold separately.' },
+	{ title: 'Do business anywhere', text: 'Install as stacked pairs or side by side to fit your floor plan and make the most of every square meter.' },
+];
 const machines = [
 	{
 		img: washer,
 		alt: 'Black Samsung 18 kg professional washer, front and angled views',
 		title: '18 kg professional washer',
 		model: 'WF18FG940CGVTC',
+		highlights: ['Super Speed: 18 kg capacity, washes in 36 min*', 'Excellent durability: 30,000-cycle test for main parts', 'Bubble technology: bubble-powered washing'],
 		spec: [
 			['Capacity', '18 kg'],
-			['Cycle time', '36 minutes'],
-			['Durability', 'Main parts tested to 30,000 cycles'],
-			['Cleaning', 'Bubble technology, swirl drum'],
-			['Motor', 'Inverter (direct drive)'],
+			['Cycle time', '36 min'],
+			['Body color', 'Black Caviar'],
+			['Door color', 'Deep Charcoal'],
+			['Panel display', 'LED'],
+			['Drum type', 'Swirl Drum'],
+			['Drum volume', '158 L'],
 			['Dimensions (W x H x D)', '762 x 1,083 x 826 mm'],
 			['Weight', '121 kg'],
 			['Power consumption', '800 W'],
-			['Connectivity', 'Embedded Wi-Fi'],
+			['Inverter', 'Inverter (DD Motor)'],
+			['Wi-Fi', 'Embedded'],
+			['Mobile application', 'API is opened'],
+			['Maintenance test', '30,000 cycles tested'],
+			['Installation dimensions', 'Depth with door open: 1,480 mm. Allow 150 mm clearance from the rear wall.'],
 		],
 	},
 	{
@@ -34,16 +51,23 @@ const machines = [
 		alt: 'Black Samsung 14 kg professional dryer, front and angled views',
 		title: '14 kg professional dryer',
 		model: 'DV14FG94GCGVST',
+		highlights: ['Super Speed: 14 kg capacity, dries in 45 min', 'Flexible installation: reversible door to suit your space', 'User friendly: easy-to-use controller'],
 		spec: [
 			['Capacity', '14 kg'],
-			['Cycle time', '45 minutes'],
-			['Door', 'Reversible, to suit your space'],
-			['Controls', 'Easy-to-use controller, LED display'],
-			['Motor', 'Inverter (direct drive)'],
+			['Cycle time', '45 min'],
+			['Body color', 'Black Caviar'],
+			['Door color', 'Deep Charcoal'],
+			['Panel display', 'LED'],
+			['Reversible door', 'Yes'],
+			['Drum volume', '269 L'],
 			['Dimensions (W x H x D)', '762 x 1,083 x 813 mm'],
 			['Weight', '74 kg'],
 			['Power consumption', '350 W'],
-			['Connectivity', 'Embedded Wi-Fi'],
+			['Inverter', 'Inverter (DD Motor)'],
+			['Wi-Fi', 'Embedded'],
+			['Mobile application', 'API is opened'],
+			['Maintenance test', '30,000 cycles tested'],
+			['Installation dimensions', 'Depth with door open: 1,467 mm. Allow 150 mm clearance from the rear wall.'],
 		],
 	},
 ];
@@ -54,6 +78,7 @@ const machines = [
 	description="Samsung professional washers and dryers, distributed exclusively in Calabarzon by TeamG Venturez."
 >
 	<header class="page-head">
+		<Image class="brandmark" src={samsung} alt="Samsung" height={80} />
 		<h1>Samsung professional laundry equipment. From the exclusive distributor in Calabarzon.</h1>
 		<p>
 			Buy from TeamG. The same team installs and services what we sell.
@@ -69,8 +94,12 @@ const machines = [
 						<figure class="photo">
 							<Image src={m.img} alt={m.alt} widths={[420, 640, 900]} sizes="(min-width: 900px) 34rem, 92vw" />
 						</figure>
+						<Image class="brandmark sm" src={samsung} alt="Samsung" height={60} />
 						<h3>{m.title}</h3>
 						<p class="model">Model {m.model}</p>
+						<ul class="hl">
+							{m.highlights.map((h) => <li>{h}</li>)}
+						</ul>
 						<dl>
 							{m.spec.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
 						</dl>
@@ -79,9 +108,24 @@ const machines = [
 			}
 		</div>
 		<p class="note">
-			Specifications are Samsung's. Speak to us for current models, pricing and availability. Images are for illustration.
+			*Based on Samsung internal testing. Payment systems and coin exchangers are sold separately. Product images are for illustration; specifications may change without notice. Speak to us for current models, pricing and availability.
 		</p>
 		<a class="btn" href={contact}>Ask about models and availability</a>
+	</section>
+
+	<section class="band" aria-labelledby="feat">
+		<Image class="brandmark" src={samsung} alt="Samsung" height={80} />
+		<h2 id="feat">Samsung business washing machine: features that work for a laundry business.</h2>
+		<ul class="rows">
+			{
+				features.map((f) => (
+					<li>
+						<h3>{f.title}</h3>
+						<p>{f.text}</p>
+					</li>
+				))
+			}
+		</ul>
 	</section>
 
 	<section class="band" aria-labelledby="why">
@@ -128,6 +172,27 @@ const machines = [
 </Layout>
 
 <style>
+	.brandmark {
+		display: block;
+		height: 1.1rem;
+		width: auto;
+		margin-bottom: 1.25rem;
+		mix-blend-mode: multiply;
+	}
+	.brandmark.sm {
+		height: 0.8rem;
+		margin: 1.25rem 0 0.25rem;
+	}
+	.hl {
+		list-style: none;
+		margin: 0 0 1rem;
+		padding: 0;
+	}
+	.hl li {
+		padding: 0.4rem 0;
+		font-weight: 600;
+		font-size: 0.95rem;
+	}
 	.machines {
 		display: grid;
 		gap: 3rem;
@@ -163,7 +228,7 @@ const machines = [
 	}
 	.machines dl > div {
 		display: grid;
-		grid-template-columns: 11rem 1fr;
+		grid-template-columns: 10rem 1fr;
 		gap: 1rem;
 		padding-block: 0.55rem;
 		border-top: 1px solid var(--border);
