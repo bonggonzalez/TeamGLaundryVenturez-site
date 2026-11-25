@@ -1,13 +1,34 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import ContactBar from '../components/ContactBar.astro';
+import { site } from '../config/site';
 
 interface Props {
 	title?: string;
 	description?: string;
+	image?: string;
 }
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const { title = 'TeamG Venturez', description = 'TeamG Venturez' } = Astro.props;
+const { title = 'TeamG Venturez', description = 'TeamG Venturez', image = '/og.jpg' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const ogImage = new URL(`${base}${image}`, site.url).href;
+// Only well-formed IDs are injected into inline scripts.
+const gaId = /^G-[A-Z0-9]+$/.test(site.gaId) ? site.gaId : '';
+const pixelId = /^\d{5,20}$/.test(site.metaPixelId) ? site.metaPixelId : '';
+const orgSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Organization',
+	name: site.name,
+	url: site.url,
+	logo: new URL(`${base}/og.jpg`, site.url).href,
+	email: site.email,
+	telephone: site.phoneIntl,
+	description:
+		'Exclusive Samsung laundry equipment distributor in Calabarzon. Design, construction, installation, maintenance and point-of-sale for laundry businesses.',
+	areaServed: site.provinces.map((p) => ({ '@type': 'AdministrativeArea', name: `${p}, Philippines` })),
+	...(site.facebook ? { sameAs: [site.facebook] } : {}),
+};
 ---
 
 <!doctype html>
@@ -20,6 +41,51 @@ const { title = 'TeamG Venturez', description = 'TeamG Venturez' } = Astro.props
 		<link rel="icon" href={`${base}/favicon.ico`} />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<link rel="canonical" href={canonical} />
+		<link rel="sitemap" href={`${base}/sitemap.xml`} />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={site.name} />
+		<meta property="og:locale" content="en_PH" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage} />
+		<script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+		<slot name="head" />
+		<script is:inline>
+			window.tgTrack = function (name, params) {
+				try {
+					if (window.gtag) window.gtag('event', name, params || {});
+					if (window.fbq) {
+						var m = { generate_lead: 'Lead', contact_click: 'Contact' }[name];
+						if (m) window.fbq('track', m, params || {});
+					}
+				} catch (e) {}
+			};
+			document.addEventListener('click', function (e) {
+				var a = e.target && e.target.closest ? e.target.closest('a') : null;
+				if (!a) return;
+				var h = a.getAttribute('href') || '';
+				var t = a.getAttribute('data-track') || '';
+				var method =
+					t ||
+					(h.indexOf('tel:') === 0 ? 'call' : h.indexOf('mailto:') === 0 ? 'email' : h.indexOf('viber:') === 0 ? 'viber' : h.indexOf('wa.me') > -1 ? 'whatsapp' : h.indexOf('m.me') > -1 ? 'messenger' : '');
+				if (method && method !== 'quote') {
+					window.tgTrack('contact_click', { method: method, page: location.pathname });
+				} else if (method === 'quote' || a.classList.contains('btn') || a.classList.contains('cta')) {
+					window.tgTrack('cta_click', { label: (a.textContent || '').trim(), page: location.pathname });
+				}
+			});
+		</script>
+		{gaId && <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} is:inline />}
+		{gaId && <script is:inline define:vars={{ gaId }}>window.dataLayer = window.dataLayer || []; window.gtag = function () { dataLayer.push(arguments); }; gtag('js', new Date()); gtag('config', gaId);</script>}
+		{pixelId && <script is:inline define:vars={{ pixelId }}>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', pixelId);fbq('track', 'PageView');</script>}
 	</head>
 	<body>
 		<Header />
@@ -28,6 +94,7 @@ const { title = 'TeamG Venturez', description = 'TeamG Venturez' } = Astro.props
 		</main>
 		<slot name="after" />
 		<Footer />
+		<ContactBar />
 	</body>
 </html>
 

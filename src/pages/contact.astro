@@ -1,18 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
-const EMAIL = 'info@teamgventurez.com';
-const PHONE = '09178796097';
-const channels = [
-	{ label: 'Call or text', value: PHONE, href: 'tel:+639178796097' },
-	{ label: 'Email', value: EMAIL, href: `mailto:${EMAIL}` },
-];
-// Optional: set to a form-service URL to post requests there. While empty, the form opens the visitor's email app addressed to EMAIL.
-const FORM_ENDPOINT = '';
-const provinces = ['Cavite', 'Laguna', 'Batangas', 'Rizal', 'Quezon'];
+import ContactIcons from '../components/ContactIcons.astro';
+import { site } from '../config/site';
+const EMAIL = site.email;
+const PHONE = site.phoneDisplay;
+const PHONE_LOCAL = site.phoneLocal;
+// Set PUBLIC_FORM_ENDPOINT (see .env.example) to post requests to a form service.
+// While empty, the form opens the visitor's email app addressed to EMAIL.
+const FORM_ENDPOINT = site.formEndpoint;
+const provinces = site.provinces;
 const roles = [
 	{ key: 'start', label: 'Starting a laundry business' },
 	{ key: 'upgrade', label: 'Upgrading my laundry' },
-	{ key: 'hotel', label: 'Hotel or motel laundry' },
+	{ key: 'hotel', label: 'Hotel or BnB laundry' },
 	{ key: 'other', label: 'Something else' },
 ];
 const interests = [
@@ -28,7 +28,7 @@ const interests = [
 
 <Layout
 	title="Get a Quote | TeamG Venturez"
-	description="Talk to TeamG Venturez about starting or upgrading a laundry operation in Calabarzon. Get a quote by form, phone, text or email."
+	description="Talk to us about starting or upgrading a laundry operation in Calabarzon. Get a quote by form, phone, text or email."
 >
 	<header class="page-head">
 		<h1>Let's plan your laundry.</h1>
@@ -39,20 +39,8 @@ const interests = [
 
 	<section class="band" aria-labelledby="channels">
 		<h2 id="channels">Reach us directly</h2>
-		<dl class="channels">
-			{
-				channels.map((c) => (
-					<div>
-						<dt>{c.label}</dt>
-						<dd><a href={c.href}>{c.value}</a></dd>
-					</div>
-				))
-			}
-			<div>
-				<dt>Service area</dt>
-				<dd>{provinces.join(', ')}</dd>
-			</div>
-		</dl>
+		<ContactIcons size="lg" class="channels" />
+		<p class="area">We serve {provinces.join(', ')}.</p>
 	</section>
 
 	<section class="band" aria-labelledby="inquiry">
@@ -110,32 +98,10 @@ const interests = [
 
 <style>
 	.channels {
-		display: grid;
-		gap: 0;
-		margin: 1.5rem 0 0;
+		margin-top: 1.5rem;
 	}
-	.channels > div {
-		display: grid;
-		gap: 0.25rem 2rem;
-		padding-block: 1.1rem;
-		border-top: 1px solid var(--border);
-	}
-	.channels dt {
-		font-weight: 600;
-	}
-	.channels dd {
-		margin: 0;
-		color: var(--text);
-	}
-	.channels dd a {
-		color: var(--accent);
-		font-weight: 600;
-		text-underline-offset: 0.25em;
-	}
-	@media (min-width: 700px) {
-		.channels > div {
-			grid-template-columns: 14rem 1fr;
-		}
+	.area {
+		margin: 1.25rem 0 0;
 	}
 	.form-wrap {
 		display: grid;
@@ -247,6 +213,7 @@ const interests = [
 			];
 			const href = `mailto:${email}?subject=${encodeURIComponent('Quote request')}&body=${encodeURIComponent(lines.join('\n'))}`;
 			status.textContent = `Opening your email app. You can also email ${email} or call or text ${phone}.`;
+			if (window.tgTrack) window.tgTrack('generate_lead', { method: 'email_fallback' });
 			location.href = href;
 			return;
 		}
@@ -258,10 +225,11 @@ const interests = [
 				body: new FormData(form),
 			});
 			if (!res.ok) throw new Error('bad status');
+			if (window.tgTrack) window.tgTrack('generate_lead', { method: 'form' });
 			form.reset();
 			status.textContent = 'Salamat po! We have your request and will be in touch.';
 		} catch {
-			status.textContent = 'Your request did not send. Please try again, or contact us directly.';
+			status.textContent = `Your request did not send. Please try again, or call or text ${phone}, or email ${email}.`;
 		}
 	});
 </script>

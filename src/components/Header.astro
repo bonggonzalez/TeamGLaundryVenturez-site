@@ -10,10 +10,10 @@ const current = norm(Astro.url.pathname);
 
 <header class="site-header">
 	<div class="container bar">
-		<a class="brand" href={`${base}/`} aria-label="TeamG Venturez with Samsung, home">
+		<a class="brand" href={`${base}/`} aria-label="TeamG Venturez with Samsung Professional Laundry, home">
 			<Image src={logo} alt="TeamG Venturez" height={72} loading="eager" />
 			<span class="x" aria-hidden="true"></span>
-			<Image class="sam" src={samsung} alt="Samsung" height={60} loading="eager" />
+			<Image class="sam" src={samsung} alt="Samsung Professional Laundry" height={72} loading="eager" />
 		</a>
 		<nav aria-label="Main">
 			<ul>
@@ -58,10 +58,6 @@ const current = norm(Astro.url.pathname);
 		width: 1px;
 		height: 1.5rem;
 		background: var(--border);
-	}
-	.brand :global(img.sam) {
-		height: 0.85rem;
-		opacity: 0.9;
 	}
 	.brand :global(img) {
 		height: 2.1rem;
@@ -123,9 +119,6 @@ const current = norm(Astro.url.pathname);
 		}
 		.brand :global(img) {
 			height: 2.5rem;
-		}
-		.brand :global(img.sam) {
-			height: 1rem;
 		}
 		.brand .x {
 			height: 1.75rem;

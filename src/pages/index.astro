@@ -8,16 +8,16 @@ const contact = `${base}/contact`;
 const provinces = ['Cavite', 'Laguna', 'Batangas', 'Rizal', 'Quezon'];
 const scope = [
 	{ title: 'Design', text: 'A layout planned around your space, your volume and your customers.' },
-	{ title: 'Construction', text: 'The build-out of your premises, planned together with the equipment.' },
-	{ title: 'Installation', text: 'Samsung professional equipment, installed by the distributor.' },
-	{ title: 'Maintenance', text: 'Ongoing service. Your laundry keeps running after opening day.' },
+	{ title: 'Construction', text: 'The build-out of your space, planned together with the equipment.' },
+	{ title: 'Installation', text: 'Samsung professional equipment, installed by our own team.' },
+	{ title: 'Maintenance', text: 'Ongoing service, so your laundry keeps running well after opening day.' },
 	{ title: 'Point-of-sale systems', text: 'Payment and sales tracking, set up for how your laundry works.' },
-	{ title: 'Business and marketing consultation', text: 'Practical guidance on running and promoting your business.' },
+	{ title: 'Business and marketing consultation', text: 'Practical advice on running and promoting your business.' },
 ];
 const audiences = [
 	{ key: 'start', title: 'Starting a laundry business', text: 'Turn your idea into a laundry negosyo with one partner for the plan, the build and the machines.' },
-	{ key: 'upgrade', title: 'Upgrading your laundry', text: 'Replace or add equipment, and tighten the systems around it.' },
-	{ key: 'hotel', title: 'Hotel or motel laundry', text: 'Run your own laundry inside your hotel or motel.' },
+	{ key: 'upgrade', title: 'Upgrading your laundry', text: 'Replace or add equipment, and make the rest of your operation run more smoothly.' },
+	{ key: 'hotel', title: 'Hotel or BnB laundry', text: 'Run your own laundry inside your hotel, BnB or inn.' },
 ];
 ---
 <Layout
@@ -29,7 +29,7 @@ const audiences = [
 			<div class="hero-copy">
 				<h1 id="hero-title">Exclusive Samsung laundry equipment distributor in Calabarzon.</h1>
 				<p class="lede">
-					One team to call for your layout, build, machines and service. From first plan to first payment.
+					One team you can call for your layout, build, machines and service, from your first plan to your opening day.
 				</p>
 				<div class="actions">
 					<a class="btn" href={contact}>Get a quote</a>
@@ -51,11 +51,11 @@ const audiences = [
 
 	<section class="claim" aria-labelledby="claim-title">
 		<div class="container claim-grid">
-			<h2 id="claim-title">Buy Samsung laundry equipment in Calabarzon straight from TeamG.</h2>
+			<h2 id="claim-title">Buy Samsung laundry equipment in Calabarzon directly from us.</h2>
 			<div>
-				<Image class="sam" src={samsung} alt="Samsung" height={80} />
+				<Image class="sam" src={samsung} alt="Samsung Professional Laundry" height={80} />
 				<p>
-					We are the exclusive distributor here. You buy from us. We install it. We keep it running. One team, one point of contact.
+					As the exclusive distributor here, we sell you the machines, install them and keep them running, so you always have one team to call.
 				</p>
 				<ul class="provinces" aria-label="Provinces covered">
 					{provinces.map((p) => <li>{p}</li>)}
@@ -67,8 +67,8 @@ const audiences = [
 	<section class="scope" id="scope" aria-labelledby="scope-title">
 		<div class="container scope-grid">
 			<div class="scope-head">
-				<h2 id="scope-title">One team. First plan to first service.</h2>
-				<p>We do more than deliver machines. We build the laundry around them.</p>
+				<h2 id="scope-title">Everything you need to open and run your laundry, from one team.</h2>
+				<p>We do more than deliver machines. We help you build the whole laundry around them.</p>
 			</div>
 			<ol class="scope-list">
 				{
@@ -85,14 +85,14 @@ const audiences = [
 
 	<section class="audiences" aria-labelledby="aud-title">
 		<div class="container">
-			<h2 id="aud-title">Which sounds like you?</h2>
+			<h2 id="aud-title">Which of these describes you?</h2>
 			<ul class="aud-list">
 				{
 					audiences.map((a) => (
 						<li>
 							<h3>{a.title}</h3>
 							<p>{a.text}</p>
-							<a href={`${contact}?for=${a.key}`}>Talk to TeamG<span aria-hidden="true"> &rarr;</span></a>
+							<a href={`${contact}?for=${a.key}`}>Talk to us<span aria-hidden="true"> &rarr;</span></a>
 						</li>
 					))
 				}
@@ -102,7 +102,7 @@ const audiences = [
 
 	<section class="close" aria-labelledby="close-title">
 		<div class="container close-inner">
-			<h2 id="close-title">Plan your laundry with the team that supplies the machines.</h2>
+			<h2 id="close-title">Let’s plan your laundry together. We supply the machines and stay with you after they are installed.</h2>
 			<a class="btn on-dark" href={contact}>Get a quote</a>
 		</div>
 	</section>
@@ -393,7 +393,7 @@ const audiences = [
 	}
 	.claim :global(.sam) {
 		display: block;
-		height: 1.15rem;
+		height: 2.75rem;
 		width: auto;
 		margin-bottom: 1.25rem;
 		mix-blend-mode: multiply;

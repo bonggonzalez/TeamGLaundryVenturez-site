@@ -1,0 +1,56 @@
+---
+import ContactIcons from './ContactIcons.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<div class="contact-bar" role="region" aria-label="Contact us quickly">
+	<ContactIcons size="md" class="bar-icons" />
+	<a href={`${base}/contact`} class="quote" data-track="quote">Get a quote</a>
+</div>
+
+<style>
+	.contact-bar {
+		display: none;
+	}
+	@media (max-width: 759px) {
+		.contact-bar {
+			position: fixed;
+			inset: auto 0 0 0;
+			z-index: 50;
+			display: flex;
+			gap: 1px;
+			background: var(--border);
+			border-top: 1px solid var(--border);
+			padding-bottom: env(safe-area-inset-bottom);
+		}
+		.contact-bar :global(.bar-icons) {
+			flex: 1;
+			flex-wrap: nowrap;
+			justify-content: space-evenly;
+			align-items: center;
+			gap: 0.25rem;
+			padding: 0.4rem 0.5rem;
+			background: #fff;
+			--ci-size: 2.2rem;
+		}
+		.contact-bar > a {
+			flex: 0 0 auto;
+			padding-inline: 1.25rem;
+			display: grid;
+			place-items: center;
+			text-align: center;
+			background: #fff;
+			color: var(--accent-strong);
+			font-weight: 700;
+			font-size: 0.95rem;
+			text-decoration: none;
+		}
+		.contact-bar > a.quote {
+			background: var(--accent);
+			color: #fff;
+		}
+		:global(body) {
+			padding-bottom: 3.4rem;
+		}
+	}
+</style>
