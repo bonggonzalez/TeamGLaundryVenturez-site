@@ -1,0 +1,149 @@
+---
+import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const contact = `${base}/contact`;
+const paths = [
+	{
+		key: 'start',
+		name: 'Start-Up',
+		promise: 'From idea to opening day, with one partner.',
+		items: [
+			'Layout design planned around your space and volume',
+			'Construction coordinated with your equipment plan',
+			'Samsung professional equipment, installed by TeamG',
+			'Point-of-sale setup and business and marketing guidance',
+		],
+		cta: 'Plan my start-up',
+	},
+	{
+		key: 'upgrade',
+		name: 'Upgrade',
+		promise: 'Better machines and tighter systems for the laundry you already run.',
+		items: [
+			'Replace or add Samsung professional equipment',
+			'Layout review for the machines you are adding',
+			'Installation and ongoing maintenance by TeamG',
+			'Point-of-sale setup and business consultation',
+		],
+		cta: 'Plan my upgrade',
+	},
+	{
+		key: 'hotel',
+		name: 'Hospitality',
+		promise: 'Your own laundry operation inside your hotel or motel.',
+		items: [
+			'Laundry layout planned for your property',
+			'Construction coordinated with your equipment plan',
+			'Samsung equipment installed and maintained by TeamG',
+			'Business consultation for running laundry in-house',
+		],
+		cta: 'Plan my in-house laundry',
+	},
+];
+---
+
+<Layout
+	title="Packages | TeamG Venturez"
+	description="Three ways to work with TeamG Venturez: Start-Up, Upgrade and Hospitality. Samsung laundry equipment plus design, construction, installation and maintenance."
+>
+	<header class="page-head">
+		<h1>Three ways to work with TeamG.</h1>
+		<p>
+			Every laundry starts from a different place. Choose the path closest to yours. We set scope
+			and pricing together after a consultation.
+		</p>
+	</header>
+
+	<section class="band" aria-labelledby="paths">
+		<h2 id="paths" class="sr">Choose your path</h2>
+		<div class="paths">
+			{
+				paths.map((p) => (
+					<article>
+						<h3>{p.name}</h3>
+						<p class="promise">{p.promise}</p>
+						<ul>
+							{p.items.map((i) => <li>{i}</li>)}
+						</ul>
+						<a class="btn" href={`${contact}?for=${p.key}`}>{p.cta}</a>
+					</article>
+				))
+			}
+		</div>
+		<p class="note">
+			Scope and pricing are set after a consultation. Tell us your plan and we will shape the
+			engagement around it.
+		</p>
+	</section>
+
+	<Fragment slot="after">
+		<section class="closing" aria-labelledby="pk-close">
+			<div class="container">
+				<h2 id="pk-close">Not sure which path fits? Tell us your plan.</h2>
+				<a class="btn" href={contact}>Request a consultation</a>
+			</div>
+		</section>
+	</Fragment>
+</Layout>
+
+<style>
+	.sr {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+	.paths {
+		display: grid;
+		gap: 3rem;
+	}
+	@media (min-width: 900px) {
+		.paths {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 3rem;
+		}
+	}
+	article {
+		display: flex;
+		flex-direction: column;
+		border-top: 2px solid var(--text);
+		padding-top: 1.5rem;
+	}
+	h3 {
+		font-family: var(--display);
+		font-weight: 800;
+		letter-spacing: -0.03em;
+		font-size: 1.9rem;
+		line-height: 1.1;
+		margin: 0 0 0.5rem;
+	}
+	.promise {
+		color: var(--muted);
+		margin: 0 0 1.25rem;
+	}
+	@media (min-width: 900px) {
+		.promise {
+			min-height: 3.2em;
+		}
+	}
+	ul {
+		list-style: none;
+		margin: 0 0 1.75rem;
+		padding: 0;
+	}
+	li {
+		padding-block: 0.7rem;
+		border-top: 1px solid var(--border);
+	}
+	article .btn {
+		margin-top: auto;
+		align-self: flex-start;
+	}
+	.note {
+		margin-top: 2.5rem;
+		color: var(--muted);
+		font-size: 0.95rem;
+	}
+</style>

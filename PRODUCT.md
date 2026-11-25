@@ -18,7 +18,7 @@ None of these are laundry customers dropping off clothes. They are buyers making
 
 ## Product Purpose
 
-Team G Laundry Venturez sells and supports commercial laundry operations. It is the exclusive distributor of Samsung laundry equipment in Calabarzon, Philippines, and helps clients build an end-to-end operation rather than just buy machines. Success is a qualified inquiry from an owner, operator or hospitality business that wants to start or upgrade a laundry operation.
+TeamG Venturez sells and supports commercial laundry operations. It is the exclusive distributor of Samsung laundry equipment in Calabarzon, Philippines, and helps clients build an end-to-end operation rather than just buy machines. Success is a qualified inquiry from an owner, operator or hospitality business that wants to start or upgrade a laundry operation.
 
 ## Positioning
 
@@ -36,12 +36,13 @@ Team G Laundry Venturez sells and supports commercial laundry operations. It is 
 - Static Astro site (Astro 7), deployed to Cloudflare; pages: Home, About, Services, Contact.
 - Ordering and inquiry channels: contact form and phone/text/email.
 - Offerings confirmed: Samsung laundry equipment distribution; design-to-construction; equipment installation; maintenance; point-of-sale systems; business and marketing consultation.
-- **Open decisions (do not fabricate):** pricing, specific Samsung models and lines, service hours, phone number, email address, form destination, financing terms, warranty terms, number of past installations.
+- **Confirmed contact:** email info@teamgventurez.com, call/text 09178796097. Exclusive-distributor status holds in all five provinces; TeamG sells equipment on its own; the Upgrade path includes a layout review; TeamG offers in-house laundry consultation for hotels. Samsung models/specs on the site come from the owner-approved reference.
+- **Open decisions (do not fabricate):** pricing, service hours, form-service endpoint (the form currently opens the visitor's email app), financing terms, warranty terms, number of past installations.
 - **Existing site copy is outdated.** The current homepage, About and Services text describes a consumer wash-and-fold, pickup-and-delivery service. That does not match the real business and must be replaced, not preserved. The Services and Contact pages are stubs.
 
 ## Brand Commitments
 
-- Name: Team G Laundry Venturez.
+- Name: TeamG Venturez.
 - No logo or brand assets provided yet. The current Bricolage Grotesque font and the wash-cycle homepage animation are incumbent implementation, not confirmed brand commitments.
 
 ## Evidence on Hand
@@ -54,5 +55,5 @@ Team G Laundry Venturez sells and supports commercial laundry operations. It is 
 1. Lead with the exclusive Samsung distributorship in Calabarzon, the one claim no competitor can make.
 2. Present the business as an end-to-end partner (design to maintenance), not an equipment catalog.
 3. Speak to three distinct buyers (start-ups, upgraders, hospitality) with their own entry points.
-4. Treat every inquiry as a high-value lead: make contacting Team G easy through form, phone, text or email.
+4. Treat every inquiry as a high-value lead: make contacting TeamG easy through form, phone, text or email.
 5. Never state prices, models, clients or credentials that the owner has not confirmed.

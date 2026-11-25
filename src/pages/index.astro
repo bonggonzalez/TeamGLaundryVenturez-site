@@ -1,112 +1,59 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import stackRow from '../assets/images/stack-row.jpg';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const contact = `${base}/contact`;
 const provinces = ['Cavite', 'Laguna', 'Batangas', 'Rizal', 'Quezon'];
 const scope = [
-	{ title: 'Design', text: 'A laundry layout planned around your space, your volume and your customers.' },
-	{ title: 'Construction', text: 'The build-out of the premises, handled alongside the equipment plan.' },
-	{ title: 'Installation', text: 'Samsung professional equipment installed and commissioned by the people who sell it.' },
-	{ title: 'Maintenance', text: 'Ongoing service so the operation keeps earning after opening day.' },
-	{ title: 'Point of sale', text: 'Point-of-sale systems set up for how your laundry takes payment.' },
-	{ title: 'Business and marketing consultation', text: 'Practical guidance on running and promoting the business.' },
+	{ title: 'Design', text: 'A layout planned around your space, your volume and your customers.' },
+	{ title: 'Construction', text: 'The build-out of your premises, planned together with the equipment.' },
+	{ title: 'Installation', text: 'Samsung professional equipment, installed by the distributor.' },
+	{ title: 'Maintenance', text: 'Ongoing service. Your laundry keeps running after opening day.' },
+	{ title: 'Point-of-sale systems', text: 'Payment and sales tracking, set up for how your laundry works.' },
+	{ title: 'Business and marketing consultation', text: 'Practical guidance on running and promoting your business.' },
 ];
 const audiences = [
 	{ key: 'start', title: 'Starting a laundry business', text: 'Go from idea to opening with one partner for the plan, the build and the machines.' },
-	{ key: 'upgrade', title: 'Upgrading your laundry', text: 'Replace or expand your equipment and add the systems around it.' },
-	{ key: 'hotel', title: 'Running laundry in your hotel or motel', text: 'Set up an in-house laundry operation inside your property.' },
+	{ key: 'upgrade', title: 'Upgrading your laundry', text: 'Replace or add equipment, and tighten the systems around it.' },
+	{ key: 'hotel', title: 'Hotel or motel laundry', text: 'Run laundry inside your own property, on your own terms.' },
 ];
 ---
 <Layout
-	title="Team G Laundry Venturez | Exclusive Samsung laundry equipment distributor in Calabarzon"
-	description="Team G Laundry Venturez is the exclusive Samsung laundry equipment distributor in Calabarzon. We design, build, install and maintain laundry operations."
+	title="TeamG Venturez | Exclusive Samsung laundry equipment distributor in Calabarzon"
+	description="TeamG Venturez is the exclusive Samsung laundry equipment distributor in Calabarzon. We design, build, install and maintain laundry operations."
 >
 	<section class="hero" aria-labelledby="hero-title">
 		<div class="container hero-grid">
 			<div class="hero-copy">
-				<h1 id="hero-title">The only Samsung laundry equipment distributor in Calabarzon.</h1>
+				<h1 id="hero-title">Exclusive Samsung laundry equipment distributor in Calabarzon.</h1>
 				<p class="lede">
-					One partner to design, build, equip and maintain your laundry operation, from the first
-					plan to point of sale.
+					One partner to design, build, equip and maintain your laundry. From first layout to first payment.
 				</p>
 				<div class="actions">
 					<a class="btn" href={contact}>Request a consultation</a>
-					<a class="link" href="#scope">See what we build</a>
+					<a class="link" href="#scope">See our services</a>
 				</div>
 			</div>
 			<figure class="machines">
-				<svg viewBox="0 0 560 480" role="img" aria-label="Illustration of a commercial washer and dryer with stainless steel drums">
-					<defs>
-						<linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
-							<stop offset="0" stop-color="#ffffff" />
-							<stop offset="1" stop-color="#d5e2f1" />
-						</linearGradient>
-						<radialGradient id="steel" cx="0.4" cy="0.35" r="0.85">
-							<stop offset="0" stop-color="#f6f9fc" />
-							<stop offset="0.6" stop-color="#b3c3d6" />
-							<stop offset="1" stop-color="#7c90a8" />
-						</radialGradient>
-						<radialGradient id="glass" cx="0.3" cy="0.25" r="0.95">
-							<stop offset="0" stop-color="#a9cdf0" stop-opacity="0.5" />
-							<stop offset="1" stop-color="#0b1220" stop-opacity="0.7" />
-						</radialGradient>
-					</defs>
-					<ellipse cx="280" cy="462" rx="262" ry="12" fill="#0b1220" opacity="0.12" />
-					<g>
-						<rect x="30" y="436" width="230" height="14" rx="4" fill="#9db4d3" />
-						<rect x="20" y="40" width="250" height="400" rx="22" fill="url(#body)" stroke="#a9bdd4" stroke-width="2" />
-						<rect x="44" y="62" width="202" height="46" rx="10" fill="#0b1220" />
-						<circle cx="70" cy="85" r="8" fill="#1d4ed8" />
-						<rect x="92" y="78" width="90" height="14" rx="7" fill="#46556a" />
-						<circle cx="214" cy="85" r="12" fill="#c8d6e6" />
-						<circle cx="145" cy="270" r="108" fill="#2b3a4f" />
-						<circle cx="145" cy="270" r="96" fill="#c3d2e3" stroke="#8ea3bd" stroke-width="3" />
-						<circle cx="145" cy="270" r="84" fill="url(#steel)" />
-						<g class="drum" fill="none" stroke="#5b7089" stroke-linecap="round">
-							<circle cx="145" cy="270" r="68" stroke-width="5" stroke-dasharray="0.1 10" />
-							<circle cx="145" cy="270" r="52" stroke-width="5" stroke-dasharray="0.1 10" />
-							<circle cx="145" cy="270" r="36" stroke-width="5" stroke-dasharray="0.1 9" />
-							<circle cx="145" cy="270" r="20" stroke-width="5" stroke-dasharray="0.1 8" />
-						</g>
-						<circle cx="145" cy="270" r="84" fill="url(#glass)" />
-						<ellipse cx="114" cy="230" rx="24" ry="11" fill="#fff" opacity="0.4" transform="rotate(-32 114 230)" />
-					</g>
-					<g>
-						<rect x="300" y="436" width="230" height="14" rx="4" fill="#9db4d3" />
-						<rect x="290" y="40" width="250" height="400" rx="22" fill="url(#body)" stroke="#a9bdd4" stroke-width="2" />
-						<rect x="314" y="62" width="202" height="46" rx="10" fill="#0b1220" />
-						<rect x="334" y="76" width="60" height="18" rx="4" fill="#46556a" />
-						<circle cx="440" cy="85" r="10" fill="#1d4ed8" />
-						<circle cx="480" cy="85" r="10" fill="#c8d6e6" />
-						<circle cx="415" cy="262" r="100" fill="#dfe9f4" stroke="#8ea3bd" stroke-width="6" />
-						<circle cx="415" cy="262" r="86" fill="url(#steel)" />
-						<g class="drum slow" fill="none" stroke="#5b7089" stroke-linecap="round">
-							<circle cx="415" cy="262" r="70" stroke-width="5" stroke-dasharray="0.1 10" />
-							<circle cx="415" cy="262" r="54" stroke-width="5" stroke-dasharray="0.1 10" />
-							<circle cx="415" cy="262" r="38" stroke-width="5" stroke-dasharray="0.1 9" />
-							<circle cx="415" cy="262" r="22" stroke-width="5" stroke-dasharray="0.1 8" />
-						</g>
-						<circle cx="415" cy="262" r="86" fill="url(#glass)" />
-						<ellipse cx="384" cy="224" rx="24" ry="11" fill="#fff" opacity="0.4" transform="rotate(-32 384 224)" />
-						<g fill="#9db4d3">
-							<rect x="350" y="392" width="130" height="5" rx="2.5" />
-							<rect x="350" y="404" width="130" height="5" rx="2.5" />
-							<rect x="350" y="416" width="130" height="5" rx="2.5" />
-						</g>
-					</g>
-				</svg>
-				<figcaption>Samsung professional washer and dryer, shown as an illustration.</figcaption>
+				<Image
+					src={stackRow}
+					alt="Rows of black Samsung professional washers and dryers stacked in pairs"
+					widths={[480, 720, 1000]}
+					sizes="(min-width: 960px) 40vw, 90vw"
+					loading="eager"
+				/>
+				<figcaption>Samsung professional washers and dryers, stacked in pairs. Image shown for illustration.</figcaption>
 			</figure>
 		</div>
 	</section>
 
 	<section class="claim" aria-labelledby="claim-title">
 		<div class="container claim-grid">
-			<h2 id="claim-title">One distributor holds Calabarzon. It is Team G.</h2>
+			<h2 id="claim-title">Buy Samsung laundry equipment in Calabarzon straight from TeamG.</h2>
 			<div>
 				<p>
-					Samsung laundry equipment reaches Calabarzon through a single exclusive distributor, so
-					buying, installation and service all come from the same team.
+					We are the exclusive distributor here. You buy from us. We install it. We keep it running. One team, one point of contact.
 				</p>
 				<ul class="provinces" aria-label="Provinces covered">
 					{provinces.map((p) => <li>{p}</li>)}
@@ -118,8 +65,8 @@ const audiences = [
 	<section class="scope" id="scope" aria-labelledby="scope-title">
 		<div class="container scope-grid">
 			<div class="scope-head">
-				<h2 id="scope-title">From the first plan to the first service call.</h2>
-				<p>We do not stop at delivering machines. Everything your laundry needs to open and keep running is in one team.</p>
+				<h2 id="scope-title">One team. First plan to first service.</h2>
+				<p>We do more than deliver machines. We build the laundry around them.</p>
 			</div>
 			<ol class="scope-list">
 				{
@@ -136,14 +83,14 @@ const audiences = [
 
 	<section class="audiences" aria-labelledby="aud-title">
 		<div class="container">
-			<h2 id="aud-title">Built around where you are starting from.</h2>
+			<h2 id="aud-title">Pick your path.</h2>
 			<ul class="aud-list">
 				{
 					audiences.map((a) => (
 						<li>
 							<h3>{a.title}</h3>
 							<p>{a.text}</p>
-							<a href={`${contact}?for=${a.key}`}>Talk to Team G<span aria-hidden="true"> &rarr;</span></a>
+							<a href={`${contact}?for=${a.key}`}>Talk to TeamG<span aria-hidden="true"> &rarr;</span></a>
 						</li>
 					))
 				}
@@ -153,7 +100,7 @@ const audiences = [
 
 	<section class="close" aria-labelledby="close-title">
 		<div class="container close-inner">
-			<h2 id="close-title">Plan your laundry operation with the team that supplies the machines.</h2>
+			<h2 id="close-title">Plan your laundry with the team that supplies the machines.</h2>
 			<a class="btn on-dark" href={contact}>Request a consultation</a>
 		</div>
 	</section>
@@ -253,35 +200,20 @@ const audiences = [
 	.machines {
 		margin: 0;
 	}
-	.machines svg {
+	.machines img {
 		display: block;
 		width: 100%;
 		max-width: 36rem;
 		margin-inline: auto;
+		height: auto;
+		border-radius: 0.9rem;
+		box-shadow: 0 24px 48px -24px rgba(11, 18, 32, 0.35);
 	}
 	.machines figcaption {
 		text-align: center;
 		font-size: 0.85rem;
 		color: var(--muted);
 		margin-top: 0.5rem;
-	}
-	.drum {
-		transform-box: fill-box;
-		transform-origin: center;
-	}
-	@media (prefers-reduced-motion: no-preference) {
-		@keyframes spin {
-			to {
-				rotate: 360deg;
-			}
-		}
-		.drum {
-			animation: spin 14s linear infinite;
-		}
-		.drum.slow {
-			animation-duration: 22s;
-			animation-direction: reverse;
-		}
 	}
 	@media (min-width: 960px) {
 		.hero-grid {

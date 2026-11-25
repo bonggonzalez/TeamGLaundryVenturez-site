@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import logo from '../assets/images/teamg-venturez-logo.png';
 import { navLinks, serviceLinks } from './nav-links';
 const year = new Date().getFullYear();
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -7,7 +9,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <footer class="site-footer">
 	<div class="container grid">
 		<div>
-			<p class="name">Team G Laundry Venturez</p>
+			<Image class="flogo" src={logo} alt="TeamG Venturez" height={72} />
 			<p>
 				Exclusive Samsung laundry equipment distributor in Calabarzon, Philippines. We design,
 				build, equip and maintain commercial laundry operations.
@@ -27,12 +29,14 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 		</div>
 		<div>
 			<h2>Contact</h2>
-			<p>Service area: Cavite, Laguna, Batangas, Rizal and Quezon.</p>
+			<p><a href="tel:+639178796097">09178796097</a></p>
+			<p><a href="mailto:info@teamgventurez.com">info@teamgventurez.com</a></p>
+			<p>Serving Cavite, Laguna, Batangas, Rizal and Quezon.</p>
 			<p><a href={`${base}/contact`}>Request a consultation</a></p>
 		</div>
 	</div>
 	<div class="container">
-		<p class="copy">&copy; {year} Team G Laundry Venturez. All rights reserved.</p>
+		<p class="copy">&copy; {year} TeamG Venturez. All rights reserved.</p>
 	</div>
 </footer>
 
@@ -71,10 +75,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 	p {
 		margin: 0 0 0.5rem;
 	}
-	.name {
-		font-family: var(--display);
-		font-weight: 700;
-		color: var(--text);
+	.site-footer :global(.flogo) {
+		height: 2.25rem;
+		width: auto;
+		margin-bottom: 0.9rem;
+		mix-blend-mode: multiply;
 	}
 	.copy {
 		margin-top: 2rem;

@@ -1,39 +1,261 @@
 ---
 import Layout from '../layouts/Layout.astro';
-// TODO(owner): phone, text, email, hours and the inquiry-form destination are
-// not confirmed yet (see PRODUCT.md "Open decisions"). Add them to the
-// "Direct channels" and "Inquiry" sections once supplied; do not invent them.
+const EMAIL = 'info@teamgventurez.com';
+const PHONE = '09178796097';
+const channels = [
+	{ label: 'Call or text', value: PHONE, href: 'tel:+639178796097' },
+	{ label: 'Email', value: EMAIL, href: `mailto:${EMAIL}` },
+];
+// Optional: set to a form-service URL to post requests there. While empty, the form opens the visitor's email app addressed to EMAIL.
+const FORM_ENDPOINT = '';
 const provinces = ['Cavite', 'Laguna', 'Batangas', 'Rizal', 'Quezon'];
+const roles = [
+	{ key: 'start', label: 'Starting a laundry business' },
+	{ key: 'upgrade', label: 'Upgrading my laundry' },
+	{ key: 'hotel', label: 'Hotel or motel laundry' },
+	{ key: 'other', label: 'Something else' },
+];
+const interests = [
+	'Samsung equipment',
+	'Design and construction',
+	'Installation',
+	'Maintenance',
+	'Point-of-sale systems',
+	'Business and marketing consultation',
+	'Not sure yet',
+];
 ---
 
 <Layout
-	title="Contact | Team G Laundry Venturez"
-	description="Contact Team G Laundry Venturez to start or upgrade a laundry operation in Calabarzon."
+	title="Contact | TeamG Venturez"
+	description="Talk to TeamG Venturez about starting or upgrading a laundry operation in Calabarzon. Request a consultation by form, phone, text or email."
 >
 	<header class="page-head">
-		<p class="eyebrow">Contact</p>
-		<h1>Talk to Team G about your laundry operation.</h1>
+		<h1>Let's plan your laundry.</h1>
 		<p>
-			Whether you are starting out, upgrading, or setting up laundry in your hotel or motel, we
-			will help you plan the next step.
+			Starting, upgrading or adding laundry to your property? Tell us your plan. We will help with the next step.
 		</p>
 	</header>
 
 	<section class="band" aria-labelledby="channels">
-		<h2 id="channels">Direct channels</h2>
-		<p>You can reach us by phone, text or email. Our contact details are coming soon.</p>
+		<h2 id="channels">Reach us directly</h2>
+		<dl class="channels">
+			{
+				channels.map((c) => (
+					<div>
+						<dt>{c.label}</dt>
+						<dd><a href={c.href}>{c.value}</a></dd>
+					</div>
+				))
+			}
+			<div>
+				<dt>Service area</dt>
+				<dd>{provinces.join(', ')}</dd>
+			</div>
+		</dl>
 	</section>
 
 	<section class="band" aria-labelledby="inquiry">
-		<h2 id="inquiry">Request a consultation</h2>
-		<p>
-			An online inquiry form is coming soon. Tell us your target location, your type of
-			operation and your space size when you get in touch.
-		</p>
-	</section>
-
-	<section class="band" aria-labelledby="area">
-		<h2 id="area">Service area</h2>
-		<p>Calabarzon: {provinces.join(', ')}.</p>
+		<div class="form-wrap">
+			<div class="form-intro">
+				<h2 id="inquiry">Request a consultation</h2>
+				<p>
+					Share a few details. We will follow up to discuss your plan and the equipment that fits.
+				</p>
+			</div>
+			<form id="inquiry-form" action={FORM_ENDPOINT || undefined} method="post" novalidate>
+				<div class="row two">
+					<label><span>First name <span class="req">(required)</span></span>
+						<input name="first_name" autocomplete="given-name" required />
+					</label>
+					<label>Last name
+						<input name="last_name" autocomplete="family-name" />
+					</label>
+				</div>
+				<div class="row two">
+					<label><span>Mobile number <span class="req">(required)</span></span>
+						<input name="mobile" type="tel" autocomplete="tel" required />
+					</label>
+					<label>Email
+						<input name="email" type="email" autocomplete="email" />
+					</label>
+				</div>
+				<div class="row two">
+					<label>What best describes you?
+						<select name="role" id="role">
+							{roles.map((r) => <option value={r.key}>{r.label}</option>)}
+						</select>
+					</label>
+					<label>Location
+						<select name="province">
+							{provinces.map((p) => <option>{p}</option>)}
+						</select>
+					</label>
+				</div>
+				<label>What do you need?
+					<select name="interest">
+						{interests.map((i) => <option>{i}</option>)}
+					</select>
+				</label>
+				<label>Your space or plan
+					<textarea name="message" rows="4" placeholder="For example: floor area in square metres, number of machines, target opening date"></textarea>
+				</label>
+				<button class="btn" type="submit">Send my request</button>
+				<p id="form-status" role="status" aria-live="polite"></p>
+			</form>
+		</div>
 	</section>
 </Layout>
+
+<style>
+	.channels {
+		display: grid;
+		gap: 0;
+		margin: 1.5rem 0 0;
+	}
+	.channels > div {
+		display: grid;
+		gap: 0.25rem 2rem;
+		padding-block: 1.1rem;
+		border-top: 1px solid var(--border);
+	}
+	.channels dt {
+		font-weight: 600;
+	}
+	.channels dd {
+		margin: 0;
+		color: var(--text);
+	}
+	.channels dd a {
+		color: var(--accent);
+		font-weight: 600;
+		text-underline-offset: 0.25em;
+	}
+	@media (min-width: 700px) {
+		.channels > div {
+			grid-template-columns: 14rem 1fr;
+		}
+	}
+	.form-wrap {
+		display: grid;
+		gap: 2rem;
+	}
+	@media (min-width: 960px) {
+		.form-wrap {
+			grid-template-columns: 1fr 1.4fr;
+			gap: 4rem;
+		}
+	}
+	form {
+		display: grid;
+		gap: 1.25rem;
+	}
+	.row.two {
+		display: grid;
+		gap: 1.25rem;
+	}
+	@media (min-width: 640px) {
+		.row.two {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+	label {
+		display: grid;
+		gap: 0.4rem;
+		font-weight: 600;
+		font-size: 0.95rem;
+	}
+	.req {
+		font-weight: 400;
+		color: var(--muted);
+	}
+	input,
+	select,
+	textarea {
+		font: inherit;
+		font-weight: 400;
+		color: var(--text);
+		background: #fff;
+		border: 1px solid #9db4d3;
+		border-radius: 0.5rem;
+		padding: 0.75rem 0.9rem;
+		width: 100%;
+	}
+	input::placeholder,
+	textarea::placeholder {
+		color: #5f6f84;
+	}
+	input:focus-visible,
+	select:focus-visible,
+	textarea:focus-visible {
+		outline: 3px solid var(--accent);
+		outline-offset: 1px;
+		border-color: var(--accent);
+	}
+	input[aria-invalid='true'] {
+		border-color: #b3261e;
+	}
+	#form-status {
+		margin: 0;
+		min-height: 1.5em;
+		color: var(--muted);
+	}
+	form .btn {
+		justify-self: start;
+	}
+</style>
+
+<script define:vars={{ endpoint: FORM_ENDPOINT, email: EMAIL, phone: PHONE }}>
+	const params = new URLSearchParams(location.search);
+	const role = document.getElementById('role');
+	const wanted = params.get('for');
+	if (wanted && role && [...role.options].some((o) => o.value === wanted)) role.value = wanted;
+
+	const form = document.getElementById('inquiry-form');
+	const status = document.getElementById('form-status');
+	form.addEventListener('submit', async (e) => {
+		e.preventDefault();
+		let ok = true;
+		for (const name of ['first_name', 'mobile']) {
+			const el = form.elements[name];
+			const bad = !el.value.trim();
+			el.setAttribute('aria-invalid', bad ? 'true' : 'false');
+			if (bad && ok) el.focus();
+			if (bad) ok = false;
+		}
+		if (!ok) {
+			status.textContent = 'Add your first name and mobile number to continue.';
+			return;
+		}
+		if (!endpoint) {
+			const f = form.elements;
+			const lines = [
+				`Name: ${f.first_name.value} ${f.last_name.value}`.trim(),
+				`Mobile: ${f.mobile.value}`,
+				`Email: ${f.email.value}`,
+				`Description: ${f.role.selectedOptions[0].text}`,
+				`Location: ${f.province.value}`,
+				`Need: ${f.interest.value}`,
+				'',
+				f.message.value,
+			];
+			const href = `mailto:${email}?subject=${encodeURIComponent('Consultation request')}&body=${encodeURIComponent(lines.join('\n'))}`;
+			status.textContent = `Opening your email app. You can also email ${email} or call or text ${phone}.`;
+			location.href = href;
+			return;
+		}
+		status.textContent = 'Sending...';
+		try {
+			const res = await fetch(endpoint, {
+				method: 'POST',
+				headers: { Accept: 'application/json' },
+				body: new FormData(form),
+			});
+			if (!res.ok) throw new Error('bad status');
+			form.reset();
+			status.textContent = 'Thank you. We have your request and will be in touch.';
+		} catch {
+			status.textContent = 'Your request did not send. Please try again, or contact us directly.';
+		}
+	});
+</script>

@@ -2,8 +2,10 @@
 export const navLinks = [
 	{ href: '/', label: 'Home' },
 	{ href: '/about', label: 'About' },
+	{ href: '/packages', label: 'Packages' },
 	{ href: '/services', label: 'Services' },
 	{ href: '/products', label: 'Products' },
+	{ href: '/faq', label: 'FAQ' },
 	{ href: '/contact', label: 'Contact' },
 ];
 

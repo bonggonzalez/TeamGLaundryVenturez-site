@@ -1,5 +1,5 @@
 ---
-name: Team G Laundry Venturez
+name: TeamG Venturez
 description: A light, product-led commercial-equipment site: white into pale blue, near-black display type, one cobalt for action.
 colors:
   ink: "#0b1220"
@@ -76,7 +76,7 @@ components:
     padding: "0.5rem 1rem"
 ---
 
-# Design System: Team G Laundry Venturez
+# Design System: TeamG Venturez
 
 ## Overview
 
@@ -180,7 +180,7 @@ Soft but not rounded-playful: large buttons use 0.6rem corners, the compact head
 - **Mobile:** links wrap onto a full-width second row under the brand and action.
 
 ### Ruled List (signature)
-Scope and audience content are presented as ruled rows rather than cards: a display-face title, Cool Slate description, hairline separators; audience entries end with a Deep Cobalt "Talk to Team G" link with an arrow.
+Scope and audience content are presented as ruled rows rather than cards: a display-face title, Cool Slate description, hairline separators; audience entries end with a Deep Cobalt "Talk to TeamG" link with an arrow.
 
 ### Machine Illustration (signature)
 An authored SVG of a commercial washer and dryer: white-to-blue body gradient, ink control panel with a cobalt indicator, stainless radial-gradient drum, glass overlay. Drums rotate at 14s and 22s (reversed), linear, only when reduced motion is not requested.

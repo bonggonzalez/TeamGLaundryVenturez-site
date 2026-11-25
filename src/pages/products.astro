@@ -1,47 +1,183 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import washer from '../assets/images/washer.jpg';
+import dryer from '../assets/images/dryer.jpg';
+import stackRow from '../assets/images/stack-row.jpg';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const contact = `${base}/contact`;
-const audiences = [
-	{ title: 'Starting a laundry business', text: 'Equipment sized for a new shop, paired with the layout, build and systems around it.' },
-	{ title: 'Upgrading your laundry', text: 'Replace or expand your current machines with Samsung professional equipment.' },
-	{ title: 'Hotels and motels', text: 'Equipment for an in-house laundry operation inside your property.' },
+const why = [
+	{ title: 'Built for daily loads', text: 'Commercial laundries run machines all day. This equipment is made for that workload.' },
+	{ title: 'Tested to 30,000 cycles', text: 'Main parts are tested for 30,000 cycles. An inverter direct-drive motor drives the drum.' },
+	{ title: 'Plan your loads', text: 'An 18 kg washer runs a 36 minute cycle. A 14 kg dryer runs 45 minutes. You can work out your daily capacity.' },
+];
+const machines = [
+	{
+		img: washer,
+		alt: 'Black Samsung 18 kg professional washer, front and angled views',
+		title: '18 kg professional washer',
+		model: 'WF18FG940CGVTC',
+		spec: [
+			['Capacity', '18 kg'],
+			['Cycle time', '36 minutes'],
+			['Durability', 'Main parts tested to 30,000 cycles'],
+			['Cleaning', 'Bubble technology, swirl drum'],
+			['Motor', 'Inverter (direct drive)'],
+			['Dimensions (W x H x D)', '762 x 1,083 x 826 mm'],
+			['Weight', '121 kg'],
+			['Power consumption', '800 W'],
+			['Connectivity', 'Embedded Wi-Fi'],
+		],
+	},
+	{
+		img: dryer,
+		alt: 'Black Samsung 14 kg professional dryer, front and angled views',
+		title: '14 kg professional dryer',
+		model: 'DV14FG94GCGVST',
+		spec: [
+			['Capacity', '14 kg'],
+			['Cycle time', '45 minutes'],
+			['Door', 'Reversible, to suit your space'],
+			['Controls', 'Easy-to-use controller, LED display'],
+			['Motor', 'Inverter (direct drive)'],
+			['Dimensions (W x H x D)', '762 x 1,083 x 813 mm'],
+			['Weight', '74 kg'],
+			['Power consumption', '350 W'],
+			['Connectivity', 'Embedded Wi-Fi'],
+		],
+	},
 ];
 ---
 
 <Layout
-	title="Products | Team G Laundry Venturez"
-	description="Samsung professional laundry equipment, distributed exclusively in Calabarzon by Team G Laundry Venturez."
+	title="Products | TeamG Venturez"
+	description="Samsung professional washers and dryers, distributed exclusively in Calabarzon by TeamG Venturez."
 >
 	<header class="page-head">
-		<p class="eyebrow">Products</p>
-		<h1>Samsung laundry equipment, exclusively in Calabarzon.</h1>
+		<h1>Samsung professional laundry equipment. From the exclusive distributor in Calabarzon.</h1>
 		<p>
-			Team G is the exclusive Samsung laundry equipment distributor for Calabarzon. You buy from
-			the distributor, and the same team installs and services what it sells.
+			Buy from TeamG. The same team installs and services what we sell.
 		</p>
 	</header>
 
-	<section class="band" aria-labelledby="who">
-		<h2 id="who">Equipment for where you are starting from</h2>
-		<div class="cards">
+	<section class="band" aria-labelledby="line">
+		<h2 id="line">A washer and dryer, built to work as a pair.</h2>
+		<div class="machines">
 			{
-				audiences.map((a) => (
-					<article class="card">
-						<h3>{a.title}</h3>
-						<p>{a.text}</p>
+				machines.map((m) => (
+					<article>
+						<figure class="photo">
+							<Image src={m.img} alt={m.alt} widths={[420, 640, 900]} sizes="(min-width: 900px) 34rem, 92vw" />
+						</figure>
+						<h3>{m.title}</h3>
+						<p class="model">Model {m.model}</p>
+						<dl>
+							{m.spec.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+						</dl>
 					</article>
 				))
 			}
 		</div>
+		<p class="note">
+			Specifications are Samsung's. Speak to us for current models, pricing and availability. Images are for illustration.
+		</p>
+		<a class="btn" href={contact}>Ask about models and availability</a>
 	</section>
 
-	<section class="band" aria-labelledby="choose">
-		<h2 id="choose">Not sure which machines fit?</h2>
-		<p>
-			Tell us your space, your expected volume and your type of operation, and we will recommend
-			the right equipment as part of your plan.
-		</p>
-		<a class="btn" href={contact}>Request a consultation</a>
+	<section class="band" aria-labelledby="why">
+		<h2 id="why">Why Samsung professional.</h2>
+		<ul class="rows">
+			{
+				why.map((w) => (
+					<li>
+						<h3>{w.title}</h3>
+						<p>{w.text}</p>
+					</li>
+				))
+			}
+		</ul>
 	</section>
+
+	<section class="band split" aria-labelledby="fit">
+		<div>
+			<h2 id="fit">Stack them. Save floor space.</h2>
+			<p>
+				Washers and dryers can be installed side by side or stacked. Stacking gives you more capacity in the same floor area. That matters in a rented shop or a hotel. We plan layout, machine count and utilities with you before installation.
+			</p>
+			<a class="btn" href={contact}>Plan your layout with us</a>
+		</div>
+		<figure class="photo">
+			<Image
+				src={stackRow}
+				alt="Four stacked pairs of black Samsung professional washers and dryers"
+				widths={[480, 720, 1000]}
+				sizes="(min-width: 900px) 34rem, 92vw"
+			/>
+			<figcaption>Image shown for illustration.</figcaption>
+		</figure>
+	</section>
+
+	<Fragment slot="after">
+		<section class="closing" aria-labelledby="prod-close">
+			<div class="container">
+				<h2 id="prod-close">Not sure which machines fit your space and volume?</h2>
+				<a class="btn" href={contact}>Request a consultation</a>
+			</div>
+		</section>
+	</Fragment>
 </Layout>
+
+<style>
+	.machines {
+		display: grid;
+		gap: 3rem;
+		margin-block: 2rem 1.5rem;
+	}
+	@media (min-width: 900px) {
+		.machines {
+			grid-template-columns: 1fr 1fr;
+			gap: 4rem;
+		}
+	}
+	.machines .photo :global(img) {
+		aspect-ratio: 1 / 1;
+		object-fit: contain;
+		background: #fff;
+		box-shadow: none;
+		border: 1px solid var(--border);
+	}
+	.machines h3 {
+		font-family: var(--display);
+		font-weight: 700;
+		letter-spacing: -0.03em;
+		font-size: 1.5rem;
+		margin: 1.25rem 0 0.5rem;
+	}
+	.model {
+		margin: 0 0 0.75rem;
+		color: var(--muted);
+		font-size: 0.9rem;
+	}
+	.machines dl {
+		margin: 0;
+	}
+	.machines dl > div {
+		display: grid;
+		grid-template-columns: 11rem 1fr;
+		gap: 1rem;
+		padding-block: 0.55rem;
+		border-top: 1px solid var(--border);
+	}
+	.machines dt {
+		font-weight: 600;
+		font-size: 0.95rem;
+	}
+	.machines dd {
+		margin: 0;
+		color: var(--muted);
+	}
+	.note {
+		font-size: 0.9rem;
+		color: var(--muted);
+	}
+</style>

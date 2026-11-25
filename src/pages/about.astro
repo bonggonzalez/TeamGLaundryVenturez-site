@@ -1,57 +1,66 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import stackRow from '../assets/images/stack-row.jpg';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const contact = `${base}/contact`;
 const provinces = ['Cavite', 'Laguna', 'Batangas', 'Rizal', 'Quezon'];
 const audiences = [
-	{ title: 'Aspiring laundry entrepreneurs', text: 'People who want to start a laundry business and need equipment plus a plan.' },
-	{ title: 'Existing laundry operators', text: 'Owners who already run a laundry business and want to upgrade equipment or operations.' },
-	{ title: 'Hospitality operators', text: 'Hotels, motels and similar businesses that want laundry inside their own property.' },
+	{ title: 'Aspiring laundry entrepreneurs', text: 'You want to start a laundry business. We bring the equipment and the plan.' },
+	{ title: 'Existing laundry operators', text: 'You already run a laundry. We help you upgrade equipment and operations.' },
+	{ title: 'Hotels, motels and hospitality', text: 'You want laundry inside your own property. We help you set it up.' },
 ];
 ---
 
 <Layout
-	title="About | Team G Laundry Venturez"
-	description="Team G Laundry Venturez is the exclusive Samsung laundry equipment distributor in Calabarzon and an end-to-end partner for commercial laundry operations."
+	title="About | TeamG Venturez"
+	description="TeamG Venturez is the exclusive Samsung laundry equipment distributor in Calabarzon and an end-to-end partner for commercial laundry operations."
 >
 	<header class="page-head">
-		<p class="eyebrow">About</p>
-		<h1>About Team G Laundry Venturez</h1>
-		<p>
-			We help clients build a complete laundry operation, not just buy machines.
-		</p>
+		<h1>The team behind Samsung laundry in Calabarzon.</h1>
+		<p>We help you build a complete laundry operation. Not just buy machines.</p>
 	</header>
 
-	<section class="band" aria-labelledby="who">
-		<h2 id="who">Who we are</h2>
-		<p>
-			Team G Laundry Venturez is the exclusive Samsung laundry equipment distributor in
-			Calabarzon, Philippines. No other distributor holds this territory.
-		</p>
-		<p>
-			We act as an end-to-end partner: design, construction, equipment installation and ongoing
-			maintenance, plus point-of-sale systems and business and marketing consultation.
-		</p>
-		<a class="btn" href={contact}>Request a consultation</a>
+	<section class="band split" aria-labelledby="who">
+		<div>
+			<h2 id="who">Who we are</h2>
+			<p>
+				TeamG Venturez is the exclusive Samsung laundry equipment distributor in Calabarzon,
+				Philippines.
+			</p>
+			<p>
+				We are your end-to-end partner. Design, construction, installation and maintenance. Point-of-sale systems. Business and marketing consultation.
+			</p>
+			<a class="btn" href={contact}>Request a consultation</a>
+		</div>
+		<figure class="photo">
+			<Image
+				src={stackRow}
+				alt="Rows of black Samsung professional washers and dryers"
+				widths={[480, 720, 1000]}
+				sizes="(min-width: 900px) 34rem, 92vw"
+			/>
+			<figcaption>Image shown for illustration.</figcaption>
+		</figure>
 	</section>
 
 	<section class="band" aria-labelledby="clients">
 		<h2 id="clients">Who we work with</h2>
-		<div class="cards">
+		<ul class="rows">
 			{
 				audiences.map((a) => (
-					<article class="card">
+					<li>
 						<h3>{a.title}</h3>
 						<p>{a.text}</p>
-					</article>
+					</li>
 				))
 			}
-		</div>
+		</ul>
 	</section>
 
 	<section class="band" aria-labelledby="area">
 		<h2 id="area">Where we operate</h2>
-		<p>We serve Calabarzon: {provinces.join(', ')}.</p>
+		<p>We serve Calabarzon: Cavite, Laguna, Batangas, Rizal and Quezon.</p>
 		<p><a href={`${base}/services`}>See our services</a> or <a href={`${base}/products`}>our products</a>.</p>
 	</section>
 </Layout>

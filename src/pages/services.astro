@@ -1,70 +1,95 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import laundromat from '../assets/images/laundromat.jpg';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const contact = `${base}/contact`;
 const services = [
 	{
 		title: 'Design',
-		text: 'A laundry layout planned around your space, your volume and your customers, before anything is built.',
+		text: 'We plan the layout around your space, your volume and your customers. Before anything is built.',
 		cta: 'Ask about design',
 	},
 	{
 		title: 'Construction',
-		text: 'The build-out of your premises, handled alongside the equipment plan so the two fit together.',
+		text: 'We plan the build-out together with the equipment. The two fit from day one.',
 		cta: 'Ask about construction',
 	},
 	{
 		title: 'Equipment installation',
-		text: 'Samsung professional laundry equipment installed and commissioned by the people who distribute it.',
+		text: 'Samsung professional equipment, installed by the team that distributes it.',
 		cta: 'Ask about installation',
 	},
 	{
 		title: 'Maintenance',
-		text: 'Ongoing service so your operation keeps earning long after opening day.',
+		text: 'Ongoing service after opening day. Your machines stay in work.',
 		cta: 'Ask about maintenance',
 	},
 	{
 		title: 'Point-of-sale systems',
-		text: 'Point-of-sale set up for the way your laundry takes payment and tracks business.',
-		cta: 'Ask about point of sale',
+		text: 'Set up to take payment and track sales the way your laundry runs.',
+		cta: 'Ask about point-of-sale',
 	},
 	{
 		title: 'Business and marketing consultation',
-		text: 'Practical guidance on running and promoting your laundry business, from plan to growth.',
+		text: 'Practical guidance on running and promoting your laundry.',
 		cta: 'Ask about consultation',
 	},
 ];
 ---
 
 <Layout
-	title="Services | Team G Laundry Venturez"
+	title="Services | TeamG Venturez"
 	description="Design, construction, equipment installation, maintenance, point-of-sale systems and business consultation for commercial laundry operations in Calabarzon."
 >
 	<header class="page-head">
-		<p class="eyebrow">Services</p>
-		<h1>From the first plan to the first service call.</h1>
+		<h1>One team from first plan to first service.</h1>
 		<p>
-			One partner for the whole laundry operation: planning, build-out, Samsung equipment,
-			systems and ongoing support.
+			Planning, construction, Samsung equipment, point-of-sale and ongoing support. All from TeamG.
 		</p>
 	</header>
 
-	{
-		services.map((s, i) => (
-			<section class="band" aria-labelledby={`svc-${i}`}>
-				<h2 id={`svc-${i}`}>{s.title}</h2>
-				<p>{s.text}</p>
-				<a class="btn" href={contact}>{s.cta}</a>
-			</section>
-		))
-	}
+	<figure class="photo wide">
+		<Image
+			src={laundromat}
+			alt="Samsung professional washers and dryers stacked in a laundry shop"
+			widths={[640, 960, 1280]}
+			sizes="(min-width: 76rem) 70rem, 92vw"
+		/>
+		<figcaption>Image shown for illustration.</figcaption>
+	</figure>
 
-	<section class="band" aria-labelledby="svc-start">
-		<h2 id="svc-start">Start your laundry operation</h2>
-		<p>
-			Tell us whether you are starting out, upgrading, or setting up laundry in your hotel or
-			motel, and we will take it from there.
-		</p>
-		<a class="btn" href={contact}>Request a consultation</a>
+	<section class="band" aria-labelledby="what">
+		<h2 id="what">Everything your laundry needs.</h2>
+		<ul class="rows">
+			{
+				services.map((s) => (
+					<li>
+						<h3>{s.title}</h3>
+						<div>
+							<p>{s.text}</p>
+							<a href={contact}>{s.cta}<span aria-hidden="true"> &rarr;</span></a>
+						</div>
+					</li>
+				))
+			}
+		</ul>
 	</section>
+
+	<Fragment slot="after">
+		<section class="closing" aria-labelledby="svc-start">
+			<div class="container">
+				<h2 id="svc-start">Starting, upgrading or adding laundry to your property? Tell us your plan.</h2>
+				<a class="btn" href={contact}>Request a consultation</a>
+			</div>
+		</section>
+	</Fragment>
 </Layout>
+
+<style>
+	.wide :global(img) {
+		aspect-ratio: 21 / 9;
+		object-fit: cover;
+		object-position: 70% 50%;
+	}
+</style>
