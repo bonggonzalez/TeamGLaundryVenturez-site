@@ -16,9 +16,9 @@ const scope = [
 	{ title: 'Business and marketing consultation', text: 'Practical advice on running and promoting your business.' },
 ];
 const audiences = [
-	{ key: 'start', title: 'Starting a laundry business', text: 'Turn your idea into a laundry negosyo with one partner for the plan, the build and the machines.' },
-	{ key: 'upgrade', title: 'Upgrading your laundry', text: 'Replace or add equipment, and make the rest of your operation run more smoothly.' },
-	{ key: 'hotel', title: 'Hotel or BnB laundry', text: 'Run your own laundry inside your hotel, BnB or inn.' },
+	{ key: 'start', cta: 'Compare startup packages', href: `${base}/packages`, title: 'Starting a laundry business', text: 'Turn your idea into a laundry negosyo with one partner for the plan, the build and the machines.' },
+	{ key: 'upgrade', cta: 'Plan my upgrade', href: `${contact}?for=upgrade`, title: 'Upgrading your laundry', text: 'Replace or add equipment, and make the rest of your operation run more smoothly.' },
+	{ key: 'hotel', cta: 'Plan an in-house laundry', href: `${contact}?for=hotel`, title: 'Hotel or BnB laundry', text: 'Run your own laundry inside your hotel, BnB or inn.' },
 ];
 ---
 <Layout
@@ -34,7 +34,8 @@ const audiences = [
 				</p>
 				<div class="actions">
 					<a class="btn" href={contact}>Get a quote</a>
-					<a class="link" href="#scope">See our services</a>
+					<a class="link" href={`${base}/packages`}>Compare startup packages</a>
+<a class="link" href={`${contact}?for=upgrade`}>Explore equipment upgrades</a>
 				</div>
 			</div>
 			<figure class="machines">
@@ -113,7 +114,7 @@ const audiences = [
 						<li>
 							<h3>{a.title}</h3>
 							<p>{a.text}</p>
-							<a href={`${contact}?for=${a.key}`}>Talk to us<span aria-hidden="true"> &rarr;</span></a>
+							<a href={a.href}>{a.cta}<span aria-hidden="true"> &rarr;</span></a>
 						</li>
 					))
 				}
@@ -121,7 +122,25 @@ const audiences = [
 		</div>
 	</section>
 
-	<section class="close" aria-labelledby="close-title">
+	<section class="audiences" aria-labelledby="show-title">
+<div class="container">
+<h2 id="show-title">See the machines at our showroom</h2>
+<ul class="aud-list">
+<li>
+<h3>Visit us in Alfonso, Cavite</h3>
+<p>{site.addressDisplay}. See the Samsung machines in person and talk to us about your plan.</p>
+<a href={`${contact}?for=showroom`}>Request a showroom demo<span aria-hidden="true"> &rarr;</span></a>
+</li>
+<li>
+<h3>Already our customer?</h3>
+<p>Warranty claims, repairs and service go through us. Your equipment has a 2-year warranty with free preventive maintenance.</p>
+<a href={`${contact}?for=service`}>Request service<span aria-hidden="true"> &rarr;</span></a>
+</li>
+</ul>
+</div>
+</section>
+
+<section class="close" aria-labelledby="close-title">
 		<div class="container close-inner">
 			<h2 id="close-title">Let’s plan your laundry together. We supply the machines and stay with you after they are installed.</h2>
 			<a class="btn on-dark" href={contact}>Get a quote</a>

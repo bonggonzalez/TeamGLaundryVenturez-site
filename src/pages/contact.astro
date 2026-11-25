@@ -13,6 +13,8 @@ const roles = [
 	{ key: 'start', label: 'Starting a laundry business' },
 	{ key: 'upgrade', label: 'Upgrading my laundry' },
 	{ key: 'hotel', label: 'Hotel or BnB laundry' },
+{ key: 'showroom', label: 'Visiting the showroom' },
+{ key: 'service', label: 'Existing customer needing service' },
 	{ key: 'other', label: 'Something else' },
 ];
 const interests = [
@@ -52,6 +54,8 @@ const interests = [
 				</p>
 			</div>
 			<form id="inquiry-form" action={FORM_ENDPOINT || undefined} method="post" novalidate>
+<p id="pkg-note" class="pkg-note" hidden></p>
+<input type="hidden" name="package" id="package" />
 				<div class="row two">
 					<label><span>First name <span class="req">(required)</span></span>
 						<input name="first_name" autocomplete="given-name" required />
@@ -74,12 +78,16 @@ const interests = [
 							{roles.map((r) => <option value={r.key}>{r.label}</option>)}
 						</select>
 					</label>
-					<label>Location
-						<select name="province">
-							{provinces.map((p) => <option>{p}</option>)}
-						</select>
-					</label>
-				</div>
+					<label>Province
+<select name="province">
+<option value="">Select your province</option>
+{provinces.map((p) => <option>{p}</option>)}
+</select>
+</label>
+</div>
+<label>Municipality or city <span class="req">(optional)</span>
+<input name="municipality" autocomplete="address-level2" />
+</label>
 				<label>What do you need?
 					<select name="interest">
 						{interests.map((i) => <option>{i}</option>)}
@@ -172,7 +180,14 @@ const interests = [
 		min-height: 1.5em;
 		color: var(--muted);
 	}
-	form .btn {
+	.pkg-note {
+margin: 0;
+padding: 0.75rem 1rem;
+border-left: 3px solid var(--accent);
+background: color-mix(in srgb, var(--accent) 8%, transparent);
+font-weight: 600;
+}
+form .btn {
 		justify-self: start;
 	}
 </style>
@@ -182,6 +197,13 @@ const interests = [
 	const role = document.getElementById('role');
 	const wanted = params.get('for');
 	if (wanted && role && [...role.options].some((o) => o.value === wanted)) role.value = wanted;
+const pkg = params.get('package');
+if (pkg && /^[2-5]$/.test(pkg)) {
+document.getElementById('package').value = `${pkg}-set package`;
+const note = document.getElementById('pkg-note');
+note.textContent = `You're asking about the ${pkg}-set package.`;
+note.hidden = false;
+}
 
 	const form = document.getElementById('inquiry-form');
 	const status = document.getElementById('form-status');
@@ -206,7 +228,8 @@ const interests = [
 				`Mobile: ${f.mobile.value}`,
 				`Email: ${f.email.value}`,
 				`Description: ${f.role.selectedOptions[0].text}`,
-				`Location: ${f.province.value}`,
+				`Package: ${f.package.value || 'none selected'}`,
+`Location: ${[f.municipality.value, f.province.value].filter(Boolean).join(', ')}`,
 				`Need: ${f.interest.value}`,
 				'',
 				f.message.value,
