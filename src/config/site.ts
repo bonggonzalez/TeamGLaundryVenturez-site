@@ -18,6 +18,7 @@ export const site = {
 		postalCode: '4123',
 		country: 'PH',
 	},
+	showroomName: 'Jumpin Wash',
 	addressDisplay: '333 Luksuhin Ibaba, Alfonso, Cavite 4123',
 	// Pinned Google Maps place for the showroom (TeamG Venturez).
 	mapUrl: 'https://maps.app.goo.gl/8XcBeHynokMFoshX7',
