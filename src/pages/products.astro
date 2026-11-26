@@ -24,6 +24,17 @@ const features = [
 	{ title: 'Connects to your other systems', text: 'You can add a third-party auto-dosing detergent system. If you already use management software, Samsung provides product protocol information to help connect it.' },
 	{ title: 'Fit more in less space', text: 'Install side by side, or stack a matching dryer on top of the washer to save floor space. Stacking needs Samsung’s top installation kit (SKK-BC) and display kit (SKK-CC1).' },
 ];
+// Rows shown up front; every other row sits under "Full specifications".
+const keySpecs = [
+	'Capacity',
+	'Cycle time',
+	'Dimensions (W x H x D)',
+	'Weight',
+	'Power consumption',
+	'Spin speed',
+	'Heating',
+	'Installation dimensions',
+];
 const machines = [
 	{
 		img: washer,
@@ -33,7 +44,7 @@ const machines = [
 		highlights: ['Super Speed: 18 kg capacity, washes in 36 min*', 'Excellent durability: 30,000-cycle test for main parts', 'Bubble technology: bubble-powered washing'],
 		spec: [
 			['Capacity', '18 kg'],
-			['Cycle time', '36 min'],
+			['Cycle time', '36 min*'],
 			['Body color', 'Black Caviar'],
 			['Door color', 'Deep Charcoal'],
 			['Panel display', 'LED'],
@@ -44,9 +55,9 @@ const machines = [
 			['Power consumption', '800 W'],
 			['Power supply', '230 V / 60 Hz'],
 			['Spin speed', '800 to 1,200 RPM'],
-			['Inverter', 'Inverter (DD Motor)'],
+			['Inverter', 'Inverter direct-drive (DD) motor'],
 			['Wi-Fi', 'Embedded'],
-			['Mobile app and software', 'Open API for integration'],
+			['Mobile app and software', 'Open API for integration with management software'],
 			['Durability test', '30,000 cycles (main parts)'],
 			['Installation dimensions', 'Depth with door open: 1,480 mm. Allow 150 mm clearance from the rear wall.'],
 		],
@@ -70,14 +81,18 @@ const machines = [
 			['Power consumption', '350 W'],
 			['Power supply', '230 V / 60 Hz'],
 			['Heating', 'LPG, 22,000 BTU'],
-			['Inverter', 'Inverter (DD Motor)'],
+			['Inverter', 'Inverter direct-drive (DD) motor'],
 			['Wi-Fi', 'Embedded'],
-			['Mobile app and software', 'Open API for integration'],
+			['Mobile app and software', 'Open API for integration with management software'],
 			['Durability test', '30,000 cycles (main parts)'],
 			['Installation dimensions', 'Depth with door open: 1,467 mm. Allow 150 mm clearance from the rear wall.'],
 		],
 	},
-];
+].map((m) => ({
+	...m,
+	key: m.spec.filter(([k]) => keySpecs.includes(k)),
+	rest: m.spec.filter(([k]) => !keySpecs.includes(k)),
+}));
 ---
 
 <Layout
@@ -88,7 +103,8 @@ const machines = [
 		<Image class="brandmark" src={samsung} alt="Samsung Professional Laundry" height={80} />
 		<h1>Samsung professional laundry equipment from an authorized dealer in Calabarzon.</h1>
 		<p>
-			When you buy from us, the same team installs and services your machines.
+			When you buy from us, the same team installs and services your machines. See set prices and daily capacity on our{' '}
+			<a href={`${base}/packages`}>packages</a> page.
 		</p>
 	</header>
 
@@ -100,24 +116,30 @@ const machines = [
 					<article>
 						<figure class="photo">
 							<Image src={m.img} alt={m.alt} widths={[420, 640, 900]} sizes="(min-width: 900px) 34rem, 92vw" />
+							<figcaption>Image shown for illustration.</figcaption>
 						</figure>
-						<Image class="brandmark sm" src={samsung} alt="Samsung Professional Laundry" height={60} />
 						<h3>{m.title}</h3>
 						<p class="model">Model {m.model}</p>
 						<ul class="hl">
 							{m.highlights.map((h) => <li>{h}</li>)}
 						</ul>
 						<dl>
-							{m.spec.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+							{m.key.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
 						</dl>
+						<details class="full">
+							<summary>Full specifications</summary>
+							<dl>
+								{m.rest.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+							</dl>
+						</details>
 					</article>
 				))
 			}
 		</div>
 		<p class="note">
-			*Based on Samsung internal testing using a Normal cycle. Individual results may vary with actual load contents. Payment systems and coin exchangers are sold separately. Product images are for illustration. Specifications, prices and availability are estimates only and may be changed by TeamG Venturez without prior notice. Message us to confirm the current models and pricing.
+			*Based on Samsung internal testing using a Normal cycle. Individual results may vary with actual load contents. Payment systems and coin exchangers are sold separately. Product images are for illustration. Specifications, prices and availability are estimates only and may be changed by TeamG Venturez without prior notice. Message us to confirm the current models and pricing. See the <a href={`${base}/faq`}>FAQ</a> for more answers.
 		</p>
-		<a class="btn" href={contact}>Ask about models and availability</a>
+		<a class="btn" href={`${contact}?interest=equipment`} data-track="quote">Ask about models and availability</a>
 	</section>
 
 	<section class="band" aria-labelledby="lpg">
@@ -132,7 +154,6 @@ const machines = [
 	</section>
 
 	<section class="band" aria-labelledby="feat">
-		<Image class="brandmark" src={samsung} alt="Samsung Professional Laundry" height={80} />
 		<h2 id="feat">Features that help a laundry business run smoothly.</h2>
 		<ul class="rows">
 			{
@@ -166,7 +187,7 @@ const machines = [
 			<p>
 				Washers and dryers can be installed side by side or stacked. Stacking saves floor space, which helps in a shop space, hotel or BnB. Stacking requires Samsung’s top installation kit (SKK-BC) and display kit (SKK-CC1); we confirm them in your plan and quote. We will plan the layout, machine count and utilities with you before we install.
 			</p>
-			<a class="btn" href={contact}>Plan your layout with us</a>
+			<a class="btn" href={`${contact}?interest=design`} data-track="quote">Plan your layout with us</a>
 		</div>
 		<figure class="photo">
 			<Image
@@ -183,7 +204,7 @@ const machines = [
 		<section class="closing" aria-labelledby="prod-close">
 			<div class="container">
 				<h2 id="prod-close">Not sure which machines fit your space and volume?</h2>
-				<a class="btn" href={contact}>Get a quote</a>
+				<a class="btn" href={`${contact}?interest=equipment`} data-track="quote">Get a quote</a>
 			</div>
 		</section>
 	</Fragment>
@@ -197,9 +218,15 @@ const machines = [
 		margin-bottom: 1.25rem;
 		mix-blend-mode: multiply;
 	}
-	.brandmark.sm {
-		height: 2rem;
-		margin: 1.25rem 0 0.25rem;
+	.band > p,
+	.rows p,
+	.hl li {
+		text-wrap: pretty;
+	}
+	.page-head a {
+		color: var(--accent);
+		font-weight: 600;
+		text-underline-offset: 0.3em;
 	}
 	.hl {
 		list-style: none;
@@ -229,6 +256,11 @@ const machines = [
 		box-shadow: none;
 		border: 1px solid var(--border);
 	}
+	.machines .photo figcaption {
+		font-size: 0.95rem;
+		color: var(--muted);
+		margin-top: 0.5rem;
+	}
 	.machines h3 {
 		font-family: var(--display);
 		font-weight: 700;
@@ -239,17 +271,23 @@ const machines = [
 	.model {
 		margin: 0 0 0.75rem;
 		color: var(--muted);
-		font-size: 0.9rem;
+		font-size: 0.95rem;
 	}
 	.machines dl {
 		margin: 0;
 	}
 	.machines dl > div {
 		display: grid;
-		grid-template-columns: 10rem 1fr;
-		gap: 1rem;
+		grid-template-columns: 1fr;
+		gap: 0.15rem;
 		padding-block: 0.55rem;
 		border-top: 1px solid var(--border);
+	}
+	@media (min-width: 480px) {
+		.machines dl > div {
+			grid-template-columns: 10rem 1fr;
+			gap: 1rem;
+		}
 	}
 	.machines dt {
 		font-weight: 600;
@@ -259,8 +297,20 @@ const machines = [
 		margin: 0;
 		color: var(--muted);
 	}
+	.full {
+		margin-top: 0.5rem;
+	}
+	.full summary {
+		display: flex;
+		align-items: center;
+		min-height: 2.75rem;
+		cursor: pointer;
+		font-weight: 600;
+		color: var(--accent);
+	}
 	.note {
-		font-size: 0.9rem;
+		font-size: 0.95rem;
 		color: var(--muted);
+		max-width: 65ch;
 	}
 </style>
