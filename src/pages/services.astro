@@ -2,42 +2,82 @@
 import Layout from '../layouts/Layout.astro';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const contact = `${base}/contact`;
-const services = [
+const before = [
 	{
+		key: 'design',
 		title: 'Design',
-		text: 'We plan the layout around your space, your volume and your customers, before anything is built.',
+		text: 'We plan the layout around your space, your volume and your customers, before anything is built. Already running a laundry? We also review your existing layout.',
 		cta: 'Ask about design',
 	},
 	{
+		key: 'construction',
 		title: 'Construction',
 		text: 'We plan the build-out together with the equipment, so the two fit from day one.',
 		cta: 'Ask about construction',
 	},
 	{
+		key: 'installation',
 		title: 'Equipment installation',
 		text: 'Samsung professional equipment, installed by the team that supplies it.',
 		cta: 'Ask about installation',
 	},
+];
+const after = [
 	{
+		key: 'maintenance',
 		title: 'Maintenance',
 		text: 'Ongoing service after opening day, so your machines keep running.',
 		cta: 'Ask about maintenance',
 	},
 	{
+		key: 'pos',
 		title: 'Point-of-sale systems',
 		text: 'Set up to take payment and track sales the way your laundry runs.',
 		cta: 'Ask about point-of-sale',
 	},
 	{
+		key: 'consultation',
 		title: 'Business and marketing consultation',
-		text: 'Practical advice on running and promoting your laundry.',
+		text: 'Practical advice on running and promoting your laundry, including running laundry in-house for hotels, BnBs and inns.',
 		cta: 'Ask about consultation',
 	},
+];
+const steps = [
+	{
+		title: 'Tell us your plan',
+		text: 'Send the form, or call, text or message us. Share your space, your plan and your target opening date.',
+	},
+	{
+		title: 'Free site visit',
+		text: 'We visit your site, assess your layout and check whether you need utility work. There is no obligation.',
+	},
+	{
+		title: 'Written quote',
+		text: 'After the visit you receive a written quote with the final figures.',
+	},
+	{
+		title: 'Contract and build',
+		text: 'Once you are ready, we sign a contract and your scope of work, and we move on to building and installing.',
+	},
+];
+const included = [
+	'Water supply and drainage connections',
+	'Electrical connections for the washer and dryer',
+	'Gas dryer connection and leak testing',
+	'Dryer exhaust and ducting',
+	'Testing, commissioning, basic training and handover',
+];
+const excluded = [
+	'Civil works and structural changes',
+	'Major electrical upgrades',
+	'Building permits and government fees',
+	'The LPG tank, supply and regulator',
+	'Materials not listed in your quotation',
 ];
 ---
 
 <Layout
-	title="Laundry Design, Installation and Service | TeamG Venturez"
+	title="Samsung Laundry Installation and Service | TeamG Venturez"
 	description="Design, construction, equipment installation, maintenance, point-of-sale systems and business consultation for laundry shops and laundromats in Calabarzon."
 >
 	<header class="page-head">
@@ -47,16 +87,39 @@ const services = [
 		</p>
 	</header>
 
-	<section class="band" aria-labelledby="what">
-		<h2 id="what">How we can help your laundry</h2>
+	<section class="band" aria-labelledby="pre">
+		<h2 id="pre">Before opening day</h2>
 		<ul class="rows">
 			{
-				services.map((s) => (
+				before.map((s) => (
 					<li>
 						<h3>{s.title}</h3>
 						<div>
 							<p>{s.text}</p>
-							<a href={contact}>{s.cta}<span aria-hidden="true"> &rarr;</span></a>
+							<a href={`${contact}?interest=${s.key}`} data-track="quote">
+								{s.cta}
+								<span aria-hidden="true"> &rarr;</span>
+							</a>
+						</div>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+
+	<section class="band" aria-labelledby="post">
+		<h2 id="post">After opening day</h2>
+		<ul class="rows">
+			{
+				after.map((s) => (
+					<li>
+						<h3>{s.title}</h3>
+						<div>
+							<p>{s.text}</p>
+							<a href={`${contact}?interest=${s.key}`} data-track="quote">
+								{s.cta}
+								<span aria-hidden="true"> &rarr;</span>
+							</a>
 						</div>
 					</li>
 				))
@@ -66,12 +129,50 @@ const services = [
 
 	<section class="band" aria-labelledby="inst">
 		<h2 id="inst">What our basic installation covers</h2>
-		<ul class="rows plain">
-			<li><h3>Included</h3><div><p>Water supply and drainage connections. Electrical connections for the washer and dryer. Gas dryer connection and leak testing. Dryer exhaust and ducting. Testing, commissioning and basic training and handover.</p></div></li>
-			<li><h3>Not included</h3><div><p>Civil works and structural changes. Major electrical upgrades. Building permits and government fees. The LPG tank, supply and regulator. Materials not listed in your quotation. Extra work found during installation is quoted separately and needs your approval first.</p></div></li>
-			<li><h3>Optional utility additions</h3><div><p>Basic electrical, plumbing and ducting work needed to commission the equipment, from about ₱200,000. This is an estimate only and is confirmed after our site visit.</p></div></li>
+		<ul class="rows">
+			<li>
+				<h3>Included</h3>
+				<div>
+					<ul class="items">{included.map((i) => <li>{i}</li>)}</ul>
+				</div>
+			</li>
+			<li>
+				<h3>Not included</h3>
+				<div>
+					<ul class="items">{excluded.map((i) => <li>{i}</li>)}</ul>
+					<p class="after-list">Extra work found during installation is quoted separately and needs your approval first.</p>
+				</div>
+			</li>
+			<li>
+				<h3>Optional utility additions</h3>
+				<div>
+					<p>
+						Basic electrical, plumbing and ducting work needed to commission the equipment, from about ₱200,000. This is an
+						estimate only and is confirmed after our site visit.
+					</p>
+				</div>
+			</li>
 		</ul>
-		<p class="est">Prices, scope and timelines are estimates only. TeamG Venturez may change them without prior notice, and your signed scope of work confirms the final figures.</p>
+		<p class="est">
+			Prices, scope and timelines are estimates, and your signed scope of work confirms the final figures. See our
+			<a href={`${base}/packages`}>packages</a> for set prices or the <a href={`${base}/faq`}>FAQ</a> for more answers.
+		</p>
+	</section>
+
+	<section class="band" aria-labelledby="how">
+		<h2 id="how">How an inquiry works</h2>
+		<ol class="rows">
+			{
+				steps.map((s) => (
+					<li>
+						<h3>{s.title}</h3>
+						<div>
+							<p>{s.text}</p>
+						</div>
+					</li>
+				))
+			}
+		</ol>
 	</section>
 
 	<Fragment slot="after">
@@ -85,14 +186,34 @@ const services = [
 </Layout>
 
 <style>
-	.wide :global(img) {
-		aspect-ratio: 21 / 9;
-		object-fit: cover;
-		object-position: 70% 50%;
+	.rows a {
+		display: inline-flex;
+		align-items: center;
+		min-height: 2.75rem;
+		margin-top: 0.25rem;
+	}
+	.rows p,
+	.items li,
+	.est {
+		text-wrap: pretty;
+	}
+	.items {
+		list-style: disc;
+		margin: 0;
+		padding-left: 1.2rem;
+		color: var(--muted);
+		max-width: 60ch;
+	}
+	.items li {
+		padding-block: 0.2rem;
+	}
+	.after-list {
+		margin-top: 1rem;
 	}
 	.est {
 		margin-top: 1.5rem;
 		color: var(--muted);
 		font-size: 0.95rem;
+		max-width: 65ch;
 	}
 </style>

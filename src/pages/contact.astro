@@ -222,6 +222,24 @@ note.textContent = `You're asking about the ${pkg}-set package.`;
 note.hidden = false;
 }
 
+	const topics = {
+		design: ['Design and construction', 'design'],
+		construction: ['Design and construction', 'construction'],
+		installation: ['Installation', 'installation'],
+		maintenance: ['Maintenance', 'maintenance'],
+		pos: ['Point-of-sale systems', 'point-of-sale systems'],
+		consultation: ['Business and marketing consultation', 'consultation'],
+	};
+	const topicKey = params.get('interest');
+	if (!pkg && topicKey && Object.hasOwn(topics, topicKey)) {
+		const [option, phrase] = topics[topicKey];
+		const need = document.querySelector('select[name="interest"]');
+		if (need && [...need.options].some((o) => o.value === option)) need.value = option;
+		const topicNote = document.getElementById('pkg-note');
+		topicNote.textContent = `You're asking about ${phrase}.`;
+		topicNote.hidden = false;
+	}
+
 	const form = document.getElementById('inquiry-form');
 	const status = document.getElementById('form-status');
 	form.addEventListener('submit', async (e) => {
