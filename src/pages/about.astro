@@ -6,11 +6,25 @@ import { site } from '../config/site';
 import stackRow from '../assets/images/stack-row.jpg';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const contact = `${base}/contact`;
-const provinces = ['Cavite', 'Laguna', 'Batangas', 'Rizal', 'Quezon'];
 const audiences = [
-	{ title: 'Aspiring laundry entrepreneurs', text: 'If you want to start a laundry negosyo, we bring the equipment and help you plan it.' },
-	{ title: 'Existing laundry owners', text: 'If you already run a laundry, we help you upgrade your equipment and the way you operate.' },
-	{ title: 'Hotels, BnBs and other hospitality owners', text: 'If you want laundry inside your own property, we help you set it up.' },
+	{
+		title: 'Aspiring laundry entrepreneurs',
+		text: 'If you want to start a laundry negosyo, we bring the equipment and help you plan it.',
+		cta: 'Plan my start-up',
+		href: `${contact}?for=start`,
+	},
+	{
+		title: 'Existing laundry owners',
+		text: 'If you already run a laundry, we help you upgrade your equipment and the way you operate.',
+		cta: 'Plan my upgrade',
+		href: `${contact}?for=upgrade`,
+	},
+	{
+		title: 'Hotels, BnBs and other hospitality owners',
+		text: 'If you want laundry inside your own property, we help you set it up, including advice on running it in-house.',
+		cta: 'Plan my in-house laundry',
+		href: `${contact}?for=hotel`,
+	},
 ];
 ---
 
@@ -19,7 +33,7 @@ const audiences = [
 	description="We are TeamG Venturez, an authorized Samsung laundry equipment dealer in Calabarzon, here to help you plan, build and run your laundry."
 >
 	<header class="page-head">
-		<h1>The team behind Samsung laundry in Calabarzon.</h1>
+		<h1>The team that plans, builds and services Samsung laundry in Calabarzon.</h1>
 		<p>We help you build a complete laundry business, with the machines as one part of it.</p>
 	</header>
 
@@ -33,7 +47,7 @@ const audiences = [
 			<p>
 				We are your partner from the first sketch to opening day and beyond: design, construction, installation and maintenance, point-of-sale systems, and business and marketing advice.
 			</p>
-			<a class="btn" href={contact}>Get a quote</a>
+			<p class="more"><a href="#how">See what happens when you contact us</a></p>
 		</div>
 		<figure class="photo">
 			<Image
@@ -53,18 +67,85 @@ const audiences = [
 				audiences.map((a) => (
 					<li>
 						<h3>{a.title}</h3>
-						<p>{a.text}</p>
+						<div>
+							<p>{a.text}</p>
+							<a href={a.href} data-track="quote">
+								{a.cta}
+								<span aria-hidden="true"> &rarr;</span>
+							</a>
+						</div>
 					</li>
 				))
 			}
 		</ul>
 	</section>
 
-	<section class="band" aria-labelledby="area">
+	<section class="band" id="how" aria-labelledby="next">
+		<h2 id="next">What happens when you contact us</h2>
+		<p>
+			Tell us your space and your plan. We arrange a free site visit and layout assessment, with no obligation to buy.
+			After the visit you receive a written quote, and a contract follows once you are ready.
+		</p>
+		<p class="more">
+			<a href={`${base}/services#how`}>See how an inquiry works</a>
+			<a href={`${base}/faq`}>Read the FAQ</a>
+		</p>
+	</section>
+
+	<section class="band area" aria-labelledby="area">
 		<h2 id="area">Where we operate</h2>
 		<p>We serve Calabarzon: Cavite, Laguna, Batangas, Rizal and Quezon.</p>
-		<p>Visit our showroom at {site.showroomName}, {site.addressDisplay}.</p>
-		<p><MapLink /></p>
-		<p><a href={`${base}/services`}>See our services</a> or <a href={`${base}/products`}>our products</a>.</p>
+		<p>
+			Visit our showroom at {site.showroomName}, {site.addressDisplay}. Message us first so we can make sure someone is
+			ready to meet you.
+		</p>
+		<p class="more">
+			<MapLink />
+			<a href={`${contact}?for=showroom`} data-track="quote">Message us before you visit</a>
+		</p>
 	</section>
+
+	<Fragment slot="after">
+		<section class="closing" aria-labelledby="about-close">
+			<div class="container">
+				<h2 id="about-close">Tell us your plan and we will help with the next step.</h2>
+				<a class="btn" href={contact}>Get a quote</a>
+			</div>
+		</section>
+	</Fragment>
 </Layout>
+
+<style>
+	.band h2 {
+		font-size: clamp(1.9rem, 4vw, 3rem);
+	}
+	.photo :global(img) {
+		box-shadow: none;
+	}
+	.rows h3 {
+		text-wrap: balance;
+	}
+	.rows p,
+	.band > p {
+		text-wrap: pretty;
+	}
+	.rows a,
+	.more a,
+	.area :global(.maplink) {
+		display: inline-flex;
+		align-items: center;
+		min-height: 2.75rem;
+	}
+	.rows a {
+		margin-top: 0.25rem;
+	}
+	.rows a span {
+		margin-left: 0.35em;
+	}
+	.more {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 1.5rem;
+		margin: 0;
+	}
+</style>
