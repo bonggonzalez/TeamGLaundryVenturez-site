@@ -1,11 +1,9 @@
 ---
 import MapLink from '../components/MapLink.astro';
 import Layout from '../layouts/Layout.astro';
-import ContactIcons from '../components/ContactIcons.astro';
-import { site } from '../config/site';
+import { site, chatChannels } from '../config/site';
 const EMAIL = site.email;
 const PHONE = site.phoneDisplay;
-const PHONE_LOCAL = site.phoneLocal;
 // Set PUBLIC_FORM_ENDPOINT (see .env.example) to post requests to a form service.
 // While empty, the form opens the visitor's email app addressed to EMAIL.
 const FORM_ENDPOINT = site.formEndpoint;
@@ -14,8 +12,8 @@ const roles = [
 	{ key: 'start', label: 'Starting a laundry business' },
 	{ key: 'upgrade', label: 'Upgrading my laundry' },
 	{ key: 'hotel', label: 'Hotel or BnB laundry' },
-{ key: 'showroom', label: 'Visiting the showroom' },
-{ key: 'service', label: 'Existing customer needing service' },
+	{ key: 'showroom', label: 'Visiting the showroom' },
+	{ key: 'service', label: 'Existing customer needing service' },
 	{ key: 'other', label: 'Something else' },
 ];
 const interests = [
@@ -27,11 +25,18 @@ const interests = [
 	'Business and marketing consultation',
 	'Not sure yet',
 ];
+const channels = [
+	{ key: 'call', label: `Call or text ${PHONE}`, href: `tel:${site.phoneIntl}` },
+	...chatChannels.map((c) => ({ key: c.key, label: `Chat on ${c.label}`, href: c.href, external: true })),
+	{ key: 'email', label: `Email ${EMAIL}`, href: `mailto:${EMAIL}` },
+	...(site.facebook ? [{ key: 'facebook', label: 'Facebook page', href: site.facebook, external: true }] : []),
+] as { key: string; label: string; href: string; external?: boolean }[];
 ---
 
 <Layout
 	title="Get a Quote | TeamG Venturez"
 	description="Talk to us about starting or upgrading a laundry operation in Calabarzon. Get a quote by form, phone, text or email."
+	hideContactBar
 >
 	<header class="page-head">
 		<h1>Let's plan your laundry.</h1>
@@ -42,7 +47,22 @@ const interests = [
 
 	<section class="band" aria-labelledby="channels">
 		<h2 id="channels">Reach us directly</h2>
-		<ContactIcons size="lg" class="channels" />
+		<ul class="channel-list">
+			{
+				channels.map((c) => (
+					<li>
+						<a
+							href={c.href}
+							data-track={c.key}
+							rel={c.external ? 'noopener' : undefined}
+							target={c.external ? '_blank' : undefined}
+						>
+							{c.label}
+						</a>
+					</li>
+				))
+			}
+		</ul>
 		<p class="area">Visit our showroom at {site.showroomName}, {site.addressDisplay}. We serve {provinces.join(', ')}.</p>
 		<p class="map"><MapLink /></p>
 	</section>
@@ -51,74 +71,113 @@ const interests = [
 		<div class="form-wrap">
 			<div class="form-intro">
 				<h2 id="inquiry">Get a quote</h2>
-				<p>
-					Share a few details. We will follow up to discuss your plan and the equipment that fits, and we will arrange your free site visit. After the visit you receive a written quote, and then a contract once you are ready. Prices and timelines are estimates only and may be changed by TeamG Venturez without prior notice.
-				</p>
+				<p>Share a few details and we will follow up to talk about your plan and the equipment that fits.</p>
+				<h3 class="next">What happens next for a new project</h3>
+				<ol class="steps">
+					<li><strong>Free site visit.</strong> We arrange your site visit and layout assessment, with no obligation to buy.</li>
+					<li><strong>Written quote.</strong> After the visit you receive a written quote.</li>
+					<li><strong>Contract.</strong> A contract follows once you are ready.</li>
+				</ol>
 			</div>
-			<form id="inquiry-form" action={FORM_ENDPOINT || undefined} method="post" novalidate>
-<p id="pkg-note" class="pkg-note" hidden></p>
-<input type="hidden" name="package" id="package" />
-<input type="hidden" name="_subject" value="New quote request from teamgventurez.com" />
-<input type="hidden" name="_template" value="table" />
-<input type="hidden" name="_cc" id="cc" />
-<input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
-				<div class="row two">
-					<label><span>First name <span class="req">(required)</span></span>
-						<input name="first_name" autocomplete="given-name" required />
-					</label>
-					<label>Last name
-						<input name="last_name" autocomplete="family-name" />
-					</label>
-				</div>
-				<div class="row two">
-					<label><span>Mobile number <span class="req">(required)</span></span>
-						<input name="mobile" type="tel" autocomplete="tel" required />
-					</label>
-					<label><span>Email <span class="req">(required)</span></span>
-						<input name="email" type="email" autocomplete="email" required />
-					</label>
-				</div>
-				<div class="row two">
-					<label>What best describes you?
-						<select name="role" id="role">
-							{roles.map((r) => <option value={r.key}>{r.label}</option>)}
+			<div class="form-col">
+				<form id="inquiry-form" action={FORM_ENDPOINT || undefined} method="post" novalidate>
+					<p id="pkg-note" class="pkg-note" hidden></p>
+					<input type="hidden" name="package" id="package" />
+					<input type="hidden" name="_subject" value="New quote request from teamgventurez.com" />
+					<input type="hidden" name="_template" value="table" />
+					<input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
+					<div class="row two">
+						<div class="field">
+							<label for="f-first">First name <span class="req">(required)</span></label>
+							<input id="f-first" name="first_name" autocomplete="given-name" required />
+							<p class="field-error" id="err-first_name" hidden></p>
+						</div>
+						<div class="field">
+							<label for="f-last">Last name</label>
+							<input id="f-last" name="last_name" autocomplete="family-name" />
+						</div>
+					</div>
+					<div class="row two">
+						<div class="field">
+							<label for="f-mobile">Mobile number <span class="req">(required)</span></label>
+							<input id="f-mobile" name="mobile" type="tel" inputmode="tel" autocomplete="tel" placeholder="0917 123 4567" required />
+							<p class="field-error" id="err-mobile" hidden></p>
+						</div>
+						<div class="field">
+							<label for="f-email">Email <span class="req">(required)</span></label>
+							<input id="f-email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required />
+							<p class="field-error" id="err-email" hidden></p>
+						</div>
+					</div>
+					<div class="row two">
+						<div class="field">
+							<label for="role">What best describes you?</label>
+							<select id="role" name="role">
+								<option value="">Choose one</option>
+								{roles.map((r) => <option value={r.key}>{r.label}</option>)}
+							</select>
+						</div>
+						<div class="field">
+							<label for="f-province">Province</label>
+							<select id="f-province" name="province">
+								<option value="">Choose your province</option>
+								{provinces.map((p) => <option>{p}</option>)}
+							</select>
+						</div>
+					</div>
+					<div class="field">
+						<label for="f-city">Municipality or city</label>
+						<input id="f-city" name="municipality" autocomplete="address-level2" />
+					</div>
+					<div class="field">
+						<label for="f-need">What do you need?</label>
+						<select id="f-need" name="interest">
+							<option value="">Choose one</option>
+							{interests.map((i) => <option>{i}</option>)}
 						</select>
-					</label>
-					<label>Province
-<select name="province">
-<option value="">Select your province</option>
-{provinces.map((p) => <option>{p}</option>)}
-</select>
-</label>
-</div>
-<label>Municipality or city <span class="req">(optional)</span>
-<input name="municipality" autocomplete="address-level2" />
-</label>
-				<label>What do you need?
-					<select name="interest">
-						{interests.map((i) => <option>{i}</option>)}
-					</select>
-				</label>
-				<label>Your space or plan
-					<textarea name="message" rows="4" placeholder="For example: floor area in square meters, number of machines, target opening date"></textarea>
-				</label>
-				<button class="btn" type="submit">Send my request</button>
-				<p class="privacy">We use your details only to reply to your request, in line with the Data Privacy Act of 2012. <a href="/privacy">Read our privacy notice</a>.</p>
-				<p id="form-status" role="status" aria-live="polite"></p>
-			</form>
+					</div>
+					<div class="field">
+						<label for="f-message">Your space or plan</label>
+						<textarea id="f-message" name="message" rows="4" placeholder="For example: floor area in square meters, number of machines, target opening date"></textarea>
+					</div>
+					<div id="form-error" class="form-error" role="alert" hidden></div>
+					<button class="btn" type="submit">Send my request</button>
+					<p class="privacy">
+						We use your details only to reply to your request, in line with the Data Privacy Act of 2012. Your request is delivered to us through the FormSubmit form service. <a href="/privacy">Read our privacy notice</a>.
+					</p>
+				</form>
+				<section id="sent" class="sent" tabindex="-1" aria-labelledby="sent-title" hidden>
+					<h3 id="sent-title">Thank you. We have your request.</h3>
+					<p>Salamat po. We will be in touch to talk about your plan and arrange your free site visit.</p>
+					<p>If it is urgent, call or text {PHONE}.</p>
+				</section>
+			</div>
 		</div>
 	</section>
 </Layout>
 
 <style>
-	.channels {
-		margin-top: 1.5rem;
+	.channel-list {
+		list-style: none;
+		margin: 1rem 0 0;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 1.75rem;
+	}
+	.channel-list a,
+	.map :global(.maplink) {
+		display: inline-flex;
+		align-items: center;
+		min-height: 2.75rem;
+		color: var(--accent);
+		font-weight: 600;
 	}
 	.area {
 		margin: 1.25rem 0 0;
 	}
 	.map {
-		margin: 0.5rem 0 0;
+		margin: 0;
 	}
 	.form-wrap {
 		display: grid;
@@ -130,9 +189,43 @@ const interests = [
 			gap: 4rem;
 		}
 	}
+	.area,
+	.form-intro p,
+	.steps li {
+		text-wrap: pretty;
+	}
+	.next {
+		text-wrap: balance;
+		font-family: var(--display);
+		font-weight: 700;
+		letter-spacing: -0.03em;
+		font-size: 1.5rem;
+		line-height: 1.2;
+		margin: 1.75rem 0 0.5rem;
+	}
+	.steps {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		max-width: 28rem;
+	}
+	.steps li {
+		padding-block: 0.8rem;
+		border-top: 1px solid var(--border);
+		color: var(--muted);
+	}
+	.steps li:last-child {
+		border-bottom: 1px solid var(--border);
+	}
+	.steps strong {
+		color: var(--text);
+	}
 	form {
 		display: grid;
 		gap: 1.25rem;
+	}
+	form[hidden] {
+		display: none;
 	}
 	.row.two {
 		display: grid;
@@ -143,9 +236,12 @@ const interests = [
 			grid-template-columns: 1fr 1fr;
 		}
 	}
-	label {
+	.field {
 		display: grid;
 		gap: 0.4rem;
+		align-content: start;
+	}
+	label {
 		font-weight: 600;
 		font-size: 0.95rem;
 	}
@@ -157,17 +253,18 @@ const interests = [
 	select,
 	textarea {
 		font: inherit;
+		font-size: 1.0625rem;
 		font-weight: 400;
 		color: var(--text);
 		background: #fff;
-		border: 1px solid #9db4d3;
+		border: 1px solid var(--muted);
 		border-radius: 0.5rem;
 		padding: 0.75rem 0.9rem;
 		width: 100%;
 	}
 	input::placeholder,
 	textarea::placeholder {
-		color: #5f6f84;
+		color: color-mix(in srgb, var(--muted) 85%, #fff);
 	}
 	input:focus-visible,
 	select:focus-visible,
@@ -178,34 +275,60 @@ const interests = [
 	}
 	input[aria-invalid='true'] {
 		border-color: #b3261e;
+		border-width: 2px;
+		padding: calc(0.75rem - 1px) calc(0.9rem - 1px);
 	}
-	.privacy {
-		font-size: 0.85rem;
-		color: var(--muted);
-		margin: 0.75rem 0 0;
-	}
-	#form-status {
+	.field-error {
 		margin: 0;
-		min-height: 1.5em;
-		color: var(--muted);
+		color: #b3261e;
+		font-size: 0.95rem;
+		font-weight: 600;
 	}
-	#form-status.err {
+	.form-error {
+		padding: 0.75rem 1rem;
+		border: 2px solid #b3261e;
+		border-radius: 0.5rem;
 		color: #b3261e;
 		font-weight: 600;
 	}
-	#form-status.ok {
-		color: #11643a;
-		font-weight: 600;
+	.privacy {
+		font-size: 0.95rem;
+		color: var(--muted);
+		margin: 0.75rem 0 0;
+		text-wrap: pretty;
 	}
 	.pkg-note {
-margin: 0;
-padding: 0.75rem 1rem;
-border-left: 3px solid var(--accent);
-background: color-mix(in srgb, var(--accent) 8%, transparent);
-font-weight: 600;
-}
-form .btn {
+		margin: 0;
+		padding: 0.75rem 1rem;
+		border: 1px solid var(--border);
+		border-radius: 0.5rem;
+		background: var(--tint);
+		font-weight: 600;
+	}
+	form .btn {
 		justify-self: start;
+	}
+	form .btn:disabled {
+		opacity: 0.7;
+		cursor: progress;
+		transform: none;
+	}
+	.sent {
+		padding: 1.75rem;
+		border: 1px solid #11643a;
+		border-radius: 0.5rem;
+	}
+	.sent h3 {
+		font-family: var(--display);
+		font-weight: 700;
+		letter-spacing: -0.03em;
+		font-size: 1.5rem;
+		line-height: 1.2;
+		margin: 0 0 0.75rem;
+		color: #11643a;
+	}
+	.sent p {
+		margin: 0 0 0.75rem;
 	}
 </style>
 
@@ -214,17 +337,17 @@ form .btn {
 	const role = document.getElementById('role');
 	const wanted = params.get('for');
 	if (wanted && role && [...role.options].some((o) => o.value === wanted)) role.value = wanted;
-const pkg = params.get('package');
-if (pkg && /^[2-5]$/.test(pkg)) {
-document.getElementById('package').value = `${pkg}-set package`;
-const note = document.getElementById('pkg-note');
-note.textContent = `You're asking about the ${pkg}-set package.`;
-note.hidden = false;
-}
+	const pkg = params.get('package');
+	if (pkg && /^[2-5]$/.test(pkg)) {
+		document.getElementById('package').value = `${pkg}-set package`;
+		const note = document.getElementById('pkg-note');
+		note.textContent = `You're asking about the ${pkg}-set package.`;
+		note.hidden = false;
+	}
 
 	const topics = {
 		equipment: ['Samsung equipment', 'Samsung equipment'],
-		design:['Design and construction', 'design'],
+		design: ['Design and construction', 'design'],
 		construction: ['Design and construction', 'construction'],
 		installation: ['Installation', 'installation'],
 		maintenance: ['Maintenance', 'maintenance'],
@@ -242,67 +365,124 @@ note.hidden = false;
 	}
 
 	const form = document.getElementById('inquiry-form');
-	const status = document.getElementById('form-status');
+	const submit = form.querySelector('button[type="submit"]');
+	const submitLabel = submit.textContent;
+	const formError = document.getElementById('form-error');
+	const sent = document.getElementById('sent');
+
+	// Mobile: a Philippine mobile number (0917..., 63917... or +63917...) or any international number starting with +.
+	const rules = {
+		first_name: { message: 'Add your first name.', ok: (v) => v.length > 0 },
+		mobile: {
+			message: 'Enter a mobile number like 0917 123 4567.',
+			ok: (v) => {
+				const d = v.replace(/[\s\-().]/g, '');
+				return /^(\+?63|0)9\d{9}$/.test(d) || /^\+\d{8,15}$/.test(d);
+			},
+		},
+		email: {
+			message: 'Enter an email address like name@example.com.',
+			ok: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
+		},
+	};
+	const showFieldError = (name, message) => {
+		const el = form.elements[name];
+		const err = document.getElementById(`err-${name}`);
+		el.setAttribute('aria-invalid', 'true');
+		el.setAttribute('aria-describedby', err.id);
+		err.textContent = message;
+		err.hidden = false;
+	};
+	const clearFieldError = (name) => {
+		const el = form.elements[name];
+		const err = document.getElementById(`err-${name}`);
+		el.removeAttribute('aria-invalid');
+		el.removeAttribute('aria-describedby');
+		err.textContent = '';
+		err.hidden = true;
+	};
+	const showFormError = (message) => {
+		formError.textContent = message;
+		formError.hidden = false;
+	};
+	Object.keys(rules).forEach((name) => form.elements[name].addEventListener('input', () => clearFieldError(name)));
+
+	let sending = false;
 	form.addEventListener('submit', async (e) => {
 		e.preventDefault();
-			const checks = [
-				['first_name', 'your name', (v) => !!v],
-				['mobile', 'your mobile number', (v) => !!v],
-				['email', 'your email address', (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)],
-			];
-			const missing = [];
-			let firstBad = null;
-			for (const [name, label, valid] of checks) {
-				const el = form.elements[name];
-				const bad = !valid(el.value.trim());
-				el.setAttribute('aria-invalid', bad ? 'true' : 'false');
-				if (bad) {
-					missing.push(label);
-					if (!firstBad) firstBad = el;
-				}
+		if (sending) return;
+		formError.hidden = true;
+
+		const bad = [];
+		for (const [name, rule] of Object.entries(rules)) {
+			if (rule.ok(form.elements[name].value.trim())) {
+				clearFieldError(name);
+			} else {
+				showFieldError(name, rule.message);
+				bad.push(name);
 			}
-			if (missing.length) {
-				status.textContent = `Please add ${missing.join(', ').replace(/, ([^,]*)$/, ' and $1')} before sending.`;
-				status.classList.add('err');
-				firstBad.focus();
-				return;
-			}
-			status.classList.remove('err');
-			form.elements._cc.value = form.elements.email.value.trim();
+		}
+		if (bad.length) {
+			showFormError(
+				bad.length === 1
+					? 'Please check the field above that needs your attention.'
+					: `Please check the ${bad.length} fields above that need your attention.`
+			);
+			form.elements[bad[0]].focus();
+			return;
+		}
+
 		if (!endpoint) {
 			const f = form.elements;
+			const text = (el) => (el.value ? el.selectedOptions[0].text : 'Not specified');
 			const lines = [
 				`Name: ${f.first_name.value} ${f.last_name.value}`.trim(),
 				`Mobile: ${f.mobile.value}`,
 				`Email: ${f.email.value}`,
-				`Description: ${f.role.selectedOptions[0].text}`,
+				`Description: ${text(f.role)}`,
 				`Package: ${f.package.value || 'none selected'}`,
-`Location: ${[f.municipality.value, f.province.value].filter(Boolean).join(', ')}`,
-				`Need: ${f.interest.value}`,
+				`Location: ${[f.municipality.value, f.province.value].filter(Boolean).join(', ')}`,
+				`Need: ${text(f.interest)}`,
 				'',
 				f.message.value,
 			];
 			const href = `mailto:${email}?subject=${encodeURIComponent('Quote request')}&body=${encodeURIComponent(lines.join('\n'))}`;
-			status.textContent = `Opening your email app. You can also email ${email} or call or text ${phone}.`;
+			showFormError(`Opening your email app. You can also email ${email} or call or text ${phone}.`);
 			if (window.tgTrack) window.tgTrack('generate_lead', { method: 'email_fallback' });
 			location.href = href;
 			return;
 		}
-		status.textContent = 'Sending...';
-			status.classList.remove('ok');
+
+		sending = true;
+		submit.disabled = true;
+		submit.textContent = 'Sending…';
+		form.setAttribute('aria-busy', 'true');
+		const controller = new AbortController();
+		const timer = setTimeout(() => controller.abort(), 15000);
 		try {
 			const res = await fetch(endpoint, {
 				method: 'POST',
 				headers: { Accept: 'application/json' },
 				body: new FormData(form),
+				signal: controller.signal,
 			});
-			if (!res.ok) throw new Error('bad status');
+			const data = await res.json().catch(() => null);
+			// Only a clear success counts; anything else keeps the form so the visitor can retry.
+			if (!res.ok || !data || (data.success !== true && data.success !== 'true')) throw new Error('not accepted');
 			if (window.tgTrack) window.tgTrack('generate_lead', { method: 'form' });
 			form.reset();
-			status.textContent = 'Sent! Salamat po. We have your request and will be in touch soon. A copy was emailed to you.';
-				status.classList.add('ok');
+			form.hidden = true;
+			sent.hidden = false;
+			sent.focus();
+			sent.scrollIntoView({ block: 'start' });
 		} catch {
-			status.textContent = `Your request did not send. Please try again, or call or text ${phone}, or email ${email}.`;
+			showFormError(`Your request did not send. Please try again, or call or text ${phone}, or email ${email}.`);
+		} finally {
+			clearTimeout(timer);
+			sending = false;
+			submit.disabled = false;
+			submit.textContent = submitLabel;
+			form.removeAttribute('aria-busy');
 		}
 	});
 </script>
