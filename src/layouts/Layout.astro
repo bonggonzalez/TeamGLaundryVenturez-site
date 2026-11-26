@@ -38,6 +38,13 @@ const orgSchema = {
 	areaServed: site.provinces.map((p) => ({ '@type': 'AdministrativeArea', name: `${p}, Philippines` })),
 	...(site.facebook ? { sameAs: [site.facebook] } : {}),
 };
+const webSiteSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: site.name,
+	url: site.url,
+	inLanguage: 'en-PH',
+};
 ---
 
 <!doctype html>
@@ -70,6 +77,7 @@ const orgSchema = {
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImage} />
 		<script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+		<script type="application/ld+json" set:html={JSON.stringify(webSiteSchema)} />
 		<slot name="head" />
 		<script is:inline>
 			window.tgTrack = function (name, params) {
