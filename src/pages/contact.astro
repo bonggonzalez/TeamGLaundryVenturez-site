@@ -2,6 +2,7 @@
 import MapLink from '../components/MapLink.astro';
 import Layout from '../layouts/Layout.astro';
 import { site, chatChannels } from '../config/site';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const EMAIL = site.email;
 const PHONE = site.phoneDisplay;
 // Set PUBLIC_FORM_ENDPOINT (see .env.example) to post requests to a form service.
@@ -143,7 +144,7 @@ const channels = [
 					<div id="form-error" class="form-error" role="alert" hidden></div>
 					<button class="btn" type="submit">Send my request</button>
 					<p class="privacy">
-						We use your details only to reply to your request, in line with the Data Privacy Act of 2012. Your request is delivered to us through the FormSubmit form service. <a href="/privacy">Read our privacy notice</a>.
+						We use your details only to reply to your request, in line with the Data Privacy Act of 2012. Your request is delivered to us through the FormSubmit form service. <a class="privacy-link" href={`${base}/privacy`}>Read our privacy notice</a>.
 					</p>
 				</form>
 				<section id="sent" class="sent" tabindex="-1" aria-labelledby="sent-title" hidden>
@@ -296,6 +297,11 @@ const channels = [
 		color: var(--muted);
 		margin: 0.75rem 0 0;
 		text-wrap: pretty;
+	}
+	.privacy-link {
+		display: inline-block;
+		padding-block: 0.6rem;
+		font-weight: 600;
 	}
 	.pkg-note {
 		margin: 0;
