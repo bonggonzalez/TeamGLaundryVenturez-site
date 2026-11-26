@@ -1,42 +1,231 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-24T15:30:00Z",
-  "title": "Design System: Team G Laundry Venturez",
+  "generatedAt": "2026-11-26T17:52:09Z",
+  "title": "Design System: TeamG Venturez",
   "extensions": {
     "colorMeta": {
-      "cobalt": { "role": "primary", "displayName": "Signal Cobalt", "canonical": "#1d4ed8", "tonalRamp": ["#0a1a4d", "#102a80", "#1740b3", "#1d4ed8", "#4a73e6", "#7b97ee", "#b4c5f6", "#e3e9fc"] },
-      "cobalt-deep": { "role": "primary", "displayName": "Deep Cobalt", "canonical": "#1740b3", "tonalRamp": ["#08153d", "#0e2370", "#1740b3", "#2557d6", "#5578e0", "#8aa2ea", "#bccaf3", "#e6ebfb"] },
-      "ink": { "role": "neutral", "displayName": "Showroom Ink", "canonical": "#0b1220", "tonalRamp": ["#0b1220", "#1b2638", "#2f3b50", "#46556a", "#6b7a8f", "#98a5b5", "#c6cfda", "#eef1f5"] },
-      "slate-muted": { "role": "neutral", "displayName": "Cool Slate", "canonical": "#46556a", "tonalRamp": ["#10161f", "#222c3a", "#344152", "#46556a", "#66758a", "#8f9bac", "#bcc5d1", "#e9edf2"] },
-      "paper": { "role": "neutral", "displayName": "Clean White", "canonical": "#ffffff", "tonalRamp": ["#d9dee5", "#e3e7ec", "#eaeef2", "#f0f3f6", "#f5f7f9", "#f9fafb", "#fcfdfd", "#ffffff"] },
-      "mist-blue": { "role": "neutral", "displayName": "Mist Blue", "canonical": "#e8f3ff", "tonalRamp": ["#5b7fa6", "#7f9fc2", "#a0bcd9", "#bfd3e8", "#d3e3f3", "#e0ecf8", "#e8f3ff", "#f4f9ff"] },
-      "hairline": { "role": "neutral", "displayName": "Hairline Blue-Gray", "canonical": "#d3dfec", "tonalRamp": ["#6f84a0", "#8a9db5", "#a3b4c8", "#b9c8d9", "#c8d5e4", "#d3dfec", "#e2eaf3", "#f0f4f9"] },
-      "scrollbar-thumb": { "role": "neutral", "displayName": "Scroll Thumb", "canonical": "#9db4d3", "tonalRamp": ["#3e5879", "#546f93", "#6b86ab", "#839bbd", "#9db4d3", "#b6c8df", "#d0dbea", "#e8eef6"] }
+      "cobalt": {
+        "role": "primary",
+        "displayName": "Signal Cobalt",
+        "canonical": "#1d4ed8",
+        "tonalRamp": [
+          "#0a1a4d",
+          "#102a80",
+          "#1740b3",
+          "#1d4ed8",
+          "#4a73e6",
+          "#7b97ee",
+          "#b4c5f6",
+          "#e3e9fc"
+        ]
+      },
+      "cobalt-deep": {
+        "role": "primary",
+        "displayName": "Deep Cobalt",
+        "canonical": "#1740b3",
+        "tonalRamp": [
+          "#08153d",
+          "#0e2370",
+          "#1740b3",
+          "#2557d6",
+          "#5578e0",
+          "#8aa2ea",
+          "#bccaf3",
+          "#e6ebfb"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Showroom Ink",
+        "canonical": "#0b1220",
+        "tonalRamp": [
+          "#0b1220",
+          "#1b2638",
+          "#2f3b50",
+          "#46556a",
+          "#6b7a8f",
+          "#98a5b5",
+          "#c6cfda",
+          "#eef1f5"
+        ]
+      },
+      "slate-muted": {
+        "role": "neutral",
+        "displayName": "Cool Slate",
+        "canonical": "#46556a",
+        "tonalRamp": [
+          "#10161f",
+          "#222c3a",
+          "#344152",
+          "#46556a",
+          "#66758a",
+          "#8f9bac",
+          "#bcc5d1",
+          "#e9edf2"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Clean White",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#d9dee5",
+          "#e3e7ec",
+          "#eaeef2",
+          "#f0f3f6",
+          "#f5f7f9",
+          "#f9fafb",
+          "#fcfdfd",
+          "#ffffff"
+        ]
+      },
+      "mist-blue": {
+        "role": "neutral",
+        "displayName": "Mist Blue",
+        "canonical": "#e8f3ff",
+        "tonalRamp": [
+          "#5b7fa6",
+          "#7f9fc2",
+          "#a0bcd9",
+          "#bfd3e8",
+          "#d3e3f3",
+          "#e0ecf8",
+          "#e8f3ff",
+          "#f4f9ff"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline Blue-Gray",
+        "canonical": "#d3dfec",
+        "tonalRamp": [
+          "#6f84a0",
+          "#8a9db5",
+          "#a3b4c8",
+          "#b9c8d9",
+          "#c8d5e4",
+          "#d3dfec",
+          "#e2eaf3",
+          "#f0f4f9"
+        ]
+      },
+      "scrollbar-thumb": {
+        "role": "neutral",
+        "displayName": "Scroll Thumb",
+        "canonical": "#9db4d3",
+        "tonalRamp": [
+          "#3e5879",
+          "#546f93",
+          "#6b86ab",
+          "#839bbd",
+          "#9db4d3",
+          "#b6c8df",
+          "#d0dbea",
+          "#e8eef6"
+        ]
+      },
+      "navy": {
+        "role": "neutral",
+        "displayName": "Brand Navy",
+        "canonical": "#04101f",
+        "tonalRamp": [
+          "#04101f",
+          "#0b1b30",
+          "#16283f",
+          "#243a55",
+          "#3a5273",
+          "#617a99",
+          "#9fb0c5",
+          "#dde4ec"
+        ]
+      }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Hero H1 only; Bricolage Grotesque 800, tight tracking." },
-      "headline": { "displayName": "Headline", "purpose": "Section H2s across claim, scope, audiences and closing band." },
-      "title": { "displayName": "Title", "purpose": "Scope and audience item H3s." },
-      "body": { "displayName": "Body", "purpose": "Default Hanken Grotesk copy; secondary paragraphs in Cool Slate." },
-      "label": { "displayName": "Label", "purpose": "Buttons, links and nav in Hanken Grotesk 600." }
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero H1 only; Bricolage Grotesque 800, tight tracking."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section H2s across claim, scope, audiences and closing band."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Scope, audience and package column H3s."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default Hanken Grotesk copy; secondary paragraphs in Cool Slate."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Buttons, links, nav and captions in Hanken Grotesk 600."
+      }
     },
     "shadows": [
-      { "name": "button-lift", "value": "0 6px 18px rgba(29, 78, 216, 0.28)", "purpose": "Primary cobalt button at rest." },
-      { "name": "button-lift-on-cobalt", "value": "0 8px 22px rgba(4, 12, 40, 0.3)", "purpose": "White inverted button on the closing band." },
-      { "name": "header-glass", "value": "background: rgba(255,255,255,0.92); backdrop-filter: blur(8px)", "purpose": "Sticky header translucency." }
+      {
+        "name": "button-lift",
+        "value": "0 6px 18px rgba(29, 78, 216, 0.28)",
+        "purpose": "Primary cobalt button at rest."
+      },
+      {
+        "name": "button-lift-on-navy",
+        "value": "0 8px 22px rgba(4, 12, 40, 0.3)",
+        "purpose": "White inverted button on the navy closing band."
+      },
+      {
+        "name": "carousel-arrow",
+        "value": "0 6px 18px rgba(4, 16, 31, 0.18)",
+        "purpose": "Round arrow buttons over the banner carousel."
+      },
+      {
+        "name": "photo-float",
+        "value": "0 24px 48px -24px rgba(11, 18, 32, 0.35)",
+        "purpose": "Home page equipment photograph only."
+      },
+      {
+        "name": "header-glass",
+        "value": "background: rgba(255,255,255,0.92); backdrop-filter: blur(8px)",
+        "purpose": "Sticky header translucency."
+      }
     ],
     "motion": [
-      { "name": "ease-out-expo", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Button hover color and 2px lift (0.25s), header CTA (0.2s)." },
-      { "name": "drum-spin", "value": "14s linear infinite; 22s reverse on second drum", "purpose": "Ambient drum rotation, only under prefers-reduced-motion: no-preference." },
-      { "name": "smooth-scroll", "value": "scroll-behavior: smooth (auto when reduced motion)", "purpose": "In-page anchor to the scope section." }
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Button hover color and 2px lift (0.25s), header CTA (0.2s)."
+      },
+      {
+        "name": "smooth-scroll",
+        "value": "scroll-behavior: smooth (auto when reduced motion)",
+        "purpose": "In-page anchor to the scope section."
+      }
     ],
     "breakpoints": [
-      { "name": "nav", "value": "820px" },
-      { "name": "md", "value": "768px" },
-      { "name": "aud", "value": "860px" },
-      { "name": "hero", "value": "960px" },
-      { "name": "scope", "value": "1024px" },
-      { "name": "xl", "value": "1280px" }
+      {
+        "name": "nav",
+        "value": "820px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "aud",
+        "value": "860px"
+      },
+      {
+        "name": "hero",
+        "value": "960px"
+      },
+      {
+        "name": "scope",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      }
     ]
   },
   "components": [
@@ -49,12 +238,12 @@
       "css": ".ds-btn { display: inline-block; background: #1d4ed8; color: #fff; font-family: 'Hanken Grotesk', system-ui, sans-serif; font-weight: 600; font-size: 1.1rem; text-decoration: none; padding: 1rem 1.75rem; border-radius: 0.6rem; box-shadow: 0 6px 18px rgba(29,78,216,0.28); transition: background 0.25s cubic-bezier(0.16,1,0.3,1), transform 0.25s cubic-bezier(0.16,1,0.3,1); } .ds-btn:hover { background: #1740b3; transform: translateY(-2px); } .ds-btn:focus-visible { outline: 3px solid #1d4ed8; outline-offset: 3px; border-radius: 4px; }"
     },
     {
-      "name": "Inverted Button",
+      "name": "Inverted Button on Navy",
       "kind": "button",
-      "refersTo": "button-on-cobalt",
-      "description": "White action on the cobalt closing band.",
+      "refersTo": "button-on-navy",
+      "description": "White action on the navy closing band.",
       "html": "<div class=\"ds-on-band\"><a class=\"ds-btn-inv\" href=\"#\">Request a consultation</a></div>",
-      "css": ".ds-on-band { background: #1d4ed8; padding: 1.5rem; } .ds-btn-inv { display: inline-block; background: #fff; color: #1740b3; font-family: 'Hanken Grotesk', system-ui, sans-serif; font-weight: 600; font-size: 1.1rem; text-decoration: none; padding: 1rem 1.75rem; border-radius: 0.6rem; box-shadow: 0 8px 22px rgba(4,12,40,0.3); transition: background 0.25s cubic-bezier(0.16,1,0.3,1), transform 0.25s cubic-bezier(0.16,1,0.3,1); } .ds-btn-inv:hover { background: #e8f3ff; transform: translateY(-2px); } .ds-btn-inv:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }"
+      "css": ".ds-on-band { background: #04101f; padding: 1.5rem; } .ds-btn-inv { display: inline-block; background: #fff; color: #1740b3; font-family: 'Hanken Grotesk', system-ui, sans-serif; font-weight: 600; font-size: 1.1rem; text-decoration: none; padding: 1rem 1.75rem; border-radius: 0.6rem; box-shadow: 0 8px 22px rgba(4,12,40,0.3); transition: background 0.25s cubic-bezier(0.16,1,0.3,1), transform 0.25s cubic-bezier(0.16,1,0.3,1); } .ds-btn-inv:hover { background: #e8f3ff; transform: translateY(-2px); } .ds-btn-inv:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }"
     },
     {
       "name": "Text Link",
@@ -87,38 +276,71 @@
       "description": "Hairline-separated title and description row; replaces cards.",
       "html": "<ol class=\"ds-rows\"><li><h3>Design</h3><p>A laundry layout planned around your space, your volume and your customers.</p></li><li><h3>Installation</h3><p>Samsung professional equipment installed and commissioned by the people who sell it.</p></li></ol>",
       "css": ".ds-rows { list-style: none; margin: 0; padding: 0; font-family: 'Hanken Grotesk', system-ui, sans-serif; } .ds-rows li { display: grid; grid-template-columns: 12rem 1fr; gap: 0.25rem 2rem; align-items: baseline; padding-block: 1.4rem; border-top: 1px solid #d3dfec; } .ds-rows li:last-child { border-bottom: 1px solid #d3dfec; } .ds-rows h3 { margin: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 1.4rem; font-weight: 700; letter-spacing: -0.03em; color: #0b1220; } .ds-rows p { margin: 0; color: #46556a; line-height: 1.6; }"
+    },
+    {
+      "name": "Package Column",
+      "kind": "custom",
+      "refersTo": "title",
+      "description": "Open column capped with a 2px ink rule: set count, price, two ruled facts and a primary button.",
+      "html": "<article class=\"ds-pkg\"><h3>3 sets</h3><p class=\"ds-price\">Starting at ₱720,000</p><ul><li>Equipment width: 2.29 m</li><li>Per 12-hour day: 60 wash and 48 dry cycles, up to 672 kg dry</li></ul><a class=\"ds-pkg-btn\" href=\"#\">Ask about 3 sets</a></article>",
+      "css": ".ds-pkg { display: flex; flex-direction: column; border-top: 2px solid #0b1220; padding-top: 1.5rem; font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #0b1220; max-width: 18rem; } .ds-pkg h3 { margin: 0 0 0.5rem; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 1.5rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; } .ds-price { margin: 0 0 1.25rem; font-size: 1.0625rem; font-weight: 700; } .ds-pkg ul { list-style: none; margin: 0 0 1.75rem; padding: 0; } .ds-pkg li { padding-block: 0.7rem; border-top: 1px solid #d3dfec; } .ds-pkg-btn { align-self: flex-start; display: inline-block; background: #1d4ed8; color: #fff; font-weight: 600; font-size: 1.05rem; text-decoration: none; padding: 0.95rem 1.6rem; border-radius: 0.6rem; box-shadow: 0 6px 18px rgba(29,78,216,0.28); transition: background 0.25s cubic-bezier(0.16,1,0.3,1), transform 0.25s cubic-bezier(0.16,1,0.3,1); } .ds-pkg-btn:hover { background: #1740b3; transform: translateY(-2px); } .ds-pkg-btn:focus-visible { outline: 3px solid #1d4ed8; outline-offset: 3px; }"
     }
   ],
   "narrative": {
     "northStar": "The Showroom Spec Sheet",
-    "overview": "This is the category standard played straight: a clean commercial-equipment page where large near-black type and a single washer/dryer illustration carry the message, and everything else stays out of the way. The page reads like a manufacturer's professional-laundry page rather than a consumer wash-and-fold flyer or a dark tech catalog. It is built for owners and operators making a capital-equipment decision, so it is calm, legible and confident, not playful.\n\nSurfaces are white that drifts into a pale blue field (hero gradient, audience band). Text is near-black ink with a cool slate for secondary copy. One cobalt blue does all the work of action: buttons, links' underline accents, focus rings, the scroll-selected text and the closing band. Structure comes from hairline rules and generous section padding, not from boxes or cards.\n\nThe hero is the one place with an image-like object: an authored SVG pair of commercial machines with stainless drums that turn slowly. It is explicitly an illustration (captioned as such) until real photography arrives.",
+    "overview": "**Creative North Star: \"The Showroom Spec Sheet\"**\n\nThis is the category standard played straight: a clean commercial-equipment page where large near-black type and real Samsung equipment imagery carry the message, and everything else stays out of the way. The page reads like a manufacturer's professional-laundry page rather than a consumer wash-and-fold flyer or a dark tech catalog. It is built for owners and operators making a capital-equipment decision, so it is calm, legible and confident, not playful.\n\nSurfaces are white that drifts into a pale blue field (hero gradient, audience band). Text is near-black ink with a cool slate for secondary copy. One cobalt blue does all the work of action: buttons, links' underline accents, focus rings and the scroll-selected text. The one dark ground is the brand navy taken from the TG mark, used for the closing band that ends a page. Structure comes from hairline rules and generous section padding, not from boxes or cards.\n\nImagery is Samsung professional equipment photography (owner-approved, sourced from the Samsung line TeamG distributes) in a banner carousel and in single photographs. It is captioned \"Image shown for illustration\" until real photography of TeamG installations arrives. The header and footer carry a logo lockup: the TeamG Venturez mark beside the Samsung Professional Laundry logo.",
     "keyCharacteristics": [
       "Light, product-led, huge tight-tracked display type in near-black.",
-      "White into pale blue; cobalt reserved for action and the closing band.",
-      "Hairline rules and open columns instead of cards.",
-      "One authored illustration; slow, reduced-motion-safe drum rotation is the only ambient motion.",
-      "Flat surfaces; the only shadows sit under primary buttons."
+      "White into pale blue; cobalt reserved for action; brand navy reserved for the closing band.",
+      "Hairline rules and open columns instead of cards, including the package columns.",
+      "Real equipment photography, captioned as illustration.",
+      "Flat surfaces; shadows sit under primary buttons, the carousel arrows and the home page equipment photo only."
     ],
     "rules": [
-      { "name": "The One Cobalt Rule", "body": "Cobalt means \"act here\" or \"this is the closing ask.\" It is never used as decoration, as a heading color, or as a second background tint beyond the closing band.", "section": "colors" },
-      { "name": "The Cool Neutrals Rule", "body": "Every gray is blue-tinted. No warm or pure-neutral grays enter the palette.", "section": "colors" },
-      { "name": "The Heavy-Tight Rule", "body": "Display and headline text is always weight 800 with negative tracking and `text-wrap: balance`; titles drop to 700. Body never uses the display face except for pills and the brand name.", "section": "typography" },
-      { "name": "The Open Column Rule", "body": "Group content with rules and whitespace, not containers. Lists are separated by hairlines; there are no cards.", "section": "layout" },
-      { "name": "The Flat-By-Default Rule", "body": "Nothing else carries a shadow. Large buttons lift 2px on hover; panels, rows and pills stay flat.", "section": "elevation" }
+      {
+        "name": "The One Cobalt Rule",
+        "body": "Cobalt means \"act here\". It is never used as decoration, as a heading color, or as a background tint.",
+        "section": "colors"
+      },
+      {
+        "name": "The Navy Close Rule",
+        "body": "Brand Navy is the only dark ground and appears once per page, as the closing band. It is not a second accent and never a section background mid-page.",
+        "section": "colors"
+      },
+      {
+        "name": "The Cool Neutrals Rule",
+        "body": "Every gray is blue-tinted. No warm or pure-neutral grays enter the palette.",
+        "section": "colors"
+      },
+      {
+        "name": "The Heavy-Tight Rule",
+        "body": "Display and headline text is always weight 800 with negative tracking and `text-wrap: balance`; titles drop to 700. Body never uses the display face except for pills and the brand name.",
+        "section": "typography"
+      },
+      {
+        "name": "The Open Column Rule",
+        "body": "Group content with rules and whitespace, not containers. Lists are separated by hairlines; there are no cards.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat-By-Default Rule",
+        "body": "Nothing else carries a shadow. Large buttons lift 2px on hover; panels, rows, pills and the packages-page photograph stay flat.",
+        "section": "elevation"
+      }
     ],
     "dos": [
-      "Do use Signal Cobalt (`#1d4ed8`) only for actions, focus and the closing band.",
-      "Do set headlines in Bricolage Grotesque 800 with negative tracking and balanced wrapping.",
-      "Do separate content with 1px Hairline Blue-Gray rules and generous vertical padding.",
-      "Do keep surfaces flat; reserve shadows for large primary buttons.",
-      "Do gate ambient motion behind `prefers-reduced-motion: no-preference`.",
-      "Do label illustrations as illustrations until real photography is supplied."
+      "**Do** use Signal Cobalt (`#1d4ed8`) only for actions and focus, and Brand Navy (`#04101f`) only for the closing band.",
+      "**Do** set headlines in Bricolage Grotesque 800 with negative tracking and balanced wrapping.",
+      "**Do** separate content with 1px Hairline Blue-Gray rules and generous vertical padding.",
+      "**Do** keep surfaces flat; reserve shadows for large primary buttons, carousel arrows and the home page photograph.",
+      "**Do** cap running prose at 65ch and keep fine print in a collapsed disclosure.",
+      "**Do** caption equipment imagery as an illustration until real photography of TeamG installations is supplied."
     ],
     "donts": [
-      "Don't return to the dark-blue consumer wash-cycle look or a wash-and-fold tone; the audience is equipment buyers.",
-      "Don't introduce a second accent hue or warm grays.",
-      "Don't wrap list content in cards or boxed panels.",
-      "Don't invent prices, models, clients, photos or credentials in copy or imagery."
+      "**Don't** return to the dark-blue consumer wash-cycle look or a wash-and-fold tone; the audience is equipment buyers.",
+      "**Don't** introduce a second accent hue or warm grays.",
+      "**Don't** wrap list content or package columns in cards or boxed panels.",
+      "**Don't** state prices, models, clients or credentials the owner has not confirmed, or present simulated imagery as real installations."
     ]
   }
 }
