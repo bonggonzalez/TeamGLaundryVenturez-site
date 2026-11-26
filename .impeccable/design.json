@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-26T19:15:27Z",
+  "generatedAt": "2026-11-26T19:52:44Z",
   "title": "Design System: TeamG Venturez",
   "extensions": {
     "colorMeta": {
@@ -181,7 +181,7 @@
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Scope, audience and package column H3s."
+        "purpose": "Scope, audience and package column H3s, and the privacy notice section headings."
       },
       "body": {
         "displayName": "Body",
@@ -334,7 +334,7 @@
       },
       {
         "name": "The Navy Close Rule",
-        "body": "Brand Navy is the only dark ground and appears once per page, as the closing band. It is not a second accent and never a section background mid-page.",
+        "body": "Brand Navy is the only dark ground and appears once per page, as the closing band. The privacy notice is the one exception: it ends in the footer, because a closing band would add wording nobody has reviewed. It is not a second accent and never a section background mid-page.",
         "section": "colors"
       },
       {

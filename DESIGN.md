@@ -123,7 +123,7 @@ A cool, almost monochrome palette: white and ink, a tint of sky blue, one delibe
 ### Named Rules
 **The One Cobalt Rule.** Cobalt means "act here". It is never used as decoration, as a heading color, or as a background tint.
 
-**The Navy Close Rule.** Brand Navy is the only dark ground and appears once per page, as the closing band. It is not a second accent and never a section background mid-page.
+**The Navy Close Rule.** Brand Navy is the only dark ground and appears once per page, as the closing band. The privacy notice is the one exception: it ends in the footer, because a closing band would add wording nobody has reviewed. It is not a second accent and never a section background mid-page.
 
 **The Cool Neutrals Rule.** Every gray is blue-tinted. No warm or pure-neutral grays enter the palette.
 
@@ -137,7 +137,7 @@ A cool, almost monochrome palette: white and ink, a tint of sky blue, one delibe
 ### Hierarchy
 - **Display** (800, `clamp(2.5rem, 7.5vw, 5.25rem)`, line-height 1, tracking -0.04em): the hero H1 only.
 - **Headline** (800, `clamp(2rem, 4.5vw, 3.5rem)` for the claim; `clamp(1.9rem, 4vw, 3rem)` for scope and audiences; `clamp(2rem, 5vw, 3.75rem)` for the closing band; line-height 1.04 to 1.05, tracking -0.03em): section H2s, balanced wrap.
-- **Title** (700, 1.4rem to 1.5rem, tracking -0.03em): scope item, audience item and package column H3s.
+- **Title** (700, 1.4rem to 1.5rem, tracking -0.03em): scope item, audience item and package column H3s, and the section headings on the privacy notice.
 - **Body** (400, 1.0625rem, line-height 1.6): default copy. Prose is capped at 65ch; secondary paragraphs are Cool Slate, capped at 28 to 38rem on the home page.
 - **Lede** (400, `clamp(1.1rem, 2vw, 1.35rem)`, Cool Slate, max 34rem): the sentence under the hero headline.
 - **Label** (600, 0.95rem to 1.1rem, no uppercase, no tracking): buttons, the text link, audience links, captions, province pills (display face at 700).
