@@ -23,6 +23,7 @@ TeamG Venturez sells and supports commercial laundry operations. It is the exclu
 ## Positioning
 
 - **Exclusive Samsung laundry equipment distributor in Calabarzon.** No other distributor holds this territory, so a competitor cannot truthfully copy the claim.
+- **Public wording (decided 2026-11-26): "authorized Samsung dealer".** The exclusive-distributor claim above is the owner's stated position, but no distributor letter is on file, so the site does not print it until the owner confirms it in writing.
 - **End-to-end partner.** Design, construction, equipment installation and ongoing maintenance, plus point-of-sale systems and business and marketing consultation.
 
 ## Operating Context
