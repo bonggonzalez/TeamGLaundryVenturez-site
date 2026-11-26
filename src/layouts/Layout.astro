@@ -14,8 +14,9 @@ const { title = 'TeamG Venturez', description = 'TeamG Venturez is an authorized
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const ogImage = new URL(`${base}${image}`, site.url).href;
 // Only well-formed IDs are injected into inline scripts.
-const gaId = /^G-[A-Z0-9]+$/.test(site.gaId) ? site.gaId : '';
-const pixelId = /^\d{5,20}$/.test(site.metaPixelId) ? site.metaPixelId : '';
+// Analytics only runs on the live build, not in `astro dev`.
+const gaId = import.meta.env.PROD && /^G-[A-Z0-9]+$/.test(site.gaId) ? site.gaId : '';
+const pixelId = import.meta.env.PROD && /^\d{5,20}$/.test(site.metaPixelId) ? site.metaPixelId : '';
 const orgSchema = {
 	'@context': 'https://schema.org',
 	'@type': 'Organization',
@@ -48,6 +49,8 @@ const orgSchema = {
 		<link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
 		<link rel="icon" href={`${base}/favicon.ico`} sizes="48x48 32x32 16x16" />
 		<link rel="apple-touch-icon" href={`${base}/apple-touch-icon.png`} />
+		<link rel="manifest" href={`${base}/site.webmanifest`} />
+		<meta name="theme-color" content="#1d4ed8" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<link rel="canonical" href={canonical} />
