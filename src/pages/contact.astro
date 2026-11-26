@@ -60,6 +60,7 @@ const interests = [
 <input type="hidden" name="package" id="package" />
 <input type="hidden" name="_subject" value="New quote request from teamgventurez.com" />
 <input type="hidden" name="_template" value="table" />
+<input type="hidden" name="_cc" id="cc" />
 <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
 				<div class="row two">
 					<label><span>First name <span class="req">(required)</span></span>
@@ -73,8 +74,8 @@ const interests = [
 					<label><span>Mobile number <span class="req">(required)</span></span>
 						<input name="mobile" type="tel" autocomplete="tel" required />
 					</label>
-					<label>Email
-						<input name="email" type="email" autocomplete="email" />
+					<label><span>Email <span class="req">(required)</span></span>
+						<input name="email" type="email" autocomplete="email" required />
 					</label>
 				</div>
 				<div class="row two">
@@ -188,6 +189,14 @@ const interests = [
 		min-height: 1.5em;
 		color: var(--muted);
 	}
+	#form-status.err {
+		color: #b3261e;
+		font-weight: 600;
+	}
+	#form-status.ok {
+		color: #11643a;
+		font-weight: 600;
+	}
 	.pkg-note {
 margin: 0;
 padding: 0.75rem 1rem;
@@ -217,18 +226,30 @@ note.hidden = false;
 	const status = document.getElementById('form-status');
 	form.addEventListener('submit', async (e) => {
 		e.preventDefault();
-		let ok = true;
-		for (const name of ['first_name', 'mobile']) {
-			const el = form.elements[name];
-			const bad = !el.value.trim();
-			el.setAttribute('aria-invalid', bad ? 'true' : 'false');
-			if (bad && ok) el.focus();
-			if (bad) ok = false;
-		}
-		if (!ok) {
-			status.textContent = 'Add your first name and mobile number to continue.';
-			return;
-		}
+			const checks = [
+				['first_name', 'your name', (v) => !!v],
+				['mobile', 'your mobile number', (v) => !!v],
+				['email', 'your email address', (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)],
+			];
+			const missing = [];
+			let firstBad = null;
+			for (const [name, label, valid] of checks) {
+				const el = form.elements[name];
+				const bad = !valid(el.value.trim());
+				el.setAttribute('aria-invalid', bad ? 'true' : 'false');
+				if (bad) {
+					missing.push(label);
+					if (!firstBad) firstBad = el;
+				}
+			}
+			if (missing.length) {
+				status.textContent = `Please add ${missing.join(', ').replace(/, ([^,]*)$/, ' and $1')} before sending.`;
+				status.classList.add('err');
+				firstBad.focus();
+				return;
+			}
+			status.classList.remove('err');
+			form.elements._cc.value = form.elements.email.value.trim();
 		if (!endpoint) {
 			const f = form.elements;
 			const lines = [
@@ -249,6 +270,7 @@ note.hidden = false;
 			return;
 		}
 		status.textContent = 'Sending...';
+			status.classList.remove('ok');
 		try {
 			const res = await fetch(endpoint, {
 				method: 'POST',
@@ -258,7 +280,8 @@ note.hidden = false;
 			if (!res.ok) throw new Error('bad status');
 			if (window.tgTrack) window.tgTrack('generate_lead', { method: 'form' });
 			form.reset();
-			status.textContent = 'Salamat po! We have your request and will be in touch.';
+			status.textContent = 'Sent! Salamat po. We have your request and will be in touch soon. A copy was emailed to you.';
+				status.classList.add('ok');
 		} catch {
 			status.textContent = `Your request did not send. Please try again, or call or text ${phone}, or email ${email}.`;
 		}
