@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-26T17:52:09Z",
+  "generatedAt": "2026-11-26T19:15:27Z",
   "title": "Design System: TeamG Venturez",
   "extensions": {
     "colorMeta": {
@@ -137,6 +137,36 @@
           "#617a99",
           "#9fb0c5",
           "#dde4ec"
+        ]
+      },
+      "error": {
+        "role": "neutral",
+        "displayName": "Signal Red",
+        "canonical": "#b3261e",
+        "tonalRamp": [
+          "#3d0d0a",
+          "#6b1712",
+          "#8f1f18",
+          "#b3261e",
+          "#cf5a52",
+          "#e08f89",
+          "#f0c4c1",
+          "#fbeceb"
+        ]
+      },
+      "success": {
+        "role": "neutral",
+        "displayName": "Confirmation Green",
+        "canonical": "#11643a",
+        "tonalRamp": [
+          "#052a18",
+          "#0a4026",
+          "#0d5230",
+          "#11643a",
+          "#3f8a62",
+          "#7ab59a",
+          "#b6d8c8",
+          "#e6f3ec"
         ]
       }
     },

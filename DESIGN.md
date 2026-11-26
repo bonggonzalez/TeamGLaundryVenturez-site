@@ -10,6 +10,8 @@ colors:
   cobalt: "#1d4ed8"
   cobalt-deep: "#1740b3"
   navy: "#04101f"
+  error: "#b3261e"
+  success: "#11643a"
   scrollbar-thumb: "#9db4d3"
 typography:
   display:
@@ -113,6 +115,10 @@ A cool, almost monochrome palette: white and ink, a tint of sky blue, one delibe
 - **Hairline Blue-Gray** (`#d3dfec`): every divider, header bottom border, footer top border, section separators.
 - **Brand Navy** (`#04101f`): the closing band background on every page, matching the TG mark. White text and the inverted button sit on it.
 - **Scroll Thumb** (`#9db4d3`): scrollbar thumb only.
+
+### Status
+- **Signal Red** (`#b3261e`): form errors only (the field border, the message under it and the summary above the send button). Always paired with text, never color alone.
+- **Confirmation Green** (`#11643a`): the thank-you panel after a request is sent, and nothing else.
 
 ### Named Rules
 **The One Cobalt Rule.** Cobalt means "act here". It is never used as decoration, as a heading color, or as a background tint.
