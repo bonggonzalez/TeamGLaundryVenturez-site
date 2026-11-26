@@ -2,42 +2,186 @@
 import Layout from '../layouts/Layout.astro';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const contact = `${base}/contact`;
-const faqs = [
-	{ q: 'Who is TeamG Venturez?', a: 'We are an authorized Samsung Professional Laundry dealer in Calabarzon. We also design, build, install and maintain laundry operations.' },
-	{ q: 'Where is your showroom?', a: 'You can visit us at Jumpin Wash, 333 Luksuhin Ibaba, Alfonso, Cavite 4123. Message us first so we can make sure someone is ready to meet you.' },
-	{ q: 'What areas do you cover?', a: 'Calabarzon: Cavite, Laguna, Batangas, Rizal and Quezon.' },
-	{ q: 'Is the site visit free?', a: 'Yes. The site visit and layout assessment are free, with no obligation to buy.' },
-	{ q: 'Do you only sell machines?', a: 'No. We help with design, construction, installation and maintenance. We also set up point-of-sale systems and offer business and marketing consultation.' },
-	{ q: 'Can hotels and BnBs work with you?', a: 'Yes, we are glad to. We help hotels, BnBs, inns and resorts set up a laundry inside their own property.' },
-	{ q: 'What do I need to start a laundry business?', a: 'A plan, a space and equipment. We help with all three: layout design, construction, Samsung equipment, point-of-sale and business guidance. Tell us where you are and we will advise on the next step.' },
-	{ q: 'Can I start small and expand later?', a: 'Yes. You can begin with 2 sets and add more as your business grows.' },
-	{ q: 'How much does it cost?', a: 'Our packages start at ₱240,000 per set of one 18 kg washer and one 14 kg gas dryer, with basic installation included. This is an estimate only and may be changed by TeamG Venturez without prior notice. Your written quotation, prepared after the site visit, confirms the final price.' },
-	{ q: 'What does basic installation cover?', a: 'Water supply, drainage, electrical connections, gas dryer connection and leak testing, dryer exhaust and ducting, testing, commissioning and basic training. It does not include civil works, major electrical upgrades, permits, the LPG tank, supply and regulator, or structural changes.' },
-	{ q: 'Do I have to take the optional utility additions?', a: 'No. Basic utility additions are optional and start from about ₱200,000 as an estimate. They cover basic electrical, plumbing and ducting work needed to commission the equipment. The final price is confirmed in your signed scope of work after the site visit and may change with materials and site conditions.' },
-	{ q: 'Do I need LPG?', a: 'Yes. Our professional dryer is a gas dryer that runs on LPG. We prepare the gas line and connection as part of installation. You arrange the LPG tank, supply and regulator with an LPG provider.' },
-	{ q: 'Can I pay through bank financing?', a: 'Yes. Financing is available through our partner banks (CHIB, AUB, BDO and BPI), subject to bank approval. Terms are set by the banks and may change.' },
-	{ q: 'How does payment work?', a: 'You pay a reservation fee to hold your order. After signing, you pay the down payment, and the balance is due before delivery. Your quotation shows the exact amounts. We can also discuss other arrangements.' },
-	{ q: 'Is there a warranty?', a: 'Yes. Our washer and dryer sets come with a 2-year warranty, including free preventive maintenance during the warranty period. The equipment warranty is provided by Samsung under its standard terms and handled through us as the authorized dealer. It does not cover misuse, tampering or unauthorized repairs.' },
-	{ q: 'Who supports me after the sale?', a: 'We do. We provide service, parts, technical help and training.' },
-	{ q: 'How long does a project take?', a: 'As an estimate: inquiry on day 1, site visit and layout assessment in days 2 to 5, quotation and contract in days 5 to 7, site preparation in weeks 2 to 3, delivery, installation and testing in 3 to 5 days, then training and handover in 1 to 2 days. Optional utility additions can add 1 to 3 weeks. Timelines depend on site readiness, permits and stock, and may change without prior notice.' },
-	{ q: 'Do you install and maintain the equipment?', a: 'Yes, we install the equipment we distribute and look after it with ongoing maintenance.' },
-	{ q: 'What is Samsung Care+?', a: 'Samsung Care+ is a service package for Samsung Professional Laundry that covers maintenance and inspection. Ask us what it includes and how to add it to your equipment.' },
-	{ q: 'Can I add my own auto-dosing detergent system?', a: 'Yes. You can connect a third-party auto-dosing detergent system to the washers.' },
-	{ q: 'Can the machines work with my existing management software?', a: 'Yes. Samsung provides product protocol information and assistance to integrate with your current software. Tell us what you use and we will help with the next step.' },
-	{ q: 'What payment systems can I use?', a: 'Coin, card, RFID, QR code and credit card systems. Payment systems and coin exchangers are sold separately.' },
-	{ q: 'Can I stack the dryer on the washer?', a: 'Yes. Stacking needs Samsung’s top installation kit (SKK-BC) and display kit (SKK-CC1). We confirm what you need when we plan your layout.' },
-	{ q: 'Can I buy just the equipment?', a: 'Yes, you can buy just the equipment from us. Tell us what you need and we will confirm models and availability.' },
-	{ q: 'Which models are available?', a: 'We carry the Samsung 18 kg professional washer (WF18FG940CGVTC) and the 14 kg professional gas dryer (DV14FG94GCGVST). See our Products page for the full details.' },
-	{ q: 'How do I get a quote?', a: 'Send us a request. Tell us your space, your plan and what you want to run. We will arrange your free site visit, then prepare your written quotation.' },
+const packages = `${base}/packages`;
+const services = `${base}/services`;
+const products = `${base}/products`;
+// Each answer is plain text so the page and the FAQPage structured data stay identical.
+// `links` render as a separate "next step" row under the answer and are not part of it.
+const groups = [
+	{
+		id: 'cost',
+		title: 'Cost and payment',
+		items: [
+			{
+				q: 'How much does it cost?',
+				a: 'Our packages start at ₱240,000 per set of one 18 kg washer and one 14 kg gas dryer, with basic installation included. This is an estimate only and may be changed by TeamG Venturez without prior notice. Your written quotation, prepared after the site visit, confirms the final price.',
+				links: [
+					{ t: 'See the packages', href: packages },
+					{ t: 'Get a quote', href: `${contact}?for=start`, track: true },
+				],
+			},
+			{
+				q: 'Do I have to take the optional utility additions?',
+				a: 'No. Basic utility additions are optional and start from about ₱200,000 as an estimate. They cover basic electrical, plumbing and ducting work needed to commission the equipment. The final price is confirmed in your signed scope of work after the site visit and may change with materials and site conditions.',
+				links: [{ t: 'See what installation covers', href: `${services}#inst` }],
+			},
+			{
+				q: 'Can I pay through bank financing?',
+				a: 'Yes. Financing is available through our partner banks (CHIB, AUB, BDO and BPI), subject to bank approval. Terms are set by the banks and may change.',
+				links: [{ t: 'Ask us about financing', href: contact, track: true }],
+			},
+			{
+				q: 'How does payment work?',
+				a: 'You pay a reservation fee to hold your order. After signing, you pay the down payment, and the balance is due before delivery. Your quotation shows the exact amounts. We can also discuss other arrangements.',
+			},
+		],
+	},
+	{
+		id: 'start',
+		title: 'Getting started',
+		items: [
+			{
+				q: 'Who is TeamG Venturez?',
+				a: 'We are an authorized Samsung Professional Laundry dealer in Calabarzon. We also design, build, install and maintain laundry operations.',
+			},
+			{
+				q: 'Where is your showroom?',
+				a: 'You can visit us at Jumpin Wash, 333 Luksuhin Ibaba, Alfonso, Cavite 4123. Message us first so we can make sure someone is ready to meet you.',
+				links: [{ t: 'Message us before you visit', href: `${contact}?for=showroom`, track: true }],
+			},
+			{ q: 'What areas do you cover?', a: 'Calabarzon: Cavite, Laguna, Batangas, Rizal and Quezon.' },
+			{
+				q: 'What do I need to start a laundry business?',
+				a: 'A plan, a space and equipment. We help with all three: layout design, construction, Samsung equipment, point-of-sale and business guidance. Tell us where you are and we will advise on the next step.',
+				links: [
+					{ t: 'See the packages', href: packages },
+					{ t: 'Tell us your plan', href: `${contact}?for=start`, track: true },
+				],
+			},
+			{
+				q: 'Can I start small and expand later?',
+				a: 'Yes. You can begin with 2 sets and add more as your business grows.',
+				links: [{ t: 'See the packages', href: packages }],
+			},
+			{
+				q: 'How many loads can a package handle in a day?',
+				a: 'Over a 12-hour day, 2 sets give a theoretical 40 wash and 32 dry cycles, 3 sets 60 and 48, 4 sets 80 and 64, and 5 sets 100 and 80. These are theoretical machine cycles with no gaps between loads, so the loads you finish depend on load size and handling time.',
+				links: [{ t: 'See the packages', href: packages }],
+			},
+			{
+				q: 'Can hotels and BnBs work with you?',
+				a: 'Yes, we are glad to. We help hotels, BnBs, inns and resorts set up a laundry inside their own property.',
+				links: [
+					{ t: 'See the hotel option', href: `${packages}#hosp` },
+					{ t: 'Plan hotel laundry with us', href: `${contact}?for=hotel`, track: true },
+				],
+			},
+			{
+				q: 'Do you only sell machines?',
+				a: 'No. We help with design, construction, installation and maintenance. We also set up point-of-sale systems and offer business and marketing consultation.',
+				links: [{ t: 'See our services', href: services }],
+			},
+		],
+	},
+	{
+		id: 'equipment',
+		title: 'Installation and equipment',
+		items: [
+			{
+				q: 'What does basic installation cover?',
+				a: 'Water supply, drainage, electrical connections, gas dryer connection and leak testing, dryer exhaust and ducting (the vent pipe that carries hot air outside), testing, commissioning (final setup and checks) and basic training. It does not include civil works (such as masonry and concrete work), major electrical upgrades, permits, the LPG tank, supply and regulator, or structural changes.',
+				links: [{ t: 'See what installation covers', href: `${services}#inst` }],
+			},
+			{
+				q: 'Do I need LPG?',
+				a: 'Yes. Our professional dryer is a gas dryer that runs on LPG. We prepare the gas line and connection as part of installation. You arrange the LPG tank, supply and regulator with an LPG provider.',
+				links: [{ t: 'Read about the LPG setup', href: `${products}#lpg` }],
+			},
+			{
+				q: 'Which models are available?',
+				a: 'We carry the Samsung 18 kg professional washer (WF18FG940CGVTC) and the 14 kg professional gas dryer (DV14FG94GCGVST).',
+				links: [{ t: 'See the machines', href: products }],
+			},
+			{
+				q: 'Can I stack the dryer on the washer?',
+				a: 'Yes. Stacking needs two Samsung kits: the top installation kit (SKK-BC) and the display kit (SKK-CC1). We confirm what you need when we plan your layout.',
+				links: [{ t: 'See stacking details', href: `${products}#fit` }],
+			},
+			{
+				q: 'Can I add my own auto-dosing detergent system?',
+				a: 'Yes. You can connect a third-party auto-dosing detergent system to the washers.',
+				links: [{ t: 'See machine features', href: `${products}#feat` }],
+			},
+			{
+				q: 'Can the machines work with my existing management software?',
+				a: 'Yes. Samsung provides product protocol information (the technical details your software needs to connect) and assistance to integrate with your current software. Tell us what you use and we will help with the next step.',
+				links: [{ t: 'See machine features', href: `${products}#feat` }],
+			},
+			{
+				q: 'What payment systems can I use?',
+				a: 'Coin, card, RFID, QR code and credit card systems. Payment systems and coin exchangers are sold separately.',
+				links: [{ t: 'See machine features', href: `${products}#feat` }],
+			},
+			{
+				q: 'Can I buy just the equipment?',
+				a: 'Yes, you can buy just the equipment from us. Tell us what you need and we will confirm models and availability.',
+				links: [{ t: 'Ask about models and availability', href: `${contact}?interest=equipment`, track: true }],
+			},
+		],
+	},
+	{
+		id: 'after',
+		title: 'After the sale',
+		items: [
+			{
+				q: 'Is there a warranty?',
+				a: 'Yes. Our washer and dryer sets come with a 2-year warranty, including free preventive maintenance during the warranty period. The equipment warranty is provided by Samsung under its standard terms and handled through us as the authorized dealer. It does not cover misuse, tampering or unauthorized repairs.',
+				links: [{ t: 'Ask about service and warranty', href: `${contact}?for=service`, track: true }],
+			},
+			{
+				q: 'Who installs and supports the equipment after the sale?',
+				a: 'We do. We install the equipment we distribute and look after it with ongoing maintenance, service, parts, technical help and training.',
+				links: [{ t: 'Request service', href: `${contact}?for=service`, track: true }],
+			},
+			{
+				q: 'What is Samsung Care+?',
+				a: 'Samsung Care+ is a service package for Samsung Professional Laundry that covers maintenance and inspection. Ask us what it includes and how to add it to your equipment.',
+				links: [{ t: 'Ask about Care+', href: `${contact}?interest=maintenance`, track: true }],
+			},
+		],
+	},
+	{
+		id: 'process',
+		title: 'Site visit, quote and timing',
+		items: [
+			{
+				q: 'Is the site visit free?',
+				a: 'Yes. The site visit and layout assessment are free, with no obligation to buy.',
+				links: [{ t: 'Request your free site visit', href: contact, track: true }],
+			},
+			{
+				q: 'How do I get a quote?',
+				a: 'Send us a request. Tell us your space, your plan and what you want to run. We will arrange your free site visit, then prepare your written quotation.',
+				links: [{ t: 'Get a quote', href: contact, track: true }],
+			},
+			{
+				q: 'How long does a project take?',
+				a: 'As an estimate: inquiry on day 1, site visit and layout assessment in days 2 to 5, quotation and contract in days 5 to 7, site preparation in weeks 2 to 3, delivery, installation and testing in 3 to 5 days, then training and handover in 1 to 2 days. Optional utility additions can add 1 to 3 weeks. Timelines depend on site readiness, permits and stock, and may change without prior notice.',
+				links: [{ t: 'See how an inquiry works', href: `${services}#how` }],
+			},
+		],
+	},
 ];
 const faqSchema = {
 	'@context': 'https://schema.org',
 	'@type': 'FAQPage',
-	mainEntity: faqs.map((f) => ({
-		'@type': 'Question',
-		name: f.q,
-		acceptedAnswer: { '@type': 'Answer', text: f.a },
-	})),
+	mainEntity: groups
+		.flatMap((g) => g.items)
+		.map((f) => ({
+			'@type': 'Question',
+			name: f.q,
+			acceptedAnswer: { '@type': 'Answer', text: f.a },
+		})),
 };
 ---
 
@@ -51,19 +195,39 @@ const faqSchema = {
 		<p>Straight answers to what people usually ask us. If an answer depends on your plan, we will tell you and help you work it out.</p>
 	</header>
 
-	<section class="band" aria-labelledby="faq-list">
-		<h2 id="faq-list" class="sr">Frequently asked questions</h2>
-		<div class="faq">
+	<div class="layout">
+		<nav class="topics" aria-label="Question topics">
+			<ul>
+				{groups.map((g) => <li><a href={`#${g.id}`}>{g.title}</a></li>)}
+			</ul>
+		</nav>
+		<div class="groups">
 			{
-				faqs.map((f) => (
-					<details>
-						<summary>{f.q}</summary>
-						<p>{f.a}</p>
-					</details>
+				groups.map((g, gi) => (
+					<section class="band" id={g.id} aria-labelledby={`${g.id}-title`}>
+						<h2 id={`${g.id}-title`}>{g.title}</h2>
+						<div class="faq">
+							{g.items.map((f, i) => (
+								<details open={gi === 0 && i === 0}>
+									<summary>{f.q}</summary>
+									<p>{f.a}</p>
+									{f.links && (
+										<div class="more">
+											{f.links.map((l) => (
+												<a href={l.href} data-track={l.track ? 'quote' : undefined}>
+													{l.t}
+												</a>
+											))}
+										</div>
+									)}
+								</details>
+							))}
+						</div>
+					</section>
 				))
 			}
 		</div>
-	</section>
+	</div>
 
 	<Fragment slot="after">
 		<section class="closing" aria-labelledby="faq-close">
@@ -76,13 +240,42 @@ const faqSchema = {
 </Layout>
 
 <style>
-	.sr {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		overflow: hidden;
-		clip-path: inset(50%);
-		white-space: nowrap;
+	.topics {
+		border-top: 1px solid var(--border);
+		padding-block: 0.75rem;
+	}
+	.topics ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 1.5rem;
+	}
+	.topics a,
+	.more a {
+		display: inline-flex;
+		align-items: center;
+		min-height: 2.75rem;
+		color: var(--accent);
+		font-weight: 600;
+	}
+	@media (min-width: 960px) {
+		.layout {
+			display: grid;
+			grid-template-columns: 15rem minmax(0, 1fr);
+			gap: 3rem;
+		}
+		.topics {
+			position: sticky;
+			top: 6rem;
+			align-self: start;
+			padding-block: clamp(2.5rem, 6vw, 4.5rem) 0;
+		}
+		.topics ul {
+			flex-direction: column;
+			gap: 0;
+		}
 	}
 	.faq {
 		max-width: 52rem;
@@ -103,8 +296,9 @@ const faqSchema = {
 		font-family: var(--display);
 		font-weight: 700;
 		letter-spacing: -0.02em;
-		font-size: 1.3rem;
+		font-size: 1.5rem;
 		line-height: 1.3;
+		text-wrap: balance;
 	}
 	summary::-webkit-details-marker {
 		display: none;
@@ -119,8 +313,15 @@ const faqSchema = {
 		rotate: 45deg;
 	}
 	details p {
-		margin: 0 0 1.5rem;
+		margin: 0 0 1rem;
 		color: var(--muted);
 		max-width: 60ch;
+		text-wrap: pretty;
+	}
+	.more {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 1.5rem;
+		margin-bottom: 0.75rem;
 	}
 </style>
