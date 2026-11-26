@@ -23,7 +23,8 @@ export const site = {
 	// Pinned Google Maps place for the showroom (TeamG Venturez).
 	mapUrl: 'https://maps.app.goo.gl/8XcBeHynokMFoshX7',
 	provinces: ['Cavite', 'Laguna', 'Batangas', 'Rizal', 'Quezon'],
-	formEndpoint: clean(env.PUBLIC_FORM_ENDPOINT),
+	// Requests are emailed to info@teamgventurez.com through FormSubmit; override via env to use another service.
+	formEndpoint: clean(env.PUBLIC_FORM_ENDPOINT) || 'https://formsubmit.co/ajax/info@teamgventurez.com',
 	gaId: clean(env.PUBLIC_GA_ID) || 'G-RRLK12LMQ0', // Google Analytics 4 measurement ID (public); override via env
 	metaPixelId: clean(env.PUBLIC_META_PIXEL_ID),
 	viber: clean(env.PUBLIC_VIBER_NUMBER) || '+639173098138', // defaults to the main number; override via env
