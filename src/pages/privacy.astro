@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../config/site';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<Layout
+	title="Privacy Notice | TeamG Venturez"
+	description="How TeamG Venturez collects, uses and protects the personal details you send us, in line with the Data Privacy Act of 2012."
+>
+	<header class="page-head">
+		<h1>Privacy notice</h1>
+		<p>How we handle the details you share with us, in line with the Data Privacy Act of 2012 (Republic Act No. 10173).</p>
+	</header>
+
+	<section class="band" aria-labelledby="collect">
+		<h2 id="collect">What we collect</h2>
+		<p>When you send a quote request, we collect the details you type into the form: your name, mobile number, email address, province, municipality or city, the package or service you are asking about, and your message. If you call, text, or message us on Viber, WhatsApp or Messenger, we receive the details you share in those chats.</p>
+		<p>When you browse this site, Google Analytics records how pages are used, such as which pages are visited and which buttons are clicked. This does not include your name or contact details.</p>
+	</section>
+
+	<section class="band" aria-labelledby="use">
+		<h2 id="use">How we use it</h2>
+		<p>We use your details only to reply to your request, arrange your free site visit, prepare your quotation, and follow up on your project or service request. We do not sell your details.</p>
+	</section>
+
+	<section class="band" aria-labelledby="share">
+		<h2 id="share">Who handles it</h2>
+		<p>Quote requests are delivered to our inbox through FormSubmit, a form service, so your details pass through it on the way to us. Site usage is measured with Google Analytics. These providers process data for us only to provide those services.</p>
+	</section>
+
+	<section class="band" aria-labelledby="keep">
+		<h2 id="keep">How long we keep it</h2>
+		<p>We keep your details for as long as we need them to deal with your request, your project and your warranty or service needs, and as the law requires. After that, we delete them.</p>
+	</section>
+
+	<section class="band" aria-labelledby="rights">
+		<h2 id="rights">Your rights</h2>
+		<p>You may ask to see the details we hold about you, correct them, or have them deleted, and you may object to how we use them. To do so, email <a href={`mailto:${site.email}`}>{site.email}</a> or call or text {site.phoneDisplay}.</p>
+		<p><a href={`${base}/contact`}>Back to the quote form</a></p>
+	</section>
+</Layout>
