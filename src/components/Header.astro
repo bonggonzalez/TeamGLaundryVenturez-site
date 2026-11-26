@@ -15,7 +15,8 @@ const current = norm(Astro.url.pathname);
 			<span class="x" aria-hidden="true"></span>
 			<Image class="sam" src={samsung} alt="Samsung Professional Laundry" height={72} loading="eager" />
 		</a>
-		<nav aria-label="Main">
+		<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+		<nav id="site-nav" aria-label="Main">
 			<ul>
 				{
 					links.map((l) => (
@@ -102,6 +103,31 @@ const current = norm(Astro.url.pathname);
 	.cta:hover {
 		background: var(--accent-strong);
 	}
+	.menu-toggle {
+		display: none;
+	}
+	/* Phones: the sticky bar at the bottom carries the quote button, and the nav folds into a Menu button. */
+	@media (max-width: 759px) {
+		.cta {
+			display: none;
+		}
+		.bar.js .menu-toggle {
+			display: inline-flex;
+			align-items: center;
+			min-height: 2.75rem;
+			padding-inline: 1.1rem;
+			border: 1px solid var(--border);
+			border-radius: 0.5rem;
+			background: #fff;
+			color: var(--text);
+			font: inherit;
+			font-weight: 600;
+			cursor: pointer;
+		}
+		.bar.js nav:not(.open) {
+			display: none;
+		}
+	}
 	@media (min-width: 820px) {
 		.site-header {
 			position: sticky;
@@ -132,3 +158,24 @@ const current = norm(Astro.url.pathname);
 		}
 	}
 </style>
+
+<script>
+	document.querySelectorAll<HTMLElement>('.site-header .bar').forEach((bar) => {
+		const button = bar.querySelector<HTMLButtonElement>('.menu-toggle');
+		const nav = bar.querySelector<HTMLElement>('nav');
+		if (!button || !nav) return;
+		bar.classList.add('js');
+		const setOpen = (open: boolean) => {
+			nav.classList.toggle('open', open);
+			button.setAttribute('aria-expanded', String(open));
+			button.textContent = open ? 'Close' : 'Menu';
+		};
+		button.addEventListener('click', () => setOpen(!nav.classList.contains('open')));
+		bar.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape' && nav.classList.contains('open')) {
+				setOpen(false);
+				button.focus();
+			}
+		});
+	});
+</script>

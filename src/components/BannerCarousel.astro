@@ -11,15 +11,13 @@ const img = (name: string) => {
 };
 
 // The text in each banner is part of the image, so `text` repeats it for screen readers and search engines.
+// `label` is the short name a screen reader announces for the link; `text` stays on the image.
+// Four slides: the offer, the price, the equipment and the process.
 const slides = [
-	{ file: '06-your-next-business', href: `${base}/packages#sets`, text: 'Your next business starts here. Commercial-grade Samsung equipment, a 2-year warranty with free preventive maintenance, and one team to call for design, installation and service.' },
-	{ file: '10-five-sets-installation', href: `${base}/packages#sets`, text: 'Get 5 sets with basic installation included, from ₱1,200,000. Estimate only. Includes a 2-year warranty with free maintenance, operations and technical training, and a free site visit and layout plan.' },
-	{ file: '02-meet-the-equipment', href: `${base}/products`, text: 'Meet the equipment: an 18 kg commercial washer and a 14 kg LPG gas dryer, one complete system. See them running at our showroom in Alfonso, Cavite.' },
-	{ file: '03-how-it-works', href: `${base}/faq`, text: 'From inquiry to installation in four steps: send an inquiry, talk to TeamG Venturez, free site visit and layout, then installation and opening.' },
-	{ file: '05-what-matters-most', href: `${base}/#why-title`, text: 'Starting a laundry business? Durability, efficiency and support after the sale. We cover all three. Message us for a free site visit in Calabarzon.' },
-	{ file: '07-day-in-your-laundry', href: `${base}/services#what`, text: 'A day in your laundry business, from opening up to closing out. Backed by a 2-year warranty and free preventive maintenance.' },
-	{ file: '09-big-enough-to-trust', href: `${base}/about#area`, text: 'Big enough to trust globally, local enough to know your business. We serve Cavite, Laguna, Batangas, Rizal and Quezon, with a local showroom and support that goes through us.' },
-	{ file: '08-thinking-about-it', href: `${base}/contact`, text: "Thinking about it? We're ready when you are. Reliable equipment, local support and one team to call." },
+	{ file: '06-your-next-business', href: `${base}/packages#sets`, label: 'See our packages', text: 'Your next business starts here. Commercial-grade Samsung equipment, a 2-year warranty with free preventive maintenance, and one team to call for design, installation and service.' },
+	{ file: '10-five-sets-installation', href: `${base}/packages#sets`, label: 'See the 5-set package', text: 'Get 5 sets with basic installation included, from ₱1,200,000. Estimate only. Includes a 2-year warranty with free maintenance, operations and technical training, and a free site visit and layout plan.' },
+	{ file: '02-meet-the-equipment', href: `${base}/products`, label: 'See the washer and dryer', text: 'Meet the equipment: an 18 kg commercial washer and a 14 kg LPG gas dryer, one complete system. See them running at our showroom in Alfonso, Cavite.' },
+	{ file: '03-how-it-works', href: `${base}/services#how`, label: 'See how an inquiry works', text: 'From inquiry to installation in four steps: send an inquiry, talk to TeamG Venturez, free site visit and layout, then installation and opening.' },
 ];
 ---
 
@@ -30,7 +28,7 @@ const slides = [
 				{
 					slides.map((s, i) => (
 						<li class="slide" aria-roledescription="slide" aria-label={`${i + 1} of ${slides.length}`}>
-							<a class="cta" href={s.href}>
+							<a class="cta" href={s.href} aria-label={s.label}>
 								<Image
 									src={img(s.file)}
 									alt={s.text}
@@ -167,12 +165,12 @@ const slides = [
 	.dots {
 		display: flex;
 		justify-content: center;
-		gap: 0.15rem;
-		margin-top: 0.4rem;
+		gap: 0;
+		margin-top: 0;
 	}
 	.dot {
-		width: 1.6rem;
-		height: 1.6rem;
+		width: 2.75rem;
+		height: 2.75rem;
 		border: 0;
 		background: transparent;
 		cursor: pointer;
@@ -222,7 +220,8 @@ const slides = [
 			i = Math.max(0, Math.min(slides.length - 1, i));
 			current = i;
 			const s = slides[i];
-			track.scrollTo({ left: s.offsetLeft - (track.clientWidth - s.clientWidth) / 2, behavior: 'smooth' });
+			const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			track.scrollTo({ left: s.offsetLeft - (track.clientWidth - s.clientWidth) / 2, behavior: calm ? 'auto' : 'smooth' });
 		};
 		const update = () => {
 			const mid = track.scrollLeft + track.clientWidth / 2;
