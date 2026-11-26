@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import stackRow from '../assets/images/stack-row.jpg';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const contact = `${base}/contact`;
 const perSet = 240000;
@@ -12,9 +14,7 @@ const sizes = [
 	{ sets: 5, wall: '3.81 m', wash: 100, dry: 80, kg: 1120 },
 ];
 const hospitality = {
-	name: 'Hotels, BnBs and inns',
-	promise: 'Your own laundry inside your hotel, BnB or inn.',
-	best: 'Best if you own or manage a hotel, BnB or inn.',
+	promise: 'Your own laundry inside your hotel, BnB or inn. Best if you own or manage one.',
 	items: [
 		'Laundry layout planned for your property',
 		'Construction coordinated with your equipment plan',
@@ -31,72 +31,106 @@ const hospitality = {
 	<header class="page-head">
 		<h1>Choose a package that fits your space.</h1>
 		<p>
-			Start small with 2 sets and expand later as your business grows. Every package includes basic installation,
-			and your site visit and layout assessment are free, with no obligation.
+			Samsung professional laundry packages from an authorized dealer in Calabarzon. Start small with 2 sets and
+			expand later as your business grows. Your site visit and layout assessment are free, with no obligation.
 		</p>
 	</header>
 
 	<section class="band" aria-labelledby="sets">
 		<h2 id="sets">Equipment packages, starting at {peso(perSet)} per set</h2>
+		<p class="lede">
+			One set is one 18 kg washer and one 14 kg gas dryer. Basic installation is included in every package. Utility
+			work, if your site needs it, is extra: from about {peso(utility)}.
+		</p>
+		<figure class="machines">
+			<Image
+				src={stackRow}
+				alt="Rows of black Samsung professional washers and dryers stacked in pairs"
+				widths={[480, 720, 1000]}
+				sizes="(min-width: 960px) 70vw, 92vw"
+			/>
+			<figcaption>Samsung professional washers and dryers, stacked in pairs. Image shown for illustration.</figcaption>
+		</figure>
 		<div class="paths sizes">
 			{
 				sizes.map((p) => (
 					<article>
 						<h3>{p.sets} sets</h3>
-						<p class="promise">Starting at {peso(p.sets * perSet)}</p>
-						<p class="best">One set is one 18 kg washer and one 14 kg gas dryer.</p>
+						<p class="price">Starting at {peso(p.sets * perSet)}</p>
 						<ul>
-							<li>Equipment footprint: {p.wall} of wall width</li>
-<li>Theoretical capacity: {p.wash} wash cycles and {p.dry} dry cycles over a 12-hour day</li>
-<li>Up to {p.kg} kg of dry capacity a day</li>
-<li>Basic installation included</li>
-<li>Utility work, if your site needs it: from about {peso(utility)}, so about {peso(p.sets * perSet + utility)} in total</li>
-</ul>
-<a class="btn" href={`${contact}?for=start&package=${p.sets}`}>Ask about {p.sets} sets</a>
+							<li>Equipment width: {p.wall}</li>
+							<li>
+								Per 12-hour day: {p.wash} wash and {p.dry} dry cycles, up to {p.kg} kg dry
+							</li>
+						</ul>
+						<a class="btn" href={`${contact}?for=start&package=${p.sets}`}>
+							Ask about {p.sets} sets
+						</a>
 					</article>
 				))
 			}
 		</div>
+
 		<h3 class="sub">What the price covers</h3>
-<ul class="cover">
-<li><strong>Included:</strong> the Samsung equipment and basic installation. This means water and drainage connections, electrical connections for the washer and dryer, the gas dryer connection and leak test, dryer exhaust and ducting, and testing, commissioning, basic training and handover.</li>
-<li><strong>If your site needs it:</strong> basic utility additions, from about {peso(utility)}. These cover the electrical, plumbing and ducting work needed to commission the equipment. For example, 2 sets at {peso(2 * perSet)} plus utility work of {peso(utility)} comes to about {peso(2 * perSet + utility)}. The site visit tells us whether you need it.</li>
-<li><strong>Not included:</strong> civil works and structural changes, major electrical upgrades, building permits and government fees, and the LPG tank, supply and regulator.</li>
-</ul>
-<p class="note">
-Wash and dry cycles are theoretical machine cycles, based on a 12-hour day with no gaps between loads. The number of completed wash-and-dry loads you get depends on load size, handling time and dryer capacity. The footprint is the width of the equipment only. Allow extra space for installation and service access, and we confirm clearances at your site visit.
-</p>
+		<ul class="cover">
+			<li>
+				<strong>Included:</strong> the Samsung equipment and basic installation: water and drainage connections,
+				electrical connections for the washer and dryer, the gas dryer connection and leak test, dryer exhaust and
+				ducting, and testing, commissioning, basic training and handover.
+			</li>
+			<li>
+				<strong>If your site needs it:</strong> basic utility additions, from about {peso(utility)}, for the
+				electrical, plumbing and ducting work needed to commission the equipment. For example, 2 sets at {
+					peso(2 * perSet)
+				} plus {peso(utility)} comes to about {peso(2 * perSet + utility)}. The site visit tells us whether you need
+				it.
+			</li>
+			<li>
+				<strong>Not included:</strong> civil works and structural changes, major electrical upgrades, building
+				permits and government fees, and the LPG tank, supply and regulator.
+			</li>
+		</ul>
 		<p class="note">
-			Prices, capacity figures and timelines are estimates only. TeamG Venturez may change them without prior notice.
-			Your written quotation confirms the final figures after the site visit.
+			Prices, capacity figures and timelines are estimates. Your written quotation confirms the final figures after
+			the site visit.
 		</p>
+		<details class="fine">
+			<summary>How we count capacity</summary>
+			<p>
+				Wash and dry cycles are theoretical machine cycles, based on a 12-hour day with no gaps between loads. The
+				number of completed wash-and-dry loads you get depends on load size, handling time and dryer capacity. The
+				equipment width is the equipment only. Allow extra space for installation and service access, and we confirm
+				clearances at your site visit.
+			</p>
+		</details>
 	</section>
 
 	<section class="band" aria-labelledby="hosp">
 		<h2 id="hosp">For hotels, BnBs and inns</h2>
-		<div class="paths">
-			<article>
-				<h3>{hospitality.name}</h3>
-				<p class="promise">{hospitality.promise}</p>
-				<p class="best">{hospitality.best}</p>
-				<ul>
-					{hospitality.items.map((i) => <li>{i}</li>)}
-				</ul>
-				<a class="btn" href={`${contact}?for=hotel`}>Plan my in-house laundry</a>
-			</article>
-		</div>
+		<p class="lede">{hospitality.promise}</p>
+		<ul class="cover">
+			{hospitality.items.map((i) => <li>{i}</li>)}
+		</ul>
+		<p class="more"><a data-track="quote" href={`${contact}?for=hotel`}>Plan my in-house laundry</a></p>
 	</section>
 
 	<section class="band" aria-labelledby="sup">
-<h2 id="sup">After-sales support</h2>
-<p>Your equipment comes with a 2-year warranty and free preventive maintenance. For warranty claims, repairs and service visits, you deal with us, not with several companies. To request service, call, text or message us, or use the form.</p>
-<a class="btn" href={`${contact}?for=service`}>Request service</a>
-</section>
+		<h2 id="sup">After-sales support</h2>
+		<p class="lede">
+			Your equipment comes with a 2-year warranty and free preventive maintenance. For warranty claims, repairs and
+			service visits, you deal with us, not with several companies. To request service, call, text or message us, or
+			use the form.
+		</p>
+		<p class="more"><a data-track="quote" href={`${contact}?for=service`}>Request service</a></p>
+	</section>
 
-<section class="band" aria-labelledby="upg">
+	<section class="band" aria-labelledby="upg">
 		<h2 id="upg">Already running a laundry?</h2>
-		<p>We can add machines, review your layout and take care of installation and ongoing maintenance for the laundry you already run.</p>
-		<a class="btn" href={`${contact}?for=upgrade`}>Plan my upgrade</a>
+		<p class="lede">
+			We can add machines, review your layout and take care of installation and ongoing maintenance for the laundry
+			you already run.
+		</p>
+		<p class="more"><a data-track="quote" href={`${contact}?for=upgrade`}>Plan my upgrade</a></p>
 	</section>
 
 	<Fragment slot="after">
@@ -110,23 +144,11 @@ Wash and dry cycles are theoretical machine cycles, based on a 12-hour day with 
 </Layout>
 
 <style>
-	.sr {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		overflow: hidden;
-		clip-path: inset(50%);
-		white-space: nowrap;
-	}
 	.paths {
 		display: grid;
 		gap: 3rem;
 	}
 	@media (min-width: 900px) {
-		.paths {
-			grid-template-columns: repeat(3, 1fr);
-			gap: 3rem;
-		}
 		.paths.sizes {
 			grid-template-columns: repeat(2, 1fr);
 		}
@@ -145,25 +167,16 @@ Wash and dry cycles are theoretical machine cycles, based on a 12-hour day with 
 	}
 	h3 {
 		font-family: var(--display);
-		font-weight: 800;
+		font-weight: 700;
 		letter-spacing: -0.03em;
-		font-size: 1.9rem;
+		font-size: 1.5rem;
 		line-height: 1.1;
 		margin: 0 0 0.5rem;
 	}
-	.promise {
-		color: var(--muted);
-		margin: 0 0 0.5rem;
-	}
-	.best {
-		font-size: 0.9rem;
-		font-weight: 600;
+	.price {
+		font-size: 1.0625rem;
+		font-weight: 700;
 		margin: 0 0 1.25rem;
-	}
-	@media (min-width: 900px) {
-		.promise {
-			min-height: 3.2em;
-		}
 	}
 	ul {
 		list-style: none;
@@ -178,17 +191,63 @@ Wash and dry cycles are theoretical machine cycles, based on a 12-hour day with 
 		margin-top: auto;
 		align-self: flex-start;
 	}
+	.lede,
+	li {
+		text-wrap: pretty;
+	}
+	.lede {
+		max-width: 65ch;
+		margin: 0 0 2rem;
+	}
+	.machines {
+		margin: 0 0 3rem;
+	}
+	.machines img {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+		border-radius: 0.9rem;
+	}
+	@media (min-width: 900px) {
+		.machines img {
+			aspect-ratio: 16 / 6;
+		}
+	}
+	.machines figcaption {
+		font-size: 0.95rem;
+		color: var(--muted);
+		margin-top: 0.5rem;
+	}
 	.sub {
-font-size: 1.3rem;
-margin: 2.5rem 0 0.5rem;
-}
-.cover {
-margin: 0;
-max-width: 52rem;
-}
-.note {
-		margin-top: 2.5rem;
+		margin: 3rem 0 0.5rem;
+	}
+	.cover {
+		margin: 0;
+		max-width: 65ch;
+	}
+	.note {
+		margin-top: 2rem;
 		color: var(--muted);
 		font-size: 0.95rem;
+		max-width: 65ch;
+	}
+	.fine {
+		margin-top: 1rem;
+		color: var(--muted);
+		font-size: 0.95rem;
+		max-width: 65ch;
+	}
+	.fine summary {
+		cursor: pointer;
+		font-weight: 600;
+		color: var(--accent);
+	}
+	.fine p {
+		margin: 0.75rem 0 0;
+	}
+	.more {
+		margin: 0;
 	}
 </style>
