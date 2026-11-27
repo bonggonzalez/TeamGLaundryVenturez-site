@@ -204,6 +204,9 @@ Owner-approved Samsung professional equipment imagery, 0.9rem corners, always ca
 ### Sales Tool
 On the packages page, a small calculator in an open band: three form fields (package, the visitor's own price per load, days open per month, standard 0.5rem-radius inputs with the cobalt focus ring) above three hairline-ruled rows for a quiet, steady and busy day (a quarter, half and three quarters of the package's dry cycles). It starts empty, because TeamG has not confirmed a price per load, so every peso figure comes from the visitor's input. It shows gross sales only, never profit or payback, and says so in the note beneath it. On phones each row stacks as label and value lines.
 
+### Hotel Sizing Guide
+Under the hospitality list on the packages page, a second calculator built from the same parts as the Sales Tool: three empty inputs (rooms, busy-night occupancy, kg of laundry per occupied room per day), a collapsed "Not sure of your kg per room?" tip about weighing one room's dry linens, a one-line summary, and one ruled row per package showing dry loads against that package's dry cycles as a share. TeamG has not confirmed a kg-per-room figure, so none is prefilled. Over 100% reads "over capacity". Loads are counted at a full 14 kg, and the note says real use runs higher.
+
 ### Banner Carousel
 Full-width promotional slides (2400 by 1256 ratio) with a 1px hairline border and 0.9rem corners, round white arrow buttons with the Carousel arrow shadow, and dot indicators that turn cobalt when current.
 

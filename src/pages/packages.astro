@@ -198,6 +198,76 @@ const hospitality = {
 		<ul class="cover">
 			{hospitality.items.map((i) => <li>{i}</li>)}
 		</ul>
+
+		<h3 class="sub" id="hotel-size-title">Size your laundry by rooms</h3>
+		<p class="lede">
+			Tell us how many rooms you have and how much laundry each one produces, and we will show how much of each
+			package your laundry would use.
+		</p>
+		<noscript>
+			<p class="note">
+				This tool needs JavaScript. <a href={`${contact}?for=hotel`}>Message us</a> and we will walk you through your
+				numbers.
+			</p>
+		</noscript>
+		<div class="calc" id="hotel-tool" hidden>
+			<form class="calc-form" novalidate aria-labelledby="hotel-size-title">
+				<div class="field">
+					<label for="h-rooms">Number of rooms</label>
+					<input id="h-rooms" type="number" inputmode="numeric" min="1" step="1" placeholder="Your number of rooms" />
+				</div>
+				<div class="field">
+					<label for="h-occ">Occupancy on a busy night (%)</label>
+					<input id="h-occ" type="number" inputmode="numeric" min="1" max="100" step="1" placeholder="Your busy-night occupancy" />
+				</div>
+				<div class="field">
+					<label for="h-kg">Kg of laundry per occupied room per day</label>
+					<input id="h-kg" type="number" inputmode="decimal" min="0" step="any" placeholder="Your kg per room" />
+				</div>
+			</form>
+			<details class="fine">
+				<summary>Not sure of your kg per room?</summary>
+				<p>
+					Weigh the dry sheets, pillowcases and towels from one typical occupied room on a bathroom or luggage scale,
+					and use that number. If you would like help, message us and we will walk you through it.
+				</p>
+			</details>
+			<div aria-live="polite">
+				<p class="calc-hint" id="hotel-hint">Enter your rooms, busy-night occupancy and kg per room to see the figures.</p>
+				<div id="hotel-out" hidden>
+					<p class="calc-pkg">
+						<strong id="hotel-sum"></strong>
+					</p>
+					<ul class="scen">
+						{
+							sizes.map((p) => (
+								<li data-dry={p.dry}>
+									<p class="scen-name">
+										{p.sets} sets <span>up to {p.kg} kg dry in a 12-hour day</span>
+									</p>
+									<dl class="scen-nums two">
+										<div>
+											<dt>Dry loads you would run</dt>
+											<dd data-out="loads" />
+										</div>
+										<div>
+											<dt>Share of its dry cycles</dt>
+											<dd data-out="share" />
+										</div>
+									</dl>
+								</li>
+							))
+						}
+					</ul>
+				</div>
+			</div>
+			<p class="note">
+				How we work this out: your daily laundry is rooms × busy-night occupancy × kg per room, and we count a dry load
+				as a full 14 kg. Capacity figures are theoretical machine cycles in a 12-hour day with no gaps between loads,
+				and loads that are not full need more cycles, so your real use will run higher than these shares. Your site
+				visit confirms the number of sets, the layout and the utilities.
+			</p>
+		</div>
 		<p class="more"><a data-track="quote" href={`${contact}?for=hotel`}>Plan my in-house laundry</a></p>
 	</section>
 
@@ -368,6 +438,7 @@ const hospitality = {
 		border-radius: 0.5rem;
 		padding: 0.75rem 0.9rem;
 		width: 100%;
+		height: 3.25rem;
 	}
 	input::placeholder {
 		color: color-mix(in srgb, var(--muted) 85%, #fff);
@@ -377,6 +448,12 @@ const hospitality = {
 		outline: 3px solid var(--accent);
 		outline-offset: 1px;
 		border-color: var(--accent);
+	}
+	.calc-form .field {
+		align-content: end;
+	}
+	.calc .fine {
+		margin: 0 0 1.5rem;
 	}
 	.calc-hint {
 		margin: 0 0 1.75rem;
@@ -435,6 +512,9 @@ const hospitality = {
 	@media (min-width: 560px) {
 		.scen-nums {
 			grid-template-columns: repeat(3, 1fr);
+		}
+		.scen-nums.two {
+			grid-template-columns: repeat(2, 1fr);
 		}
 		.scen-nums div {
 			display: grid;
@@ -495,5 +575,54 @@ const hospitality = {
 		tool.querySelector('form')!.addEventListener('submit', (e) => e.preventDefault());
 		[sets, price, days].forEach((el) => el.addEventListener('input', update));
 		update();
+	}
+
+	// Hotel sizing: rooms x busy-night occupancy x kg per room, compared with each package's dry cycles.
+	const hotel = document.getElementById('hotel-tool');
+	if (hotel) {
+		const rooms = document.getElementById('h-rooms') as HTMLInputElement;
+		const occ = document.getElementById('h-occ') as HTMLInputElement;
+		const kgRoom = document.getElementById('h-kg') as HTMLInputElement;
+		const hHint = document.getElementById('hotel-hint') as HTMLElement;
+		const hOut = document.getElementById('hotel-out') as HTMLElement;
+		const hSum = document.getElementById('hotel-sum') as HTMLElement;
+		const DRY_KG = 14;
+		let hTracked = false;
+
+		const hide = (msg: string) => {
+			hOut.hidden = true;
+			hHint.hidden = false;
+			hHint.textContent = msg;
+		};
+		const run = () => {
+			const r = parseInt(rooms.value, 10);
+			const o = parseFloat(occ.value);
+			const k = parseFloat(kgRoom.value);
+			if (!(r >= 1) || !(k > 0) || !occ.value) {
+				return hide('Enter your rooms, busy-night occupancy and kg per room to see the figures.');
+			}
+			if (!(o >= 1 && o <= 100)) return hide('Enter your busy-night occupancy as a percentage from 1 to 100.');
+
+			const kg = r * (o / 100) * k;
+			const loads = Math.max(1, Math.ceil(kg / DRY_KG - 1e-9));
+			hHint.hidden = true;
+			hOut.hidden = false;
+			hSum.textContent = `About ${Math.round(kg).toLocaleString('en-PH')} kg of laundry a day, or ${loads} dry ${loads === 1 ? 'load' : 'loads'} of ${DRY_KG} kg.`;
+			hOut.querySelectorAll<HTMLElement>('li[data-dry]').forEach((li) => {
+				const dry = Number(li.dataset.dry);
+				const share = Math.round((loads / dry) * 100);
+				li.querySelector('[data-out="loads"]')!.textContent = `${loads} of ${dry}`;
+				li.querySelector('[data-out="share"]')!.textContent = loads > dry ? `${share}%, over capacity` : `${share}%`;
+			});
+			if (!hTracked) {
+				hTracked = true;
+				(window as any).tgTrack?.('hotel_sizing_used', { page: location.pathname });
+			}
+		};
+
+		hotel.hidden = false;
+		hotel.querySelector('form')!.addEventListener('submit', (e) => e.preventDefault());
+		[rooms, occ, kgRoom].forEach((el) => el.addEventListener('input', run));
+		run();
 	}
 </script>
