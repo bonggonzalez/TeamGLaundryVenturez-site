@@ -19,6 +19,7 @@ export const site = {
 		country: 'PH',
 	},
 	showroomName: 'Jumpin Wash',
+	showroomHours: '9AM to 5PM', // confirmed by the owner 2026-11-27; days of the week not yet given
 	addressDisplay: '333 Luksuhin Ibaba, Alfonso, Cavite 4123',
 	// Pinned Google Maps place for the showroom (TeamG Venturez).
 	mapUrl: 'https://maps.app.goo.gl/8XcBeHynokMFoshX7',

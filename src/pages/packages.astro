@@ -13,6 +13,11 @@ const sizes = [
 	{ sets: 4, wall: '3.05 m', wash: 80, dry: 64, kg: 896 },
 	{ sets: 5, wall: '3.81 m', wash: 100, dry: 80, kg: 1120 },
 ];
+// A single set, sold on its own (confirmed by the owner 2026-11-27). Width and capacity follow the same
+// per-set maths as the columns above: 762 mm per set, 12 h / 36 min washes, 12 h / 45 min dries, 14 kg per dry load.
+const oneSet = { sets: 1, wall: '0.76 m', wash: 20, dry: 16, kg: 224 };
+const toolSizes = [oneSet, ...sizes];
+const setsLabel = (n: number) => (n === 1 ? '1 set' : `${n} sets`);
 // Shares of the theoretical dry-cycle ceiling shown in the sales tool. Scenario levels, not claims about any shop.
 const scenarios = [
 	{ name: 'A quiet day', note: 'a quarter of your dry cycles', share: 0.25 },
@@ -32,12 +37,12 @@ const hospitality = {
 
 <Layout
 	title="Laundry Packages in Calabarzon | TeamG Venturez"
-	description="Samsung laundry packages from 2 to 5 washer and dryer sets, from ₱480,000 for 2 sets (₱240,000 per set), with basic installation included. Free site visit."
+	description="Samsung laundry equipment from one washer and dryer set at ₱240,000, or packages of 2 to 5 sets, with basic installation included. Free site visit."
 >
 	<header class="page-head">
 		<h1>Choose a package that fits your space.</h1>
 		<p>
-			Samsung professional laundry packages from an authorized dealer in Calabarzon. Start small with 2 sets and
+			Samsung professional laundry packages from an authorized dealer in Calabarzon. Start small with a single set and
 			expand later as your business grows. Your site visit and layout assessment are free, with no obligation.
 		</p>
 	</header>
@@ -47,6 +52,10 @@ const hospitality = {
 		<p class="lede">
 			One set is one 18 kg washer and one 14 kg gas dryer. Basic installation is included in every package. Utility
 			work, if your site needs it, is extra: from about {peso(utility)}.
+		</p>
+		<p class="lede">
+			{`Buying just one set? It is ${peso(perSet)}, with ${oneSet.wall} of equipment width and, in a 12-hour day, ${oneSet.wash} wash and ${oneSet.dry} dry cycles, up to ${oneSet.kg} kg dry.`}{' '}
+			<a data-track="quote" href={`${contact}?for=start&package=1`}>Ask about 1 set</a>.
 		</p>
 		<figure class="machines">
 			<Image
@@ -128,9 +137,9 @@ const hospitality = {
 					<label for="c-sets">Package</label>
 					<select id="c-sets">
 						{
-							sizes.map((p) => (
+							toolSizes.map((p) => (
 								<option value={p.sets} data-dry={p.dry} data-price={p.sets * perSet}>
-									{p.sets} sets
+									{setsLabel(p.sets)}
 								</option>
 							))
 						}
@@ -149,7 +158,7 @@ const hospitality = {
 				<p class="calc-hint" id="calc-hint">Enter your price per load to see the figures.</p>
 				<div id="calc-out" hidden>
 					<p class="calc-pkg">
-						<strong id="calc-pkg">2 sets:</strong> <span id="calc-pkg-price"></span>
+						<strong id="calc-pkg">1 set:</strong> <span id="calc-pkg-price"></span>
 					</p>
 					<ul class="scen">
 						{
@@ -240,10 +249,10 @@ const hospitality = {
 					</p>
 					<ul class="scen">
 						{
-							sizes.map((p) => (
+							toolSizes.map((p) => (
 								<li data-dry={p.dry}>
 									<p class="scen-name">
-										{p.sets} sets <span>up to {p.kg} kg dry in a 12-hour day</span>
+										{setsLabel(p.sets)} <span>up to {p.kg} kg dry in a 12-hour day</span>
 									</p>
 									<dl class="scen-nums two">
 										<div>
@@ -274,7 +283,7 @@ const hospitality = {
 	<section class="band" aria-labelledby="sup">
 		<h2 id="sup">After-sales support</h2>
 		<p class="lede">
-			Your equipment comes with a 2-year warranty and free preventive maintenance. For warranty claims, repairs and
+			Your equipment comes with a 2-year warranty and free preventive maintenance, and we stock genuine Samsung spare parts at our showroom. For warranty claims, repairs and
 			service visits, you deal with us, not with several companies. To request service, call, text or message us, or
 			use the form.
 		</p>
@@ -557,7 +566,7 @@ const hospitality = {
 			}
 			hint.hidden = true;
 			out.hidden = false;
-			pkg.textContent = `${sets.value} sets:`;
+			pkg.textContent = `${sets.value} ${sets.value === '1' ? 'set' : 'sets'}:`;
 			pkgPrice.textContent = `Package from ${peso(Number(opt.dataset.price))}, with basic installation`;
 			out.querySelectorAll<HTMLElement>('li[data-share]').forEach((li) => {
 				const loads = Math.round(dry * Number(li.dataset.share));

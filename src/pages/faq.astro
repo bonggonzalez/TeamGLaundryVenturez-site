@@ -14,7 +14,7 @@ const groups = [
 		items: [
 			{
 				q: 'How much does it cost?',
-				a: 'Our packages begin with 2 sets from ₱480,000, which is ₱240,000 per set of one 18 kg washer and one 14 kg gas dryer, with basic installation included. If your site needs utility work, add about ₱200,000. Your written quotation, prepared after the free site visit, confirms the final price.',
+				a: 'Our packages start at ₱240,000 per set of one 18 kg washer and one 14 kg gas dryer, with basic installation included. You can buy a single set or a package of 2 to 5 sets. If your site needs utility work, add from about ₱200,000. Your written quotation, prepared after the free site visit, confirms the final price.',
 				links: [
 					{ t: 'See the packages', href: packages },
 					{ t: 'Get a quote', href: `${contact}?for=start`, track: true },
@@ -32,7 +32,7 @@ const groups = [
 			},
 			{
 				q: 'How does payment work?',
-				a: 'You pay a reservation fee to hold your order. After signing, you pay the down payment, and the balance is due before delivery. Your quotation shows the exact amounts. We can also discuss other arrangements.',
+				a: 'You pay in full before delivery, and we deliver once full payment is received. We do not ask for a reservation fee or a down payment. Your quotation shows the exact amount, and bank financing is available if you prefer it, subject to bank approval.',
 			},
 		],
 	},
@@ -46,7 +46,7 @@ const groups = [
 			},
 			{
 				q: 'Where is your showroom?',
-				a: 'You can visit us at Jumpin Wash, 333 Luksuhin Ibaba, Alfonso, Cavite 4123. Message us first so we can make sure someone is ready to meet you.',
+				a: 'You can visit us at Jumpin Wash, 333 Luksuhin Ibaba, Alfonso, Cavite 4123. Showroom hours are 9AM to 5PM. Message us first so we can make sure someone is ready to meet you.',
 				links: [{ t: 'Message us before you visit', href: `${contact}?for=showroom`, track: true }],
 			},
 			{ q: 'What areas do you cover?', a: 'Calabarzon: Cavite, Laguna, Batangas, Rizal and Quezon.' },
@@ -60,12 +60,12 @@ const groups = [
 			},
 			{
 				q: 'Can I start small and expand later?',
-				a: 'Yes. You can begin with 2 sets and add more as your business grows.',
+				a: 'Yes. You can begin with a single set and add more as your business grows.',
 				links: [{ t: 'See the packages', href: packages }],
 			},
 			{
 				q: 'How many loads can a package handle in a day?',
-				a: 'Over a 12-hour day, 2 sets give a theoretical 40 wash and 32 dry cycles, 3 sets 60 and 48, 4 sets 80 and 64, and 5 sets 100 and 80. These are theoretical machine cycles with no gaps between loads, so the loads you finish depend on load size and handling time.',
+				a: 'Over a 12-hour day, 1 set gives a theoretical 20 wash and 16 dry cycles, 2 sets give 40 and 32, 3 sets 60 and 48, 4 sets 80 and 64, and 5 sets 100 and 80. These are theoretical machine cycles with no gaps between loads, so the loads you finish depend on load size and handling time.',
 				links: [{ t: 'See the packages', href: packages }],
 			},
 			{
@@ -142,6 +142,11 @@ const groups = [
 				q: 'Who installs and supports the equipment after the sale?',
 				a: 'We do. We install the equipment we distribute and look after it with ongoing maintenance, service, parts, technical help and training.',
 				links: [{ t: 'Request service', href: `${contact}?for=service`, track: true }],
+			},
+			{
+				q: 'Do you stock spare parts?',
+				a: 'Yes. We stock genuine Samsung spare parts at our showroom in Alfonso, Cavite. Message us with your machine model and the part you need.',
+				links: [{ t: 'Ask about spare parts', href: `${contact}?for=service`, track: true }],
 			},
 			{
 				q: 'What is Samsung Care+?',

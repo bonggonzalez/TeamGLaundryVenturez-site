@@ -38,7 +38,8 @@ TeamG Venturez sells and supports commercial laundry operations. It is the exclu
 - Ordering and inquiry channels: contact form and phone/text/email.
 - Offerings confirmed: Samsung laundry equipment distribution; design-to-construction; equipment installation; maintenance; point-of-sale systems; business and marketing consultation.
 - **Confirmed contact:** email info@teamgventurez.com, call/text 0917 309 8138 (the number the site uses; confirmed in project chat on 2026-11-26, replacing the earlier 09178796097). Exclusive-distributor status holds in all five provinces; TeamG sells equipment on its own; the Upgrade path includes a layout review; TeamG offers in-house laundry consultation for hotels. Samsung models/specs on the site come from the owner-approved reference.
-- **Open decisions (do not fabricate):** pricing, service hours, form-service endpoint (the form currently opens the visitor's email app), financing terms, warranty terms, number of past installations.
+- **Confirmed 2026-11-27:** a customer can buy a single set (₱240,000, basic installation included). TeamG stocks genuine Samsung spare parts at the showroom. Showroom hours are 9AM to 5PM (days of the week not yet given). Payment is in full before delivery, with no reservation fee and no down payment; delivery follows full payment.
+- **Open decisions (do not fabricate):** showroom days of the week, financing terms, warranty response times, number of past installations, price per load or running costs for any earnings or payback figure.
 - **Existing site copy is outdated.** The current homepage, About and Services text describes a consumer wash-and-fold, pickup-and-delivery service. That does not match the real business and must be replaced, not preserved. The Services and Contact pages are stubs.
 
 ## Brand Commitments
