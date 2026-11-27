@@ -23,3 +23,6 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 .claude/launch.json
+
+# showroom photos: originals show identifiable people and a child; only curated crops are committed
+src/assets/images/showroom/originals/

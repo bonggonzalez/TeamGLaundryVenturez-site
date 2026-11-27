@@ -199,7 +199,7 @@ Scope and audience content are presented as ruled rows rather than cards: a disp
 An open column capped with a 2px ink rule: a Title-weight set count, a 700-weight price line, two hairline-ruled facts (equipment width, daily capacity) and a primary button. Scope and fine print sit below the columns in a ruled list and a collapsed disclosure (Signal Cobalt 600 summary), never inside the column.
 
 ### Equipment Photograph (signature)
-Owner-approved Samsung professional equipment imagery, 0.9rem corners, always captioned "Image shown for illustration" in Cool Slate. The home page version floats on the Photo float shadow; the packages page version is a flat 16:6 banner crop on desktop and 16:9 on mobile.
+Two kinds. Stock Samsung professional equipment imagery (owner-approved) keeps 0.9rem corners and is always captioned "Image shown for illustration" in Cool Slate. Real showroom photographs of the Alfonso showroom (cropped from the owner's photos, not retouched) use the same corners and are captioned as the showroom, never as an illustration; they show the showroom, not client installations or the Products-page models. The home page version floats on the Photo float shadow; the packages page version is a flat 16:6 banner crop on desktop and 16:9 on mobile.
 
 ### Sales Tool
 On the packages page, a small calculator in an open band: three form fields (package, the visitor's own price per load, days open per month, standard 0.5rem-radius inputs with the cobalt focus ring) above three hairline-ruled rows for a quiet, steady and busy day (a quarter, half and three quarters of the package's dry cycles). It starts empty, because TeamG has not confirmed a price per load, so every peso figure comes from the visitor's input. It shows gross sales only, never profit or payback, and says so in the note beneath it. On phones each row stacks as label and value lines.
@@ -218,7 +218,7 @@ Full-width promotional slides (2400 by 1256 ratio) with a 1px hairline border an
 - **Do** separate content with 1px Hairline Blue-Gray rules and generous vertical padding.
 - **Do** keep surfaces flat; reserve shadows for large primary buttons, carousel arrows and the home page photograph.
 - **Do** cap running prose at 65ch and keep fine print in a collapsed disclosure.
-- **Do** caption equipment imagery as an illustration until real photography of TeamG installations is supplied.
+- **Do** caption stock equipment imagery as an illustration, and caption real showroom photographs as the showroom, until photography of TeamG client installations is supplied.
 
 ### Don't:
 - **Don't** return to the dark-blue consumer wash-cycle look or a wash-and-fold tone; the audience is equipment buyers.

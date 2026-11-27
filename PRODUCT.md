@@ -48,7 +48,7 @@ TeamG Venturez sells and supports commercial laundry operations. It is the exclu
 
 ## Evidence on Hand
 
-- No testimonials, case studies, client lists, project photos, equipment photography or certifications are on hand. Future work must not invent them.
+- The showroom opened on 2026-11-21 at Jumpin Wash, Alfonso, Cavite, and the owner supplied real photos of it (see `src/assets/images/SOURCES.md`). No testimonials, case studies, client lists, client-installation photos or certifications are on hand. Future work must not invent them.
 - The exclusive-distributor status is stated by the owner; no distributor letter or Samsung authorization document is in the repo.
 
 ## Product Principles

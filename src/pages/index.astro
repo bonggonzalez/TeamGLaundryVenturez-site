@@ -3,6 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import stackRow from '../assets/images/stack-row.jpg';
 import samsung from '../assets/images/samsung-logo.png';
+import showroomWall from '../assets/images/showroom/curated/showroom-wall-wide.jpg';
+import showroomBags from '../assets/images/showroom/curated/showroom-wall-bags.jpg';
 import { site } from '../config/site';
 import MapLink from '../components/MapLink.astro';
 import BannerCarousel from '../components/BannerCarousel.astro';
@@ -145,16 +147,41 @@ const audiences = [
 	</section>
 
 	<section class="showroom" aria-labelledby="show-title">
-		<div class="container visit-grid">
-			<h2 id="show-title">See the machines at our showroom</h2>
-			<div>
-				<h3>Visit us in Alfonso, Cavite</h3>
-				<p>{site.showroomName}, {site.addressDisplay}. See the Samsung machines in person and talk to us about your plan.</p>
-				<p class="map"><MapLink /></p>
-				<a class="go" href={`${contact}?for=showroom`} data-track="quote">
-					Request a showroom demo
-					<span aria-hidden="true"> &rarr;</span>
-				</a>
+		<div class="container">
+			<div class="visit-grid">
+				<h2 id="show-title">Visit our Samsung showroom in Alfonso, Cavite.</h2>
+				<div>
+					<p>
+						Our showroom opened on 21 November 2026 at {site.showroomName}, {site.addressDisplay}. See Samsung professional machines in person and talk to us about your plan. Message us first so we can make sure someone is ready to meet you.
+					</p>
+					<p class="map"><MapLink /></p>
+					<a class="go" href={`${contact}?for=showroom`} data-track="quote">
+						Request a showroom demo
+						<span aria-hidden="true"> &rarr;</span>
+					</a>
+				</div>
+			</div>
+			<div class="shots">
+				<figure>
+					<Image
+						class="top"
+						src={showroomWall}
+						alt="Rows of black Samsung professional dryers under a Samsung Professional Laundry sign at our showroom"
+						widths={[480, 720, 1000]}
+						sizes="(min-width: 760px) 45vw, 92vw"
+					/>
+					<figcaption>The Samsung Professional Laundry wall at our showroom.</figcaption>
+				</figure>
+				<figure>
+					<Image
+						class="bottom"
+						src={showroomBags}
+						alt="Black Samsung washers and dryers at our showroom, each with a blue Jumpin Wash tote bag hanging from it"
+						widths={[480, 720, 1000]}
+						sizes="(min-width: 760px) 45vw, 92vw"
+					/>
+					<figcaption>Washers and dryers at our showroom in Alfonso, Cavite.</figcaption>
+				</figure>
 			</div>
 		</div>
 	</section>
@@ -483,6 +510,39 @@ const audiences = [
 	}
 	.showroom :global(.maplink) {
 		min-height: 2.75rem;
+	}
+	.shots {
+		display: grid;
+		gap: 1.5rem;
+		margin-top: 3rem;
+	}
+	.shots figure {
+		margin: 0;
+	}
+	.shots img {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 5 / 4;
+		object-fit: cover;
+		border-radius: 0.9rem;
+	}
+	.shots img.top {
+		object-position: left top;
+	}
+	.shots img.bottom {
+		object-position: center bottom;
+	}
+	.shots figcaption {
+		font-size: 0.95rem;
+		color: var(--muted);
+		margin-top: 0.5rem;
+	}
+	@media (min-width: 760px) {
+		.shots {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 2rem;
+		}
 	}
 	@media (min-width: 960px) {
 		.visit-grid {
