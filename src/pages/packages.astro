@@ -13,6 +13,12 @@ const sizes = [
 	{ sets: 4, wall: '3.05 m', wash: 80, dry: 64, kg: 896 },
 	{ sets: 5, wall: '3.81 m', wash: 100, dry: 80, kg: 1120 },
 ];
+// Shares of the theoretical dry-cycle ceiling shown in the sales tool. Scenario levels, not claims about any shop.
+const scenarios = [
+	{ name: 'A quiet day', note: 'a quarter of your dry cycles', share: 0.25 },
+	{ name: 'A steady day', note: 'half of your dry cycles', share: 0.5 },
+	{ name: 'A busy day', note: 'three quarters of your dry cycles', share: 0.75 },
+];
 const hospitality = {
 	promise: 'Your own laundry inside your hotel, BnB or inn. Best if you own or manage one.',
 	items: [
@@ -102,6 +108,88 @@ const hospitality = {
 				clearances at your site visit.
 			</p>
 		</details>
+	</section>
+
+	<section class="band" aria-labelledby="calc-title" id="sales">
+		<h2 id="calc-title">See what your sales could look like.</h2>
+		<p class="lede">
+			Tell us what you plan to charge per load and we will show the sales your machines could bring in. The figures
+			come from your own price, so please use what you expect to charge in your area.
+		</p>
+		<noscript>
+			<p class="note">
+				This tool needs JavaScript. <a href={`${contact}?for=start`}>Message us</a> and we will walk you through your
+				numbers.
+			</p>
+		</noscript>
+		<div class="calc" id="calc-tool" hidden>
+			<form class="calc-form" novalidate>
+				<div class="field">
+					<label for="c-sets">Package</label>
+					<select id="c-sets">
+						{
+							sizes.map((p) => (
+								<option value={p.sets} data-dry={p.dry} data-price={p.sets * perSet}>
+									{p.sets} sets
+								</option>
+							))
+						}
+					</select>
+				</div>
+				<div class="field">
+					<label for="c-price">Your price per load (₱)</label>
+					<input id="c-price" type="number" inputmode="decimal" min="0" step="any" placeholder="Your price per load" />
+				</div>
+				<div class="field">
+					<label for="c-days">Days open per month</label>
+					<input id="c-days" type="number" inputmode="numeric" min="1" max="31" step="1" value="30" />
+				</div>
+			</form>
+			<div aria-live="polite">
+				<p class="calc-hint" id="calc-hint">Enter your price per load to see the figures.</p>
+				<div id="calc-out" hidden>
+					<p class="calc-pkg">
+						<strong id="calc-pkg">2 sets:</strong> <span id="calc-pkg-price"></span>
+					</p>
+					<ul class="scen">
+						{
+							scenarios.map((s) => (
+								<li data-share={s.share}>
+									<p class="scen-name">
+										{s.name} <span>{s.note}</span>
+									</p>
+									<dl class="scen-nums">
+										<div>
+											<dt>Finished loads a day</dt>
+											<dd data-out="loads" />
+										</div>
+										<div>
+											<dt>Sales a day</dt>
+											<dd data-out="day" />
+										</div>
+										<div>
+											<dt>Sales a month</dt>
+											<dd data-out="month" />
+										</div>
+									</dl>
+								</li>
+							))
+						}
+					</ul>
+				</div>
+			</div>
+			<p class="note">
+				How we work this out: one finished load is counted as one dry cycle, because the dryer is the slower step, and
+				we show a quarter, half and three quarters of the dry cycles your package can run in a 12-hour day. Your real
+				results depend on your customers, load sizes and handling time. These are sales, not profit: LPG, water,
+				electricity, rent, staff, detergent and permits come out of your sales, and they differ from site to site.
+			</p>
+			<p class="more">
+				<a id="calc-cta" data-track="quote" data-base={`${contact}?for=start&package=`} href={`${contact}?for=start`}>
+					Message us and we will walk you through your numbers
+				</a>
+			</p>
+		</div>
 	</section>
 
 	<section class="band" aria-labelledby="hosp">
@@ -249,4 +337,163 @@ const hospitality = {
 	.more {
 		margin: 0;
 	}
+	/* Sales tool */
+	.calc-form {
+		display: grid;
+		gap: 1.25rem;
+		max-width: 52rem;
+		margin-bottom: 1.75rem;
+	}
+	@media (min-width: 700px) {
+		.calc-form {
+			grid-template-columns: 1fr 1.4fr 1fr;
+		}
+	}
+	.field {
+		display: grid;
+		gap: 0.4rem;
+		align-content: start;
+	}
+	label {
+		font-weight: 600;
+		font-size: 0.95rem;
+	}
+	input,
+	select {
+		font: inherit;
+		font-size: 1.0625rem;
+		color: var(--text);
+		background: #fff;
+		border: 1px solid var(--muted);
+		border-radius: 0.5rem;
+		padding: 0.75rem 0.9rem;
+		width: 100%;
+	}
+	input::placeholder {
+		color: color-mix(in srgb, var(--muted) 85%, #fff);
+	}
+	input:focus-visible,
+	select:focus-visible {
+		outline: 3px solid var(--accent);
+		outline-offset: 1px;
+		border-color: var(--accent);
+	}
+	.calc-hint {
+		margin: 0 0 1.75rem;
+		color: var(--muted);
+	}
+	.calc-pkg {
+		margin: 0 0 0.75rem;
+		font-weight: 600;
+	}
+	.calc-pkg span {
+		font-weight: 400;
+		color: var(--muted);
+	}
+	.scen {
+		max-width: 52rem;
+		margin: 0 0 1.75rem;
+		border-bottom: 1px solid var(--border);
+	}
+	.scen-name {
+		margin: 0 0 0.5rem;
+		font-family: var(--display);
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		font-size: 1.15rem;
+	}
+	.scen-name span {
+		font-family: 'Hanken Grotesk', system-ui, sans-serif;
+		font-weight: 400;
+		font-size: 0.95rem;
+		letter-spacing: 0;
+		color: var(--muted);
+		margin-left: 0.5rem;
+	}
+	.scen-nums {
+		display: grid;
+		gap: 0.25rem 1.5rem;
+		margin: 0;
+	}
+	.scen-nums div {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: 1rem;
+	}
+	.scen-nums dt {
+		color: var(--muted);
+		font-size: 0.95rem;
+	}
+	.scen-nums dd {
+		margin: 0;
+		font-family: var(--display);
+		font-weight: 700;
+		font-size: 1.25rem;
+		letter-spacing: -0.02em;
+	}
+	@media (min-width: 560px) {
+		.scen-nums {
+			grid-template-columns: repeat(3, 1fr);
+		}
+		.scen-nums div {
+			display: grid;
+			gap: 0.1rem;
+		}
+	}
 </style>
+
+<script>
+	const tool = document.getElementById('calc-tool');
+	if (tool) {
+		const sets = document.getElementById('c-sets') as HTMLSelectElement;
+		const price = document.getElementById('c-price') as HTMLInputElement;
+		const days = document.getElementById('c-days') as HTMLInputElement;
+		const hint = document.getElementById('calc-hint') as HTMLElement;
+		const out = document.getElementById('calc-out') as HTMLElement;
+		const pkg = document.getElementById('calc-pkg') as HTMLElement;
+		const pkgPrice = document.getElementById('calc-pkg-price') as HTMLElement;
+		const cta = document.getElementById('calc-cta') as HTMLAnchorElement;
+		const peso = (n: number) => `₱${Math.round(n).toLocaleString('en-PH')}`;
+		let tracked = false;
+
+		const update = () => {
+			const opt = sets.selectedOptions[0];
+			const dry = Number(opt.dataset.dry);
+			const p = parseFloat(price.value);
+			const d = parseInt(days.value, 10);
+			cta.href = `${cta.dataset.base}${sets.value}`;
+			if (!(p > 0)) {
+				out.hidden = true;
+				hint.hidden = false;
+				hint.textContent = 'Enter your price per load to see the figures.';
+				return;
+			}
+			if (!(d >= 1 && d <= 31)) {
+				out.hidden = true;
+				hint.hidden = false;
+				hint.textContent = 'Enter the days you will be open in a month, from 1 to 31.';
+				return;
+			}
+			hint.hidden = true;
+			out.hidden = false;
+			pkg.textContent = `${sets.value} sets:`;
+			pkgPrice.textContent = `Package from ${peso(Number(opt.dataset.price))}, with basic installation`;
+			out.querySelectorAll<HTMLElement>('li[data-share]').forEach((li) => {
+				const loads = Math.round(dry * Number(li.dataset.share));
+				li.querySelector('[data-out="loads"]')!.textContent = String(loads);
+				li.querySelector('[data-out="day"]')!.textContent = peso(loads * p);
+				li.querySelector('[data-out="month"]')!.textContent = peso(loads * p * d);
+			});
+			if (!tracked) {
+				tracked = true;
+				(window as any).tgTrack?.('sales_tool_used', { sets: sets.value, page: location.pathname });
+			}
+		};
+
+		tool.hidden = false;
+		tool.querySelector('form')!.addEventListener('submit', (e) => e.preventDefault());
+		[sets, price, days].forEach((el) => el.addEventListener('input', update));
+		update();
+	}
+</script>
