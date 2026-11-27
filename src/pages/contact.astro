@@ -105,8 +105,8 @@ const channels = [
 							<p class="field-error" id="err-mobile" hidden></p>
 						</div>
 						<div class="field">
-							<label for="f-email">Email <span class="req">(required)</span></label>
-							<input id="f-email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required />
+							<label for="f-email">Email <span class="req">(optional)</span></label>
+							<input id="f-email" name="email" type="email" autocomplete="email" placeholder="name@example.com" />
 							<p class="field-error" id="err-email" hidden></p>
 						</div>
 					</div>
@@ -387,8 +387,8 @@ const channels = [
 			},
 		},
 		email: {
-			message: 'Enter an email address like name@example.com.',
-			ok: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
+			message: 'Enter an email address like name@example.com, or leave it blank.',
+			ok: (v) => v === '' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
 		},
 	};
 	const showFieldError = (name, message) => {
@@ -444,7 +444,7 @@ const channels = [
 			const lines = [
 				`Name: ${f.first_name.value} ${f.last_name.value}`.trim(),
 				`Mobile: ${f.mobile.value}`,
-				`Email: ${f.email.value}`,
+				`Email: ${f.email.value || 'Not given'}`,
 				`Description: ${text(f.role)}`,
 				`Package: ${f.package.value || 'none selected'}`,
 				`Location: ${[f.municipality.value, f.province.value].filter(Boolean).join(', ')}`,
